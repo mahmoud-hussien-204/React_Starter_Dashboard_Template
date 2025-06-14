@@ -21,13 +21,24 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@ui/*": [
+        "./src/shared/components/ui/*"
+      ],
+      "@components/*": [
+        "./src/shared/components/*"
+      ],
+      "@hooks/*": [
+        "./src/shared/hooks/*"
+      ],
+      "@utils/*": [
+        "./src/shared/utils/*"
       ]
     }
   },
