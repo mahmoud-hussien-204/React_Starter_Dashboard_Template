@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router';
 
-const ExamsLayout = () => {
+const RootLayout = () => {
   return (
     <div>
-      ExamsLayout
+      RootLayout
       <Outlet />
     </div>
   );
 };
 
-export default ExamsLayout;
+export default RootLayout;

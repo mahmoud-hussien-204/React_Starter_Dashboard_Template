@@ -1,23 +1,25 @@
-import type { RouteObject } from 'react-router';
+import { createBrowserRouter } from 'react-router';
 
-const createDynamicRouter = () => {
-  const routes: RouteObject[] = [];
+import { injectModuleRoutes } from './injectModuleRoutes';
 
-  return {
-    injectRoutes: (newRoutes: RouteObject[], moduleName: string) => {
-      const wrappedRoutes = newRoutes.map(route => ({
-        ...route,
-        element: (
-          <ModuleLoader moduleName={moduleName}>
-            {route.element}
-          </ModuleLoader>
-        ),
-      }));
+export const createAppRouter = async () => {
+  const moduleRoutes = await injectModuleRoutes();
 
-      routes.push(...wrappedRoutes);
+  return createBrowserRouter([
+    {
+      path: '*',
+      lazy: async () => ({
+        Component: (await import('@/layouts/NotFoundLayout')).default,
+      }),
     },
-    getRoutes: () => routes,
-  };
+    {
+      path: '/',
+      lazy: async () => ({
+        Component: (await import('@/layouts/RootLayout')).default,
+      }),
+      children: moduleRoutes,
+    },
+  ]);
 };
 
-export const dynamicRouter = createDynamicRouter();
+export type Router = Awaited<ReturnType<typeof createAppRouter>>;

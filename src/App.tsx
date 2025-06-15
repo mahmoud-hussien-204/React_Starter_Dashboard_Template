@@ -1,10 +1,18 @@
-import { Button } from '@ui/button';
+import { Suspense } from 'react';
 
-function App() {
+import { RouterProvider } from 'react-router';
+
+import type { Router } from './core/router';
+
+interface IProps {
+  router: Router;
+}
+
+function App({ router }: IProps) {
   return (
-    <>
-      <Button variant='default'>click me</Button>
-    </>
+    <Suspense fallback={<div>Loading...</div>}>
+      <RouterProvider router={router} />
+    </Suspense>
   );
 }
 
