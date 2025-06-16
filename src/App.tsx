@@ -4,6 +4,10 @@ import { RouterProvider } from 'react-router';
 
 import type { Router } from './core/router';
 
+import { Provider } from 'react-redux';
+
+import { store } from './core/store';
+
 interface IProps {
   router: Router;
 }
@@ -11,7 +15,9 @@ interface IProps {
 function App({ router }: IProps) {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </Suspense>
   );
 }

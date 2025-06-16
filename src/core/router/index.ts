@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router';
 
-import { injectModuleRoutes } from './injectModuleRoutes';
+import { injectRouteModule } from './injectRouteModule';
 
 export const createAppRouter = async () => {
-  const moduleRoutes = await injectModuleRoutes();
+  const moduleRoutes = await injectRouteModule();
 
   return createBrowserRouter([
     {
