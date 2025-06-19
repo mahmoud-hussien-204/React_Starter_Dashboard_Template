@@ -1,6 +1,4 @@
-import { store, type RootState } from '@/core/store';
-
-import { createSelector } from '@reduxjs/toolkit';
+import { store } from '@/core/store';
 
 import { toast } from 'sonner';
 
@@ -47,23 +45,16 @@ export async function interceptor<TData>({
   }
 }
 
-let cachedToken: string | null = null;
-
-const selectLang = createSelector(
-  (state: RootState) => state.appConfig.lang,
-  (lang) => lang
-);
+const storeState = store.getState();
 
 async function interceptRequest(request: RequestInit) {
-  if (!cachedToken) {
-    cachedToken = localStorage.getItem('token') || '';
-  }
+  const token = storeState.userData?.token || '';
 
-  const language = selectLang(store.getState());
+  const language = storeState.appConfig.lang;
 
   const headers = new Headers({
     ...(request.headers || {}),
-    Authorization: `Bearer ${cachedToken}`,
+    Authorization: `Bearer ${token}`,
     'Accept-Language': language,
     'Content-Language': language,
     'Content-Type': 'application/json',

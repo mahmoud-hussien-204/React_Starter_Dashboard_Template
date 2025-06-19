@@ -1,15 +1,15 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export interface AuthState {
-  email: string;
+  email: string | null;
 }
 
 const initialState: AuthState = {
-  email: 'm.hussein',
+  email: null,
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: 'auth-slice',
   initialState,
   reducers: {
     setEmail: (state, action: PayloadAction<string>) => {
