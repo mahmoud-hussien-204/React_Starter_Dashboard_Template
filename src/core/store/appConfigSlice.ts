@@ -1,25 +1,25 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
+import { getLangConfig, getLayoutConfig, getThemeConfig } from '../config';
+
 interface IAppConfigState {
-  theme: 'light' | 'dark';
-  lang: 'ar' | 'en';
+  theme: ITheme;
+  lang: ILang;
+  layout: ILayout;
 }
 
 const initialState: IAppConfigState = {
-  theme: 'light',
-  lang: 'en',
+  theme: getThemeConfig(),
+  lang: getLangConfig(),
+  layout: getLayoutConfig(),
 };
 
 const appConfigSlice = createSlice({
-  name: 'theme',
+  name: 'app-config-slice',
   initialState,
-  reducers: {
-    setThemeMode: (state, action: PayloadAction<'light' | 'dark'>) => {
-      state.theme = action.payload;
-    },
-  },
+  reducers: {},
 });
 
-export const { setThemeMode } = appConfigSlice.actions;
+export const appConfigActions = appConfigSlice.actions;
 
 export const appConfigReducer = appConfigSlice.reducer;

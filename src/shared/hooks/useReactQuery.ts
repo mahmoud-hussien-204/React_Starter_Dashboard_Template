@@ -7,7 +7,7 @@ interface UseCustomQueryOptions<TData, TError>
   enabled?: boolean;
 }
 
-export function useReactQuery<TData = unknown, TError = Error>({
+export function useReactQuery<TData = unknown, TError = IApiError>({
   queryKey,
   queryFn,
   options,
@@ -20,10 +20,11 @@ export function useReactQuery<TData = unknown, TError = Error>({
     queryKey,
     queryFn,
     ...options,
+    refetchOnWindowFocus: false,
   });
 }
 
-export function useReactMutation<TData = unknown, TError = Error, TVariables = unknown>({
+export function useReactMutation<TData = unknown, TError = IApiError, TVariables = unknown>({
   mutationFn,
   options,
 }: {
@@ -32,6 +33,7 @@ export function useReactMutation<TData = unknown, TError = Error, TVariables = u
 }) {
   return useMutation<TData, TError, TVariables>({
     mutationFn,
+    retry: 0,
     ...options,
   });
 }
