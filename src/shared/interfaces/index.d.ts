@@ -8,3 +8,5 @@ interface IUserData {
 }
 
 type IRole = 'admin' | 'teacher' | 'student';
+
+type IAppMainLayouts = `${import('../enums').EnumAppMainLayouts}`;

@@ -1,8 +1,8 @@
 import type { RouteObject } from 'react-router';
 
-const modules = import.meta.glob<{ default: RouteObject[] }>('@/modules/**/routes.ts');
+const appModules = import.meta.glob<{ default: RouteObject[] }>('@/modules/*/routes.ts');
 
-export const injectRouteModule = async (): Promise<RouteObject[]> => {
+export const injectRouteModule = async (modules = appModules): Promise<RouteObject[]> => {
   const moduleRoutes: RouteObject[] = [];
 
   for (const path in modules) {

@@ -1,11 +1,19 @@
-import { Outlet } from 'react-router';
+import { Link, Outlet } from 'react-router';
 
 const RootLayout = () => {
+  console.log('root render');
+
   return (
-    <div>
-      RootLayout
+    <main>
+      root layout
+      <div className='flex gap-4 p-4'>
+        <Link to='/auth/login'>login</Link>
+        <Link to='/settings'>settings</Link>
+        <Link to='/teachers/users'>users</Link>
+        <Link to='/teachers/exams'>exams</Link>
+      </div>
       <Outlet />
-    </div>
+    </main>
   );
 };
 
