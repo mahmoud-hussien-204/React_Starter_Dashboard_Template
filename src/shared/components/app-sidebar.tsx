@@ -9,6 +9,8 @@ import {
   SidebarRail,
 } from '@/shared/components/ui/sidebar';
 
+import Logo from '@/layouts/components/Logo';
+
 const data = {
   navMain: [
     {
@@ -101,10 +103,9 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible='offcanvas' {...props}>
+    <Sidebar collapsible='offcanvas' {...props} className=''>
       <SidebarHeader>
-        {/* <TeamSwitcher teams={data.teams} /> */}
-        logo
+        <Logo />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />

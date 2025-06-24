@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 @import 'tailwindcss';
 
 @import 'tw-animate-css';
@@ -5,10 +7,105 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* start spacing */
+  --spacing-0.25rem: 0.25rem;
+  --spacing-0.5rem: 0.5rem;
+  --spacing-0.75rem: 0.75rem;
+  --spacing-1rem: 1rem;
+  --spacing-1.25rem: 1.25rem;
+  --spacing-1.5rem: 1.5rem;
+  --spacing-1.75rem: 1.75rem;
+  --spacing-2rem: 2rem;
+  --spacing-2.25rem: 2.25rem;
+  --spacing-2.5rem: 2.5rem;
+  --spacing-2.75rem: 2.75rem;
+  --spacing-3rem: 3rem;
+  --spacing-3.25rem: 3.25rem;
+  --spacing-3.5rem: 3.5rem;
+  --spacing-3.75rem: 3.75rem;
+  --spacing-4rem: 4rem;
+  --spacing-4.25rem: 4.25rem;
+  --spacing-4.5rem: 4.5rem;
+  --spacing-4.75rem: 4.75rem;
+  --spacing-5rem: 5rem;
+  --spacing-5.25rem: 5.25rem;
+  --spacing-5.5rem: 5.5rem;
+  --spacing-5.75rem: 5.75rem;
+  --spacing-6rem: 6rem;
+  --spacing-6.25rem: 6.25rem;
+  --spacing-6.5rem: 6.5rem;
+  --spacing-6.75rem: 6.75rem;
+  --spacing-7rem: 7rem;
+  --spacing-7.25rem: 7.25rem;
+  --spacing-7.5rem: 7.5rem;
+  --spacing-7.75rem: 7.75rem;
+  --spacing-8rem: 8rem;
+  --spacing-8.25rem: 8.25rem;
+  --spacing-8.5rem: 8.5rem;
+  --spacing-8.75rem: 8.75rem;
+  --spacing-9rem: 9rem;
+  --spacing-9.25rem: 9.25rem;
+  --spacing-9.5rem: 9.5rem;
+  --spacing-9.75rem: 9.75rem;
+  --spacing-10rem: 10rem;
+  --spacing-10.25rem: 10.25rem;
+  --spacing-10.5rem: 10.5rem;
+  --spacing-10.75rem: 10.75rem;
+  --spacing-11rem: 11rem;
+  --spacing-11.25rem: 11.25rem;
+  --spacing-11.5rem: 11.5rem;
+  --spacing-11.75rem: 11.75rem;
+  --spacing-12rem: 12rem;
+  --spacing-12.25rem: 12.25rem;
+  --spacing-12.5rem: 12.5rem;
+  --spacing-12.75rem: 12.75rem;
+  --spacing-13rem: 13rem;
+  --spacing-13.25rem: 13.25rem;
+  --spacing-13.5rem: 13.5rem;
+  --spacing-13.75rem: 13.75rem;
+  --spacing-14rem: 14rem;
+  --spacing-14.25rem: 14.25rem;
+  --spacing-14.5rem: 14.5rem;
+  --spacing-14.75rem: 14.75rem;
+  --spacing-15rem: 15rem;
+  --spacing-15.25rem: 15.25rem;
+  --spacing-15.5rem: 15.5rem;
+  --spacing-15.75rem: 15.75rem;
+  --spacing-16rem: 16rem;
+  --spacing-16.25rem: 16.25rem;
+  --spacing-16.5rem: 16.5rem;
+  --spacing-16.75rem: 16.75rem;
+  --spacing-17rem: 17rem;
+  --spacing-17.25rem: 17.25rem;
+  --spacing-17.5rem: 17.5rem;
+  --spacing-17.75rem: 17.75rem;
+  --spacing-18rem: 18rem;
+  --spacing-18.25rem: 18.25rem;
+  --spacing-18.5rem: 18.5rem;
+  --spacing-18.75rem: 18.75rem;
+  --spacing-19rem: 19rem;
+  --spacing-19.25rem: 19.25rem;
+  --spacing-19.5rem: 19.5rem;
+  --spacing-19.75rem: 19.75rem;
+  --spacing-20rem: 20rem;
+  --spacing-20.25rem: 20.25rem;
+  --spacing-20.5rem: 20.5rem;
+  --spacing-20.75rem: 20.75rem;
+  --spacing-21rem: 21rem;
+  /* end spacing */
+
+  /* start font */
+  --font-poppins: 'Poppins', sans-serif;
+  /* end font */
+
+  /* start radius */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  /* end radius */
+
+  /* start colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -40,6 +137,7 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  /* end colors */
 }
 
 @layer base {
