@@ -8,7 +8,7 @@ export const sidebarLinks = [
     isActive: true,
   },
   {
-    title: 'Users',
+    title: 'Users Management',
     url: '#',
     icon: Users,
     items: [

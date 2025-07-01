@@ -62,18 +62,18 @@ const HomeLayout = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>
-          <div className='flex items-center gap-2 px-4'>
-            <SidebarTrigger className='-ml-1' />
-            <Separator orientation='vertical' className='mr-2 h-4' />
+        <header className='p-1rem flex shrink-0 items-center gap-2 transition-[width,height] ease-linear'>
+          <div className='flex items-center gap-2'>
+            <SidebarTrigger />
+            <Separator orientation='vertical' className='!h-1rem' />
 
             {/* Search Modal */}
             <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
               <DialogTrigger asChild>
-                <Button variant='ghost' className='h-9 gap-2'>
-                  <Search className='h-4 w-4' />
-                  <span>Search</span>
-                </Button>
+                <div className='flex cursor-pointer items-center gap-2 text-sm'>
+                  <Search size={18} />
+                  <span className='text-muted-foreground'>Search</span>
+                </div>
               </DialogTrigger>
               <DialogContent className='sm:max-w-md'>
                 <DialogHeader>

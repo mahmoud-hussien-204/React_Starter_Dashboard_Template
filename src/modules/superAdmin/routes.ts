@@ -8,7 +8,7 @@ const routes = await injectRouteModule(modules);
 
 const usersRoutes: RouteObject[] = [
   {
-    path: 'teachers',
+    path: 'super-admin',
     lazy: async () => ({
       Component: (await import('@/layouts/HomeLayout')).default,
     }),
