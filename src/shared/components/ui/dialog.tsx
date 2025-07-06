@@ -1,8 +1,12 @@
 import * as React from 'react';
+
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+
 import { XIcon } from 'lucide-react';
 
 import { cn } from '@/shared/utils/index';
+
+import { Button, type IButtonVariantProps } from './button';
 
 function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot='dialog' {...props} />;
@@ -80,13 +84,65 @@ function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
   );
 }
 
-function DialogFooter({ className, ...props }: React.ComponentProps<'div'>) {
+interface IDialogFooterProps extends React.ComponentProps<'div'> {
+  isLoading: boolean;
+  isSubmitButton?: boolean;
+  submitButtonTitle?: string;
+  submitButtonVariant?: IButtonVariantProps['variant'];
+  submitButtonClassName?: string;
+  submitButtonIsDisabled?: boolean;
+  isCancelButton?: boolean;
+  cancelButtonTitle?: string;
+  cancelButtonVariant?: IButtonVariantProps['variant'];
+  cancelButtonClassName?: string;
+  cancelButtonIsDisabled?: boolean;
+  closeDialog: () => void;
+}
+
+function DialogFooter({
+  className,
+  isLoading,
+  isSubmitButton = true,
+  submitButtonTitle = 'Submit',
+  submitButtonVariant = 'default',
+  submitButtonClassName,
+  submitButtonIsDisabled,
+  isCancelButton = true,
+  cancelButtonTitle = 'Cancel',
+  cancelButtonVariant = 'outline',
+  cancelButtonClassName,
+  cancelButtonIsDisabled,
+  closeDialog,
+  ...props
+}: IDialogFooterProps) {
   return (
     <div
       data-slot='dialog-footer'
       className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
       {...props}
-    />
+    >
+      {isCancelButton && (
+        <Button
+          variant={cancelButtonVariant}
+          onClick={closeDialog}
+          className={cn('flex-1', cancelButtonClassName)}
+          disabled={cancelButtonIsDisabled}
+        >
+          {cancelButtonTitle}
+        </Button>
+      )}
+
+      {isSubmitButton && (
+        <Button
+          type='submit'
+          variant={submitButtonVariant}
+          className={cn('flex-1', submitButtonClassName)}
+          disabled={submitButtonIsDisabled}
+        >
+          {submitButtonTitle}
+        </Button>
+      )}
+    </div>
   );
 }
 

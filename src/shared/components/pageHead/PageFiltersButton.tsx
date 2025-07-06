@@ -21,11 +21,15 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
-interface IProps {
-  FiltersComponent?: React.ReactNode;
+interface IFiltersComponentProps {
+  closeDialog: () => void;
 }
 
-const PageFiltersButton = ({ FiltersComponent = <DefaultFilters /> }: IProps) => {
+interface IProps {
+  FiltersComponent?: React.ComponentType<IFiltersComponentProps>;
+}
+
+const PageFiltersButton = ({ FiltersComponent = DefaultFilters }: IProps) => {
   const { showDialog, closeDialog, isDelayedOpenedDialog, isOpenedDialog } = useDialog();
   return (
     <Dialog open={isOpenedDialog}>
@@ -37,15 +41,7 @@ const PageFiltersButton = ({ FiltersComponent = <DefaultFilters /> }: IProps) =>
           <DialogTitle>Filter Options</DialogTitle>
           <DialogDescription>You can filter by any of the available options.</DialogDescription>
         </DialogHeader>
-        {isDelayedOpenedDialog && FiltersComponent}
-        <DialogFooter>
-          <Button variant='outline' onClick={closeDialog} className='flex-1'>
-            Cancel
-          </Button>
-          <Button type='submit' form='page-filters-form' className='flex-1'>
-            Apply Filters
-          </Button>
-        </DialogFooter>
+        {isDelayedOpenedDialog && <FiltersComponent closeDialog={closeDialog} />}
       </DialogContent>
     </Dialog>
   );
@@ -58,7 +54,7 @@ interface IFilterForm {
   role: string;
 }
 
-const DefaultFilters = () => {
+const DefaultFilters = ({ closeDialog }: IFiltersComponentProps) => {
   const { statusSearchParams, roleSearchParams, setSearchParams } = useURLFilters();
 
   const form = useForm<IFilterForm>({
@@ -123,6 +119,12 @@ const DefaultFilters = () => {
               <FormMessage />
             </FormItem>
           )}
+        />
+
+        <DialogFooter
+          closeDialog={closeDialog}
+          isLoading={false}
+          submitButtonTitle='Apply Filters'
         />
       </form>
     </Form>

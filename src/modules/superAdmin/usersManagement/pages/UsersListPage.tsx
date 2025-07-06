@@ -18,6 +18,7 @@ const UsersListPage = () => {
       <PageHead>
         <div className='gap-0.75rem flex items-center'>
           <PageSearch />
+          <PageFiltersButton FiltersComponent={<O} />
           <PageFiltersButton />
         </div>
 
