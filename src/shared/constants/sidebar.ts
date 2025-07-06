@@ -1,4 +1,4 @@
-import { Building2, Car, LayoutDashboard, Settings, Truck, Users } from 'lucide-react';
+import { Ban, Building2, Car, LayoutDashboard, Settings, Truck, Users } from 'lucide-react';
 
 export const sidebarLinks = [
   {
@@ -9,16 +9,21 @@ export const sidebarLinks = [
   },
   {
     title: 'Users Management',
-    url: '#',
+    url: 'users-management',
     icon: Users,
+  },
+  {
+    title: 'Errors',
+    url: '/errors',
+    icon: Ban,
     items: [
       {
-        title: 'Admins',
-        url: '#',
+        title: 'Error 404',
+        url: '/errors/404',
       },
       {
-        title: 'Users',
-        url: '#',
+        title: 'Error 500',
+        url: '/errors/500',
       },
     ],
   },
