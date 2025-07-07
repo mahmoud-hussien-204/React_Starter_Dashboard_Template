@@ -21,7 +21,7 @@ const HomeLayout = () => {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className='bg-sidebar p-1rem flex shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear'>
+        <header className='bg-sidebar p-1rem sticky top-0 flex shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear'>
           <div className='flex items-center gap-2'>
             <SidebarTrigger />
             <Separator orientation='vertical' className='!h-1rem' />
@@ -34,7 +34,7 @@ const HomeLayout = () => {
             <NotificationMenu />
           </div>
         </header>
-        <div className='px-1rem py-1.25rem'>
+        <div className='px-1rem py-1.25rem flex-1'>
           <Outlet />
         </div>
       </SidebarInset>

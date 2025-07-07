@@ -18,16 +18,19 @@ const UsersListPage = () => {
       <PageHead>
         <div className='gap-0.75rem flex items-center'>
           <PageSearch />
-          <PageFiltersButton FiltersComponent={<O} />
           <PageFiltersButton />
         </div>
 
         <div className='gap-0.75rem flex items-center'>
           <PageExportButton handleExport={() => console.log('export')} />
-          <PageCreateNewButton title='Add User' />
+          <PageCreateNewButton
+            title='Add User'
+            dialogCreateTitle='Create new user'
+            dialogCreateDescription=''
+            renderProps={({ closeDialog }) => <div>create new user form</div>}
+          />
         </div>
       </PageHead>
-      hello
     </section>
   );
 };

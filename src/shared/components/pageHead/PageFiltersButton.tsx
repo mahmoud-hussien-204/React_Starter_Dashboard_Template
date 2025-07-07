@@ -2,14 +2,7 @@ import { SlidersHorizontalIcon } from 'lucide-react';
 
 import { Button } from '@/shared/components/ui/button';
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '../ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader } from '../ui/dialog';
 
 import useDialog from '@/shared/hooks/useDialog';
 
@@ -26,22 +19,28 @@ interface IFiltersComponentProps {
 }
 
 interface IProps {
-  FiltersComponent?: React.ComponentType<IFiltersComponentProps>;
+  renderProps?: (props: IFiltersComponentProps) => React.ReactNode;
 }
 
-const PageFiltersButton = ({ FiltersComponent = DefaultFilters }: IProps) => {
+const PageFiltersButton = ({ renderProps }: IProps) => {
   const { showDialog, closeDialog, isDelayedOpenedDialog, isOpenedDialog } = useDialog();
   return (
-    <Dialog open={isOpenedDialog}>
+    <Dialog open={isOpenedDialog} onOpenChange={closeDialog}>
       <Button size='lg' variant='secondary' onClick={showDialog}>
         <SlidersHorizontalIcon /> Filters
       </Button>
       <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Filter Options</DialogTitle>
-          <DialogDescription>You can filter by any of the available options.</DialogDescription>
-        </DialogHeader>
-        {isDelayedOpenedDialog && <FiltersComponent closeDialog={closeDialog} />}
+        <DialogHeader
+          title='Filter Options'
+          description='You can filter by any of the available options.'
+        />
+        {isDelayedOpenedDialog ? (
+          renderProps ? (
+            renderProps({ closeDialog })
+          ) : (
+            <DefaultFilters closeDialog={closeDialog} />
+          )
+        ) : null}
       </DialogContent>
     </Dialog>
   );
@@ -68,6 +67,7 @@ const DefaultFilters = ({ closeDialog }: IFiltersComponentProps) => {
       status: data.status,
       role: data.role,
     });
+    closeDialog();
   }
 
   return (
@@ -125,6 +125,7 @@ const DefaultFilters = ({ closeDialog }: IFiltersComponentProps) => {
           closeDialog={closeDialog}
           isLoading={false}
           submitButtonTitle='Apply Filters'
+          submitButtonIsDisabled={!form.formState.isDirty}
         />
       </form>
     </Form>

@@ -74,13 +74,22 @@ function DialogContent({
   );
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<'div'>) {
+interface IDialogHeaderProps extends React.ComponentProps<'div'> {
+  title?: string;
+  description?: string;
+}
+
+function DialogHeader({ className, title, description, children, ...props }: IDialogHeaderProps) {
   return (
     <div
       data-slot='dialog-header'
-      className={cn('pb-0.5rem flex flex-col gap-2 border-b text-center sm:text-left', className)}
+      className={cn('pb-1rem flex flex-col gap-2 border-b text-center sm:text-left', className)}
       {...props}
-    />
+    >
+      {title && <DialogTitle>{title}</DialogTitle>}
+      {description && <DialogDescription>{description}</DialogDescription>}
+      {children && children}
+    </div>
   );
 }
 
@@ -113,12 +122,16 @@ function DialogFooter({
   cancelButtonClassName,
   cancelButtonIsDisabled,
   closeDialog,
+  children,
   ...props
 }: IDialogFooterProps) {
   return (
     <div
       data-slot='dialog-footer'
-      className={cn('flex flex-col-reverse gap-2 sm:flex-row sm:justify-end', className)}
+      className={cn(
+        'mt-1.5rem gap-1rem flex flex-col-reverse sm:flex-row sm:justify-end',
+        className
+      )}
       {...props}
     >
       {isCancelButton && (
@@ -142,6 +155,8 @@ function DialogFooter({
           {submitButtonTitle}
         </Button>
       )}
+
+      {children && children}
     </div>
   );
 }

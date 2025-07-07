@@ -1,19 +1,21 @@
 import { useSearchParams } from 'react-router';
 
+import { getFilterValue } from '../utils/url';
+
 const useURLFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const statusSearchParams = searchParams.get('status');
+  const statusSearchParams = getFilterValue(searchParams.get('status'));
 
-  const roleSearchParams = searchParams.get('role');
+  const roleSearchParams = getFilterValue(searchParams.get('role'));
 
-  const pageSearchParams = searchParams.get('page');
+  const pageSearchParams = getFilterValue(searchParams.get('page'));
 
-  const limitSearchParams = searchParams.get('limit');
+  const limitSearchParams = getFilterValue(searchParams.get('limit'));
 
-  const orderBySearchParams = searchParams.get('orderBy');
+  const orderBySearchParams = getFilterValue(searchParams.get('orderBy'));
 
-  const searchSearchParams = searchParams.get('search');
+  const searchSearchParams = getFilterValue(searchParams.get('search'));
 
   return {
     statusSearchParams,
