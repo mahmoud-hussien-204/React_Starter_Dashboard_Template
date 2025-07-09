@@ -9,9 +9,9 @@ const useURLFilters = () => {
 
   const roleSearchParams = getFilterValue(searchParams.get('role'));
 
-  const pageSearchParams = getFilterValue(searchParams.get('page')) || 1;
+  const pageSearchParams = getFilterValue(searchParams.get('page')) || '1';
 
-  const sizeSearchParams = getFilterValue(searchParams.get('size'));
+  const sizeSearchParams = getFilterValue(searchParams.get('size')) || '15';
 
   const orderBySearchParams = getFilterValue(searchParams.get('orderBy'));
 

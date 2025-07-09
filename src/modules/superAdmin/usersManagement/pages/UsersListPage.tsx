@@ -12,6 +12,7 @@ import usePageData from '@/shared/hooks/usePageData';
 
 import {
   Table,
+  TableAction,
   TableBody,
   TableCell,
   TableContainer,
@@ -19,22 +20,37 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/components/ui/table';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/shared/components/ui/dropdown-menu';
 
-import { Button } from '@/shared/components/ui/button';
-
-import { MoreVerticalIcon } from 'lucide-react';
+import { DropdownMenuItem, DropdownMenuSeparator } from '@/shared/components/ui/dropdown-menu';
 
 import { DynamicPagination } from '@/shared/components/dynamic-pagination';
 
+import { useReactQuery } from '@/shared/hooks/useReactQuery';
+
+import { apiGetUsersList } from '../api/users';
+
+import { queryKeys } from '../constants';
+
+import useURLFilters from '@/shared/hooks/useURLFilters';
+
 const UsersListPage = () => {
   usePageData({ title: 'Users Management' });
+
+  const { pageSearchParams, sizeSearchParams, searchSearchParams } = useURLFilters();
+
+  const { data, isFetching, isLoading } = useReactQuery({
+    queryFn: () =>
+      apiGetUsersList({
+        limit: sizeSearchParams,
+        page: +pageSearchParams,
+        search: searchSearchParams,
+      }),
+    queryKey: [queryKeys.users, pageSearchParams, sizeSearchParams, searchSearchParams],
+  });
+
+  const meta = data?.meta;
+
+  const usersList = data?.data;
 
   return (
     <section>
@@ -57,8 +73,52 @@ const UsersListPage = () => {
 
       <section>
         <TableContainer>
-          <TableDemo />
-          <DynamicPagination totalPages={100} />
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>User</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Phone</TableHead>
+                <TableHead>Role</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>KYC Status</TableHead>
+                <TableHead>Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {usersList &&
+                usersList.map((user) => (
+                  <TableRow key={user.id}>
+                    <TableCell>
+                      <div className='gap-0.5rem flex items-center'>
+                        <img src={user.avatar} alt={user.name} className='size-10 rounded-full' />
+                        <div>
+                          <h6>{user.name}</h6>
+                          <span className='text-foreground text-xs'>ID: {user.id}</span>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell>{user.email}</TableCell>
+                    <TableCell>
+                      <a href={`tel:${user.phone}`} className='text-primary'>
+                        {user.phone}
+                      </a>
+                    </TableCell>
+                    <TableCell>{user.role}</TableCell>
+                    <TableCell>{user.status}</TableCell>
+                    <TableCell>{user.KYC_status}</TableCell>
+                    <TableAction>
+                      <DropdownMenuItem>Edit</DropdownMenuItem>
+                      <DropdownMenuItem>Make a copy</DropdownMenuItem>
+                      <DropdownMenuItem>Favorite</DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem>Delete</DropdownMenuItem>
+                    </TableAction>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+          <DynamicPagination totalPages={Math.ceil((meta?.pagesCount || 1) / +sizeSearchParams)} />
         </TableContainer>
       </section>
     </section>
@@ -66,143 +126,3 @@ const UsersListPage = () => {
 };
 
 export default UsersListPage;
-
-const invoices = [
-  {
-    invoice: 'INV001',
-    paymentStatus: 'Paid',
-    totalAmount: '$250.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV002',
-    paymentStatus: 'Pending',
-    totalAmount: '$150.00',
-    paymentMethod: 'PayPal',
-  },
-  {
-    invoice: 'INV003',
-    paymentStatus: 'Unpaid',
-    totalAmount: '$350.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV004',
-    paymentStatus: 'Paid',
-    totalAmount: '$450.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV005',
-    paymentStatus: 'Paid',
-    totalAmount: '$550.00',
-    paymentMethod: 'PayPal',
-  },
-  {
-    invoice: 'INV006',
-    paymentStatus: 'Pending',
-    totalAmount: '$200.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV007',
-    paymentStatus: 'Unpaid',
-    totalAmount: '$300.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV001',
-    paymentStatus: 'Paid',
-    totalAmount: '$250.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV002',
-    paymentStatus: 'Pending',
-    totalAmount: '$150.00',
-    paymentMethod: 'PayPal',
-  },
-  {
-    invoice: 'INV003',
-    paymentStatus: 'Unpaid',
-    totalAmount: '$350.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV004',
-    paymentStatus: 'Paid',
-    totalAmount: '$450.00',
-    paymentMethod: 'Credit Card',
-  },
-  {
-    invoice: 'INV005',
-    paymentStatus: 'Paid',
-    totalAmount: '$550.00',
-    paymentMethod: 'PayPal',
-  },
-  {
-    invoice: 'INV006',
-    paymentStatus: 'Pending',
-    totalAmount: '$200.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV006',
-    paymentStatus: 'Pending',
-    totalAmount: '$200.00',
-    paymentMethod: 'Bank Transfer',
-  },
-  {
-    invoice: 'INV006',
-    paymentStatus: 'Pending',
-    totalAmount: '$200.00',
-    paymentMethod: 'Bank Transfer',
-  },
-];
-
-export function TableDemo() {
-  return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Invoice</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Method</TableHead>
-          <TableHead>Amount</TableHead>
-          <TableHead className='sticky left-0 right-0 z-20'>Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {invoices.map((invoice) => (
-          <TableRow key={invoice.invoice}>
-            <TableCell className='font-medium'>{invoice.invoice}</TableCell>
-            <TableCell>{invoice.paymentStatus}</TableCell>
-            <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell>{invoice.totalAmount}</TableCell>
-            <TableCell className='sticky left-0 right-0 z-20'>
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant='ghost'
-                    className='text-muted-foreground data-[state=open]:bg-muted flex size-8'
-                    size='icon'
-                  >
-                    <MoreVerticalIcon />
-                    <span className='sr-only'>Open menu</span>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align='end' className='w-32'>
-                  <DropdownMenuItem>Edit</DropdownMenuItem>
-                  <DropdownMenuItem>Make a copy</DropdownMenuItem>
-                  <DropdownMenuItem>Favorite</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>Delete</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  );
-}

@@ -18,9 +18,10 @@ interface IApiError {
 }
 
 interface IApiSearchParams {
-  page: number;
-  limit: number;
-  order: 'asc' | 'desc';
-  orderBy: string;
-  search: string;
+  page?: number;
+  size?: number;
+  order?: 'asc' | 'desc';
+  orderBy?: string;
+  search?: string;
+  [key: string]: string | number | boolean;
 }

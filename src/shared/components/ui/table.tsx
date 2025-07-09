@@ -1,6 +1,9 @@
 import * as React from 'react';
 
 import { cn } from '@/shared/utils/index';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu';
+import { Button } from './button';
+import { MoreVerticalIcon } from 'lucide-react';
 
 function TableContainer({ children }: Required<React.PropsWithChildren>) {
   return <div className='rounded-md border'>{children}</div>;
@@ -25,7 +28,10 @@ function TableHeader({ className, ...props }: React.ComponentProps<'thead'>) {
   return (
     <thead
       data-slot='table-header'
-      className={cn('[&_tr]:bg-muted sticky top-0 z-30 [&_tr]:border-0', className)}
+      className={cn(
+        '[&_tr]:bg-muted [&_tr]:hover:bg-muted sticky top-0 z-30 [&_tr]:border-0',
+        className
+      )}
       {...props}
     />
   );
@@ -56,7 +62,7 @@ function TableRow({ className, ...props }: React.ComponentProps<'tr'>) {
     <tr
       data-slot='table-row'
       className={cn(
-        'hover:bg-muted data-[state=selected]:bg-muted border-b transition-colors',
+        'hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors',
         className
       )}
       {...props}
@@ -100,8 +106,26 @@ function TableCaption({ className, ...props }: React.ComponentProps<'caption'>) 
   );
 }
 
-function TableAction() {
-  return <></>;
+function TableAction({ children }: Required<React.PropsWithChildren>) {
+  return (
+    <TableCell>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            variant='ghost'
+            className='text-muted-foreground data-[state=open]:bg-muted flex size-8'
+            size='icon'
+          >
+            <MoreVerticalIcon />
+            <span className='sr-only'>Open menu</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align='end' className='w-32'>
+          {children}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </TableCell>
+  );
 }
 
 export {
