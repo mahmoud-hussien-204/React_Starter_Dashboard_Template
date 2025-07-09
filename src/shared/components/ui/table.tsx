@@ -10,7 +10,7 @@ function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (
     <div
       data-slot='table-container'
-      className='relative h-[max(calc(100dvh-260px),500px)] w-full overflow-x-auto '
+      className='relative h-[max(calc(100dvh-234px),400px)] w-full overflow-x-auto '
     >
       <table
         data-slot='table'
@@ -100,6 +100,10 @@ function TableCaption({ className, ...props }: React.ComponentProps<'caption'>) 
   );
 }
 
+function TableAction() {
+  return <></>;
+}
+
 export {
   TableContainer,
   Table,
@@ -110,4 +114,5 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  TableAction,
 };

@@ -11,6 +11,7 @@ import {
 import { useCallback } from 'react';
 
 import useURLFilters from '../hooks/useURLFilters';
+import PageSize from './page-size';
 
 interface IDynamicPaginationProps {
   totalPages: number;
@@ -56,8 +57,6 @@ export function DynamicPagination({ totalPages, onPageChange }: IDynamicPaginati
 
       // Add the range of pages
       for (let i = startPage; i <= endPage; i++) {
-        console.log('i', i);
-
         pages.push(i);
       }
 
@@ -88,8 +87,8 @@ export function DynamicPagination({ totalPages, onPageChange }: IDynamicPaginati
   };
 
   return (
-    <div className='h-3rem bg-muted flex items-center justify-between rounded-ee-md rounded-es-md'>
-      <div>hello</div>
+    <div className='h-3rem px-1rem bg-muted flex items-center justify-center rounded-ee-md rounded-es-md sm:justify-between'>
+      <PageSize className='hidden sm:block' />
       <Pagination>
         <PaginationContent>
           <PaginationItem>

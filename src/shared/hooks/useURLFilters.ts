@@ -11,7 +11,7 @@ const useURLFilters = () => {
 
   const pageSearchParams = getFilterValue(searchParams.get('page')) || 1;
 
-  const limitSearchParams = getFilterValue(searchParams.get('limit'));
+  const sizeSearchParams = getFilterValue(searchParams.get('size'));
 
   const orderBySearchParams = getFilterValue(searchParams.get('orderBy'));
 
@@ -32,7 +32,7 @@ const useURLFilters = () => {
     statusSearchParams,
     roleSearchParams,
     pageSearchParams,
-    limitSearchParams,
+    sizeSearchParams,
     orderBySearchParams,
     searchSearchParams,
     searchParams,

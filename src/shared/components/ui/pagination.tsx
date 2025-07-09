@@ -37,7 +37,8 @@ type PaginationLinkProps = {
 
 function PaginationLink({ className, isActive, size = 'icon', ...props }: PaginationLinkProps) {
   return (
-    <a
+    <span
+      role='button'
       aria-current={isActive ? 'page' : undefined}
       data-slot='pagination-link'
       data-active={isActive}
@@ -46,7 +47,8 @@ function PaginationLink({ className, isActive, size = 'icon', ...props }: Pagina
           variant: isActive ? 'default' : 'ghost',
           size,
         }),
-        className
+        className,
+        'cursor-pointer max-sm:size-8'
       )}
       {...props}
     />
@@ -58,7 +60,7 @@ function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof
     <PaginationLink
       aria-label='Go to previous page'
       size='default'
-      className={cn('gap-1 !px-4 sm:!px-2.5 sm:pl-2.5', className)}
+      className={cn('gap-1', className)}
       {...props}
     >
       <ChevronLeftIcon />
@@ -72,7 +74,7 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
     <PaginationLink
       aria-label='Go to next page'
       size='default'
-      className={cn('gap-1 !px-4 sm:!px-2.5 sm:pr-2.5', className)}
+      className={cn('gap-1', className)}
       {...props}
     >
       <span className='hidden sm:block'>Next</span>
@@ -86,7 +88,7 @@ function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'
     <span
       aria-hidden
       data-slot='pagination-ellipsis'
-      className={cn('flex size-9 items-center justify-center', className)}
+      className={cn('flex size-8 items-center justify-center sm:size-9', className)}
       {...props}
     >
       <MoreHorizontalIcon className='size-4' />
