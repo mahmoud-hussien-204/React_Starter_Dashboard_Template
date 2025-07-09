@@ -136,6 +136,7 @@ function DialogFooter({
     >
       {isCancelButton && (
         <Button
+          type='button'
           variant={cancelButtonVariant}
           onClick={closeDialog}
           className={cn('flex-1', cancelButtonClassName)}
