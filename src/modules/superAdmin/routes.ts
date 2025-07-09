@@ -10,7 +10,7 @@ const usersRoutes: RouteObject[] = [
   {
     path: 'super-admin',
     lazy: async () => ({
-      Component: (await import('@/layouts/HomeLayout')).default,
+      Component: (await import('@/layouts/home-layout')).default,
     }),
     children: routes,
   },

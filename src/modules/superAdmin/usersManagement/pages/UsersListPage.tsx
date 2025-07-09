@@ -1,12 +1,12 @@
-import PageCreateNewButton from '@/shared/components/pageHead/PageCreateNewButton';
+import PageCreateNewButton from '@/shared/components/pageHead/page-create-new-button';
 
-import PageExportButton from '@/shared/components/pageHead/PageExportButton';
+import PageExportButton from '@/shared/components/pageHead/page-export-button';
 
-import PageFiltersButton from '@/shared/components/pageHead/PageFiltersButton';
+import PageFiltersButton from '@/shared/components/pageHead/page-filters-button';
 
-import PageHead from '@/shared/components/pageHead/PageHead';
+import PageHead from '@/shared/components/pageHead/page-head';
 
-import PageSearch from '@/shared/components/pageHead/PageSearch';
+import PageSearch from '@/shared/components/pageHead/page-search';
 
 import usePageData from '@/shared/hooks/usePageData';
 
@@ -14,6 +14,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableHeader,
   TableRow,
@@ -30,15 +31,7 @@ import { Button } from '@/shared/components/ui/button';
 
 import { MoreVerticalIcon } from 'lucide-react';
 
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/shared/components/ui/pagination';
+import { DynamicPagination } from '@/shared/components/dynamic-pagination';
 
 const UsersListPage = () => {
   usePageData({ title: 'Users Management' });
@@ -63,8 +56,10 @@ const UsersListPage = () => {
       </PageHead>
 
       <section>
-        <TableDemo />
-        <PaginationDemo />
+        <TableContainer>
+          <TableDemo />
+          <DynamicPagination totalPages={100} />
+        </TableContainer>
       </section>
     </section>
   );
@@ -115,6 +110,90 @@ const invoices = [
     totalAmount: '$300.00',
     paymentMethod: 'Credit Card',
   },
+  {
+    invoice: 'INV001',
+    paymentStatus: 'Paid',
+    totalAmount: '$250.00',
+    paymentMethod: 'Credit Card',
+  },
+  {
+    invoice: 'INV002',
+    paymentStatus: 'Pending',
+    totalAmount: '$150.00',
+    paymentMethod: 'PayPal',
+  },
+  {
+    invoice: 'INV003',
+    paymentStatus: 'Unpaid',
+    totalAmount: '$350.00',
+    paymentMethod: 'Bank Transfer',
+  },
+  {
+    invoice: 'INV004',
+    paymentStatus: 'Paid',
+    totalAmount: '$450.00',
+    paymentMethod: 'Credit Card',
+  },
+  {
+    invoice: 'INV005',
+    paymentStatus: 'Paid',
+    totalAmount: '$550.00',
+    paymentMethod: 'PayPal',
+  },
+  {
+    invoice: 'INV006',
+    paymentStatus: 'Pending',
+    totalAmount: '$200.00',
+    paymentMethod: 'Bank Transfer',
+  },
+  {
+    invoice: 'INV007',
+    paymentStatus: 'Unpaid',
+    totalAmount: '$300.00',
+    paymentMethod: 'Credit Card',
+  },
+  {
+    invoice: 'INV001',
+    paymentStatus: 'Paid',
+    totalAmount: '$250.00',
+    paymentMethod: 'Credit Card',
+  },
+  {
+    invoice: 'INV002',
+    paymentStatus: 'Pending',
+    totalAmount: '$150.00',
+    paymentMethod: 'PayPal',
+  },
+  {
+    invoice: 'INV003',
+    paymentStatus: 'Unpaid',
+    totalAmount: '$350.00',
+    paymentMethod: 'Bank Transfer',
+  },
+  {
+    invoice: 'INV004',
+    paymentStatus: 'Paid',
+    totalAmount: '$450.00',
+    paymentMethod: 'Credit Card',
+  },
+  {
+    invoice: 'INV005',
+    paymentStatus: 'Paid',
+    totalAmount: '$550.00',
+    paymentMethod: 'PayPal',
+  },
+  {
+    invoice: 'INV006',
+    paymentStatus: 'Pending',
+    totalAmount: '$200.00',
+    paymentMethod: 'Bank Transfer',
+  },
+  {
+    invoice: 'INV007',
+    paymentStatus: 'Unpaid',
+    totalAmount: '$300.00',
+    paymentMethod: 'Credit Card',
+  },
 ];
 
 export function TableDemo() {
@@ -122,11 +201,11 @@ export function TableDemo() {
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className='w-[100px]'>Invoice</TableHead>
+          <TableHead>Invoice</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Method</TableHead>
-          <TableHead className='text-right'>Amount</TableHead>
-          <TableHead className=''>Actions</TableHead>
+          <TableHead>Amount</TableHead>
+          <TableHead className='sticky left-0 right-0 z-20'>Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -135,8 +214,8 @@ export function TableDemo() {
             <TableCell className='font-medium'>{invoice.invoice}</TableCell>
             <TableCell>{invoice.paymentStatus}</TableCell>
             <TableCell>{invoice.paymentMethod}</TableCell>
-            <TableCell className='text-right'>{invoice.totalAmount}</TableCell>
-            <TableCell>
+            <TableCell>{invoice.totalAmount}</TableCell>
+            <TableCell className='sticky left-0 right-0 z-20'>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -161,34 +240,5 @@ export function TableDemo() {
         ))}
       </TableBody>
     </Table>
-  );
-}
-
-export function PaginationDemo() {
-  return (
-    <Pagination>
-      <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious href='#' />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href='#'>1</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href='#' isActive>
-            2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href='#'>3</PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext href='#' />
-        </PaginationItem>
-      </PaginationContent>
-    </Pagination>
   );
 }

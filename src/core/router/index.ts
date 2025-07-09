@@ -9,13 +9,13 @@ export const createAppRouter = async () => {
     {
       path: '*',
       lazy: async () => ({
-        Component: (await import('@/layouts/NotFoundLayout')).default,
+        Component: (await import('@/layouts/not-fount-layout')).default,
       }),
     },
     {
       path: '/',
       lazy: async () => ({
-        Component: (await import('@/layouts/RootLayout')).default,
+        Component: (await import('@/layouts/root-layout')).default,
       }),
       children: moduleRoutes,
     },

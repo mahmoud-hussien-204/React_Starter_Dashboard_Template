@@ -20,7 +20,7 @@ const AppSearch = () => {
   return (
     <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
       <DialogTrigger asChild>
-        <Button variant='ghost'>
+        <Button variant='ghost' className='hidden md:flex'>
           <SearchIcon size={18} />
           <span className='text-muted-foreground'>Search</span>
         </Button>
