@@ -1,4 +1,4 @@
-import useURLFilters from '../hooks/useURLFilters';
+import useURLFilters from '../hooks/use-url-filters';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 

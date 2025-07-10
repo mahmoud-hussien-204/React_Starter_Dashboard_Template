@@ -8,7 +8,7 @@ import ThemeToggler from './theme-toggler';
 
 import NotificationMenu from './notification-menu';
 
-import { useAppSelector } from '@/shared/hooks/useStore';
+import { useAppSelector } from '@/shared/hooks/use-store';
 
 const AppHeader = () => {
   const pageTitle = useAppSelector((state) => state.appConfig.pageData.title);

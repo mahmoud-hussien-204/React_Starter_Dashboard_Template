@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useToggler from './useToggler';
+import useToggler from './use-toggler';
 
 const useDialog = () => {
   const [isOpenedDialog, toggleOpenedDialog] = useToggler();

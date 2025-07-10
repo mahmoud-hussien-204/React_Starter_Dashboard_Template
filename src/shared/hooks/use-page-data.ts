@@ -1,6 +1,6 @@
 import { appConfigActions } from '@/core/store/slices/appConfigSlice';
 
-import { useAppDispatch } from './useStore';
+import { useAppDispatch } from './use-store';
 
 import { useEffect } from 'react';
 

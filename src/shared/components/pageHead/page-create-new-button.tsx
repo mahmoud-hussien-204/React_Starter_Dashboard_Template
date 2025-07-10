@@ -1,4 +1,4 @@
-import useDialog from '@/shared/hooks/useDialog';
+import useDialog from '@/shared/hooks/use-dialog';
 
 import { Button } from '../ui/button';
 

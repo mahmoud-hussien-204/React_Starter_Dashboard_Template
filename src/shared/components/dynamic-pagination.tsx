@@ -10,7 +10,7 @@ import {
 
 import { useCallback } from 'react';
 
-import useURLFilters from '../hooks/useURLFilters';
+import useURLFilters from '../hooks/use-url-filters';
 import PageSize from './page-size';
 
 interface IDynamicPaginationProps {

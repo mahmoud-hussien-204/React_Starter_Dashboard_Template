@@ -4,11 +4,11 @@ import { Button } from '@/shared/components/ui/button';
 
 import { Dialog, DialogContent, DialogFooter, DialogHeader } from '../ui/dialog';
 
-import useDialog from '@/shared/hooks/useDialog';
+import useDialog from '@/shared/hooks/use-dialog';
 
 import { useForm } from 'react-hook-form';
 
-import useURLFilters from '@/shared/hooks/useURLFilters';
+import useURLFilters from '@/shared/hooks/use-url-filters';
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 

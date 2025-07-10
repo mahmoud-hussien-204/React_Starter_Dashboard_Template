@@ -1,6 +1,6 @@
 import { authSlice } from '../store';
 
-import { useAppSelector, useInjectSlice } from '@/shared/hooks/useStore';
+import { useAppSelector, useInjectSlice } from '@/shared/hooks/use-store';
 
 const LoginPage = () => {
   useInjectSlice(authSlice);

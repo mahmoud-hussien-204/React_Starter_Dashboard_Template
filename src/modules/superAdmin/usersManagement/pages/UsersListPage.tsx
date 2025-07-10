@@ -8,7 +8,7 @@ import PageHead from '@/shared/components/pageHead/page-head';
 
 import PageSearch from '@/shared/components/pageHead/page-search';
 
-import usePageData from '@/shared/hooks/usePageData';
+import usePageData from '@/shared/hooks/use-page-data';
 
 import {
   Table,
@@ -25,13 +25,17 @@ import { DropdownMenuItem, DropdownMenuSeparator } from '@/shared/components/ui/
 
 import { DynamicPagination } from '@/shared/components/dynamic-pagination';
 
-import { useReactQuery } from '@/shared/hooks/useReactQuery';
+import { useReactQuery } from '@/shared/hooks/use-react-query';
 
 import { apiGetUsersList } from '../api/users';
 
 import { queryKeys } from '../constants';
 
-import useURLFilters from '@/shared/hooks/useURLFilters';
+import useURLFilters from '@/shared/hooks/use-url-filters';
+import { Badge } from '@/shared/components/ui/badge';
+import { getKycStatusString, getKycStatusVariant, getUserStatus } from '../utils/kycStatus';
+import { CheckCircleIcon, CircleXIcon, PhoneIcon } from 'lucide-react';
+import { cn } from '@/shared/utils';
 
 const UsersListPage = () => {
   usePageData({ title: 'Users Management' });
@@ -79,7 +83,6 @@ const UsersListPage = () => {
                 <TableHead>User</TableHead>
                 <TableHead>Email</TableHead>
                 <TableHead>Phone</TableHead>
-                <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>KYC Status</TableHead>
                 <TableHead>Actions</TableHead>
@@ -100,13 +103,26 @@ const UsersListPage = () => {
                     </TableCell>
                     <TableCell>{user.email}</TableCell>
                     <TableCell>
-                      <a href={`tel:${user.phone}`} className='text-primary'>
+                      <a href={`tel:${user.phone}`} className='gap-0.5rem flex items-center'>
+                        <PhoneIcon size={15} className='text-primary' />
                         {user.phone}
                       </a>
                     </TableCell>
-                    <TableCell>{user.role}</TableCell>
-                    <TableCell>{user.status}</TableCell>
-                    <TableCell>{user.KYC_status}</TableCell>
+                    <TableCell>
+                      <span className='gap-0.5rem flex items-center'>
+                        {user.status ? (
+                          <CheckCircleIcon className='text-primary' size={15} />
+                        ) : (
+                          <CircleXIcon className='text-destructive' size={15} />
+                        )}
+                        {getUserStatus(user.status)}{' '}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant={getKycStatusVariant(user.KYC_status)}>
+                        {getKycStatusString(user.KYC_status)}
+                      </Badge>
+                    </TableCell>
                     <TableAction>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
                       <DropdownMenuItem>Make a copy</DropdownMenuItem>
