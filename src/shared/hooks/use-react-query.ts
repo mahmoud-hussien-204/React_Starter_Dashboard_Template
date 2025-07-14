@@ -1,6 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import type { UseMutationOptions, UseQueryOptions, UseQueryResult } from '@tanstack/react-query';
+import type {
+  QueryKey,
+  UseMutationOptions,
+  UseQueryOptions,
+  UseQueryResult,
+} from '@tanstack/react-query';
 
 interface UseCustomQueryOptions<TData, TError>
   extends Omit<UseQueryOptions<TData, TError>, 'queryKey' | 'queryFn'> {
@@ -12,7 +17,7 @@ export function useReactQuery<TData = unknown, TError = IApiError>({
   queryFn,
   options,
 }: {
-  queryKey: string[];
+  queryKey: QueryKey;
   queryFn: () => Promise<TData>;
   options?: UseCustomQueryOptions<TData, TError>;
 }): UseQueryResult<TData, TError> {

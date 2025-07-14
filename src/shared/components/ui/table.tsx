@@ -1,9 +1,13 @@
 import * as React from 'react';
 
 import { cn } from '@/shared/utils/index';
+
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu';
+
 import { Button } from './button';
+
 import { MoreVerticalIcon } from 'lucide-react';
+import { Skeleton } from './skeleton';
 
 function TableContainer({ children }: Required<React.PropsWithChildren>) {
   return <div className='rounded-md border'>{children}</div>;
@@ -128,6 +132,32 @@ function TableAction({ children }: Required<React.PropsWithChildren>) {
   );
 }
 
+function TableLoading({ colspan, rowspan = 13 }: { rowspan?: number; colspan: number }) {
+  return Array.from({ length: rowspan }, (_, i) => (
+    <TableRow key={i}>
+      <TableCell colSpan={colspan}>
+        <Skeleton className='h-[60%]' />
+      </TableCell>
+    </TableRow>
+  ));
+}
+
+function TableNoDataFound({
+  message = 'No data found',
+  colspan,
+}: {
+  message?: string;
+  colspan: number;
+}) {
+  return (
+    <TableRow>
+      <TableCell colSpan={colspan}>
+        <p className='text-muted-foreground text-center'>{message}</p>
+      </TableCell>
+    </TableRow>
+  );
+}
+
 export {
   TableContainer,
   Table,
@@ -139,4 +169,6 @@ export {
   TableCell,
   TableCaption,
   TableAction,
+  TableLoading,
+  TableNoDataFound,
 };
