@@ -29,6 +29,8 @@ const queryClient = new QueryClient({
   mutationCache: new MutationCache({
     onSuccess: (_data, _variables, _context, mutation) => {
       if (mutation.meta?.invalidatesQuery) {
+        console.log('run');
+
         queryClient.invalidateQueries({
           queryKey: mutation.meta.invalidatesQuery,
         });

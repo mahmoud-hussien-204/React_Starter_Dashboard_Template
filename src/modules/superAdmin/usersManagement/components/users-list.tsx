@@ -25,24 +25,61 @@ import useURLFilters from '@/shared/hooks/use-url-filters';
 
 import { Badge } from '@/shared/components/ui/badge';
 
-import { getKycStatusString, getKycStatusVariant, getUserStatus } from '../utils/kycStatus';
+import { getKycStatusString, getKycStatusVariant, getUserStatus } from '../utils/kyc-status';
 
 import { CheckCircleIcon, CircleXIcon, PhoneIcon } from 'lucide-react';
 
+import UserCard from '@/shared/components/user-card';
+
+import useDialog from '@/shared/hooks/use-dialog';
+
+import { Dialog, DialogContent, DialogHeader } from '@/shared/components/ui/dialog';
+
+import EditUserForm from './edit-user-form';
+
+import DialogConfirmation from '@/shared/components/dialog-confirmation';
+
+import { interceptor } from '@/shared/api/interceptor';
+
+import { useMemo } from 'react';
+
 const UsersList = () => {
+  const {
+    showDialog: showEditDialog,
+    closeDialog: closeEditDialog,
+    isDelayedOpenedDialog: isEditDelayedOpenedDialog,
+    isOpenedDialog: isEditOpenedDialog,
+    setDialogProps: setEditDialogProps,
+    dialogProps: editDialogProps,
+  } = useDialog();
+
+  const {
+    showDialog: showDeleteDialog,
+    closeDialog: closeDeleteDialog,
+    isDelayedOpenedDialog: isDeleteDelayedOpenedDialog,
+    isOpenedDialog: isDeleteOpenedDialog,
+    setDialogProps: setDeleteDialogProps,
+    dialogProps: deleteDialogProps,
+  } = useDialog();
+
   const { pageSearchParams, sizeSearchParams, searchSearchParams } = useURLFilters();
 
-  const { data, isLoading, isFetching } = useReactQuery({
+  const queryKey = useMemo(
+    () => [
+      queryKeys.users,
+      { page: pageSearchParams, limit: sizeSearchParams, search: searchSearchParams },
+    ],
+    [pageSearchParams, sizeSearchParams, searchSearchParams]
+  );
+
+  const { data, isLoading } = useReactQuery({
     queryFn: () =>
       apiGetUsersList({
         limit: sizeSearchParams,
         page: +pageSearchParams,
         search: searchSearchParams,
       }),
-    queryKey: [
-      queryKeys.users,
-      { page: pageSearchParams, limit: sizeSearchParams, search: searchSearchParams },
-    ],
+    queryKey: queryKey,
   });
 
   const meta = data?.meta;
@@ -69,13 +106,7 @@ const UsersList = () => {
               usersList.map((user) => (
                 <TableRow key={user.id}>
                   <TableCell>
-                    <div className='gap-0.5rem flex items-center'>
-                      <img src={user.avatar} alt={user.name} className='size-10 rounded-full' />
-                      <div>
-                        <h6>{user.name}</h6>
-                        <span className='text-foreground text-xs'>ID: {user.id}</span>
-                      </div>
-                    </div>
+                    <UserCard src={user.avatar} subtitle={`ID: ${user.id}`} title={user.name} />
                   </TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
@@ -101,9 +132,23 @@ const UsersList = () => {
                   </TableCell>
                   <TableAction>
                     <DropdownMenuItem>View</DropdownMenuItem>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        showEditDialog();
+                        setEditDialogProps(user);
+                      }}
+                    >
+                      Edit
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem>Delete</DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        showDeleteDialog();
+                        setDeleteDialogProps(user);
+                      }}
+                    >
+                      Delete
+                    </DropdownMenuItem>
                   </TableAction>
                 </TableRow>
               ))
@@ -114,8 +159,37 @@ const UsersList = () => {
         </Table>
         <DynamicPagination totalPages={Math.ceil((meta?.pagesCount || 1) / +sizeSearchParams)} />
       </TableContainer>
+
+      <Dialog open={isEditOpenedDialog} onOpenChange={closeEditDialog}>
+        <DialogContent>
+          <DialogHeader
+            title='Edit User'
+            description='You can edit any of the available options.'
+          />
+          {isEditDelayedOpenedDialog ? <EditUserForm /> : null}
+        </DialogContent>
+      </Dialog>
+
+      <DialogConfirmation
+        closeDialog={closeDeleteDialog}
+        isDelayedOpenedDialog={isDeleteDelayedOpenedDialog}
+        isOpenedDialog={isDeleteOpenedDialog}
+        onConfirm={async () => apiDeleteUser(deleteDialogProps?.id || 0)}
+        invalidatesQuery={queryKey}
+      />
     </section>
   );
 };
 
 export default UsersList;
+
+function apiDeleteUser(id: number) {
+  console.log(id);
+
+  return interceptor({
+    endpoint: `users/${id}`,
+    requestOptions: {
+      method: 'Delete',
+    },
+  });
+}

@@ -10,7 +10,7 @@ import PageSearch from '@/shared/components/pageHead/page-search';
 
 import usePageData from '@/shared/hooks/use-page-data';
 
-import UsersList from '../components/UsersList';
+import UsersList from '../components/users-list';
 
 const UsersListPage = () => {
   usePageData({ title: 'Users Management' });
