@@ -2,7 +2,7 @@ import { interceptor } from '@/shared/api/interceptor.api';
 
 import { toQueryString } from '@/shared/utils/url.utils';
 
-import type { IUser } from '../interfaces/users.interface';
+import type { IEditUserForm, IUser } from '../interfaces/users.interface';
 
 import { safeCall } from '@/shared/api/safe-call.api';
 
@@ -20,6 +20,19 @@ export function apiDeleteUser(userId: string | undefined) {
     endpoint: `users/${userId}`,
     requestOptions: {
       method: 'DELETE',
+    },
+  });
+}
+
+export function apiEditUser(payload: IEditUserForm) {
+  const isSafe = safeCall(payload);
+  if (!isSafe) return Promise.reject();
+  const { id, ...data } = payload;
+  return interceptor<IUser>({
+    endpoint: `users/${id}`,
+    requestOptions: {
+      method: 'PUT',
+      body: JSON.stringify(data),
     },
   });
 }

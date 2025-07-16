@@ -8,7 +8,15 @@ import type { IUser } from '../interfaces/users.interface';
 
 import { EnumUserRoles } from '@/shared/enums/index.enum';
 
-const useEditUserForm = (user: IUser | undefined) => {
+import { getDirtyFields } from '@/shared/utils/get-dirty-fields.utils';
+
+import { useReactMutation } from '@/shared/hooks/use-react-query.hook';
+
+import { apiEditUser } from '../api/users.api';
+
+import { queryKeys } from '@/shared/constants/query-keys.constant';
+
+const useEditUserForm = (user: IUser | undefined, closeDialog: () => void) => {
   const form = useForm<IEditUserFormSchema>({
     defaultValues: {
       id: user?.id,
@@ -23,11 +31,27 @@ const useEditUserForm = (user: IUser | undefined) => {
     resolver: zodResolver(editUserFormSchema),
   });
 
+  const { mutate, isPending } = useReactMutation({
+    mutationFn: apiEditUser,
+    options: {
+      meta: {
+        invalidatesQuery: [queryKeys.users.list],
+      },
+      onSuccess: () => {
+        closeDialog();
+      },
+    },
+  });
+
   const onSubmit = (data: IEditUserFormSchema) => {
-    console.log(data);
+    const payload = getDirtyFields(data, form.formState.dirtyFields);
+    mutate({
+      id: data.id,
+      ...payload,
+    });
   };
 
-  return { onSubmit, form };
+  return { onSubmit, form, isPending };
 };
 
 export default useEditUserForm;

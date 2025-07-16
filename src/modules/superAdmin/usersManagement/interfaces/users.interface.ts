@@ -16,4 +16,4 @@ type IUserForm = Omit<IUser, 'id' | 'createdAt' | 'KYC_status'> & {
 
 export type ICreateUserForm = IUserForm;
 
-export type IEditUserForm = IUserForm;
+export type IEditUserForm = Partial<IUserForm> & { id: string };

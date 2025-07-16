@@ -9,7 +9,9 @@ const useFileUploader = () => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       setFile(selectedFile);
-      setFileURL(URL.createObjectURL(selectedFile));
+      const fileURL = URL.createObjectURL(selectedFile);
+      setFileURL(fileURL);
+      return fileURL;
     }
   };
 
