@@ -1,4 +1,4 @@
-import { STORAGE_KEYS } from '@/shared/constants/storageKeys';
+import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constant';
 
 export const defaultAppConfig = {
   theme: 'light' as ITheme,

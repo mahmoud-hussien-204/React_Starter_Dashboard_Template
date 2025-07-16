@@ -1,8 +1,8 @@
 import { configureStore, combineSlices } from '@reduxjs/toolkit';
 
-import { appConfigReducer } from './slices/appConfigSlice';
+import { appConfigReducer } from './slices/app-config-slice.store.slice';
 
-import { userDataReducer } from './slices/userDataSlice';
+import { userDataReducer } from './slices/user-data-slice.store.slice';
 
 // Define an interface for lazy-loaded slices (to be extended via module augmentation)
 export interface LazyLoadedSlices {}

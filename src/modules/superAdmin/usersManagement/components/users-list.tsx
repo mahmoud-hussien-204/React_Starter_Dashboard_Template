@@ -1,5 +1,3 @@
-import { queryKeys } from '../constants';
-
 import {
   Table,
   TableAction,
@@ -17,21 +15,21 @@ import { DropdownMenuItem, DropdownMenuSeparator } from '@/shared/components/ui/
 
 import { DynamicPagination } from '@/shared/components/dynamic-pagination';
 
-import { useReactQuery } from '@/shared/hooks/use-react-query';
+import { useReactQuery } from '@/shared/hooks/use-react-query.hook';
 
-import { apiGetUsersList } from '../api/users';
+import { apiDeleteUser, apiGetUsersList } from '../api/users.api';
 
-import useURLFilters from '@/shared/hooks/use-url-filters';
+import useURLFilters from '@/shared/hooks/use-url-filters.hook';
 
 import { Badge } from '@/shared/components/ui/badge';
 
-import { getKycStatusString, getKycStatusVariant, getUserStatus } from '../utils/kyc-status';
+import { getKycStatusString, getKycStatusVariant, getUserStatus } from '../utils/kyc-status.utils';
 
 import { CheckCircleIcon, CircleXIcon, PhoneIcon } from 'lucide-react';
 
 import UserCard from '@/shared/components/user-card';
 
-import useDialog from '@/shared/hooks/use-dialog';
+import useDialog from '@/shared/hooks/use-dialog.hook';
 
 import { Dialog, DialogContent, DialogHeader } from '@/shared/components/ui/dialog';
 
@@ -39,9 +37,11 @@ import EditUserForm from './edit-user-form';
 
 import DialogConfirmation from '@/shared/components/dialog-confirmation';
 
-import { interceptor } from '@/shared/api/interceptor';
-
 import { useMemo } from 'react';
+
+import type { IUser } from '../interfaces/users.interface';
+
+import { queryKeys } from '@/shared/constants/query-keys.constant';
 
 const UsersList = () => {
   const {
@@ -51,7 +51,7 @@ const UsersList = () => {
     isOpenedDialog: isEditOpenedDialog,
     setDialogProps: setEditDialogProps,
     dialogProps: editDialogProps,
-  } = useDialog();
+  } = useDialog<IUser>();
 
   const {
     showDialog: showDeleteDialog,
@@ -60,13 +60,13 @@ const UsersList = () => {
     isOpenedDialog: isDeleteOpenedDialog,
     setDialogProps: setDeleteDialogProps,
     dialogProps: deleteDialogProps,
-  } = useDialog();
+  } = useDialog<IUser>();
 
   const { pageSearchParams, sizeSearchParams, searchSearchParams } = useURLFilters();
 
   const queryKey = useMemo(
     () => [
-      queryKeys.users,
+      queryKeys.users.list,
       { page: pageSearchParams, limit: sizeSearchParams, search: searchSearchParams },
     ],
     [pageSearchParams, sizeSearchParams, searchSearchParams]
@@ -174,7 +174,7 @@ const UsersList = () => {
         closeDialog={closeDeleteDialog}
         isDelayedOpenedDialog={isDeleteDelayedOpenedDialog}
         isOpenedDialog={isDeleteOpenedDialog}
-        onConfirm={async () => apiDeleteUser(deleteDialogProps?.id || 0)}
+        onConfirm={async () => apiDeleteUser(deleteDialogProps?.id)}
         invalidatesQuery={queryKey}
       />
     </section>
@@ -182,14 +182,3 @@ const UsersList = () => {
 };
 
 export default UsersList;
-
-function apiDeleteUser(id: number) {
-  console.log(id);
-
-  return interceptor({
-    endpoint: `users/${id}`,
-    requestOptions: {
-      method: 'Delete',
-    },
-  });
-}

@@ -2,11 +2,11 @@ import { Suspense } from 'react';
 
 import { RouterProvider } from 'react-router';
 
-import type { Router } from '@/core/router';
+import type { Router } from '@/core/router/index.router';
 
 import { Provider } from 'react-redux';
 
-import { store } from '@/core/store';
+import { store } from '@/core/store/index.store';
 
 import {
   MutationCache,
@@ -29,8 +29,6 @@ const queryClient = new QueryClient({
   mutationCache: new MutationCache({
     onSuccess: (_data, _variables, _context, mutation) => {
       if (mutation.meta?.invalidatesQuery) {
-        console.log('run');
-
         queryClient.invalidateQueries({
           queryKey: mutation.meta.invalidatesQuery,
         });

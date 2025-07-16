@@ -8,7 +8,7 @@ import PageHead from '@/shared/components/pageHead/page-head';
 
 import PageSearch from '@/shared/components/pageHead/page-search';
 
-import usePageData from '@/shared/hooks/use-page-data';
+import usePageData from '@/shared/hooks/use-page-data.hook';
 
 import UsersList from '../components/users-list';
 

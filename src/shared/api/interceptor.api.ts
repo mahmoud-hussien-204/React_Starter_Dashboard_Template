@@ -1,6 +1,6 @@
-import { store } from '@/core/store';
+import { store } from '@/core/store/index.store';
 
-import { toast } from 'sonner';
+import { notification } from '../utils/notification.utils';
 
 interface IInterceptor {
   endpoint: string;
@@ -26,7 +26,7 @@ export async function interceptor<TData>({
 
     // show success toast
     if (requestOptions.method !== 'GET' && showToast) {
-      toast.success(data.message);
+      notification.success(data.message);
     }
 
     return data;
@@ -38,7 +38,7 @@ export async function interceptor<TData>({
 
     // show error toast
     if (showToast) {
-      toast.error(apiError.message);
+      notification.error(apiError.message);
     }
 
     return Promise.reject(apiError);

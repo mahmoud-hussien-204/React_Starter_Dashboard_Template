@@ -4,7 +4,7 @@ const usersRoutes: RouteObject[] = [
   {
     path: 'users-management',
     lazy: async () => ({
-      Component: (await import('./pages/users-list-page')).default,
+      Component: (await import('./pages/users-list.page')).default,
     }),
   },
 ];

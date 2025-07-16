@@ -11,9 +11,9 @@ import { NavUser } from './nav-user';
 
 import { NavMain } from './nav-main';
 
-import { sidebarLinks } from '@/shared/constants/sidebar';
+import { sidebarLinks } from '@/shared/constants/sidebar.constant';
 
-import { userData } from '@/shared/constants/fakeData/userData';
+import { userData } from '@/shared/constants/fakeData/user-data.fakeData';
 
 import { Link } from 'react-router';
 

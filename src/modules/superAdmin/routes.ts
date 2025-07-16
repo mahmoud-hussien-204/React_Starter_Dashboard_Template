@@ -1,4 +1,4 @@
-import { injectRouteModule } from '@/core/router/injectRouteModule';
+import { injectRouteModule } from '@/core/router/inject-route-module.router';
 
 import type { RouteObject } from 'react-router';
 
@@ -10,7 +10,7 @@ const usersRoutes: RouteObject[] = [
   {
     path: 'super-admin',
     lazy: async () => ({
-      Component: (await import('@/layouts/home-layout')).default,
+      Component: (await import('@/layouts/home.layout')).default,
     }),
     children: routes,
   },

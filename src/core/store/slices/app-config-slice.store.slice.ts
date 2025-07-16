@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import { getLangConfig, getLayoutConfig, getThemeConfig } from '@/core/config';
+import { getLangConfig, getLayoutConfig, getThemeConfig } from '@/core/config/index.config';
 
 interface IAppConfigState {
   theme: ITheme;

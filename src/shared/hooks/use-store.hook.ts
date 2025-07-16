@@ -1,8 +1,8 @@
-import type { AppDispatch, RootState } from '@/core/store';
+import type { AppDispatch, RootState } from '@/core/store/index.store';
 
 import type { Slice } from '@reduxjs/toolkit';
 
-import { injectSliceModule } from '@/core/store/injectSliceModule';
+import { injectSliceModule } from '@/core/store/inject-slic-module.store';
 
 import { useLayoutEffect } from 'react';
 

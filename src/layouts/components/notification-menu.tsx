@@ -9,7 +9,7 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu';
 
-import { notifications } from '@/shared/constants/fakeData';
+import { notifications } from '@/shared/constants/fakeData/index.fakeData';
 
 import { BellIcon } from 'lucide-react';
 

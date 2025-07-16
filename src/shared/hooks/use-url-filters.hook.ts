@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 
-import { getFilterValue } from '../utils/url';
+import { getFilterValue } from '../utils/url.utils';
 
 const useURLFilters = () => {
   const [searchParams, setSearchParamsMethod] = useSearchParams();

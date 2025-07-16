@@ -18,4 +18,7 @@ export default defineConfig({
       '@utils': path.resolve(__dirname, './src/shared/utils'),
     },
   },
+  build: {
+    target: 'esnext', // support top-level await
+  },
 });

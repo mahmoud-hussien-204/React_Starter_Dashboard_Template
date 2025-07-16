@@ -29,7 +29,7 @@ export function useReactQuery<TData = unknown, TError = IApiError>({
   });
 }
 
-export function useReactMutation<TData = unknown, TError = IApiError, TVariables = unknown>({
+export function useReactMutation<TData = unknown, TError = IApiError, TVariables = void>({
   mutationFn,
   options,
 }: {

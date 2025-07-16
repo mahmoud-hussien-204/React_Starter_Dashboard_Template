@@ -1,12 +1,13 @@
 import * as React from 'react';
 
-import { cn } from '@/shared/utils/index';
+import { cn } from '@/shared/utils/index.utils';
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu';
 
 import { Button } from './button';
 
 import { MoreVerticalIcon } from 'lucide-react';
+
 import { Skeleton } from './skeleton';
 
 function TableContainer({ children }: Required<React.PropsWithChildren>) {

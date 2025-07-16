@@ -4,7 +4,7 @@ import { SearchIcon } from 'lucide-react';
 
 import { Input } from '@/shared/components/ui/input';
 
-import useDebounce from '@/shared/hooks/use-debounce';
+import useDebounce from '@/shared/hooks/use-debounce.hook';
 
 import { useSearchParams } from 'react-router';
 

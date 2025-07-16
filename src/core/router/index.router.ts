@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 
-import { injectRouteModule } from './injectRouteModule';
+import { injectRouteModule } from './inject-route-module.router';
 
 export const createAppRouter = async () => {
   const moduleRoutes = await injectRouteModule();
@@ -9,13 +9,13 @@ export const createAppRouter = async () => {
     {
       path: '*',
       lazy: async () => ({
-        Component: (await import('@/layouts/not-fount-layout')).default,
+        Component: (await import('@/layouts/not-fount.layout')).default,
       }),
     },
     {
       path: '/',
       lazy: async () => ({
-        Component: (await import('@/layouts/root-layout')).default,
+        Component: (await import('@/layouts/root.layout')).default,
       }),
       children: moduleRoutes,
     },

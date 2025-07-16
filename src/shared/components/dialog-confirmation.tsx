@@ -1,6 +1,6 @@
-import { useReactMutation } from '@/shared/hooks/use-react-query';
+import { useReactMutation } from '@/shared/hooks/use-react-query.hook';
 
-import { Dialog, DialogContent, DialogHeader } from './ui/dialog';
+import { Dialog, DialogContent, DialogFooter, DialogHeader } from './ui/dialog';
 
 import type { QueryKey } from '@tanstack/react-query';
 
@@ -10,6 +10,10 @@ interface IProps {
   isOpenedDialog: boolean;
   onConfirm: () => Promise<unknown>;
   invalidatesQuery?: QueryKey;
+  title?: string;
+  description?: string;
+  message?: string;
+  confirmButtonTitle?: string;
 }
 
 const DialogConfirmation = ({
@@ -18,6 +22,10 @@ const DialogConfirmation = ({
   isOpenedDialog,
   onConfirm,
   invalidatesQuery,
+  title,
+  description,
+  message,
+  confirmButtonTitle,
 }: IProps) => {
   const { mutate, isPending } = useReactMutation({
     mutationFn: onConfirm,
@@ -29,15 +37,31 @@ const DialogConfirmation = ({
     },
   });
 
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    mutate();
+  };
+
   return (
     <Dialog open={isOpenedDialog} onOpenChange={closeDialog}>
       <DialogContent>
-        <DialogHeader title='Be aware' description='This action cannot be undone.' />
+        <DialogHeader
+          title={title || 'Be aware'}
+          description={description || 'This action cannot be undone.'}
+        />
         {isDelayedOpenedDialog ? (
-          <>
-            Are you sure?
-            <button onClick={mutate}>{isPending && 'loading'} click</button>
-          </>
+          <form onSubmit={onSubmit}>
+            <p>
+              {message ||
+                'if this was the action that you wanted to do, please confirm your choice, or cancel and return to the previous page'}
+            </p>
+            <DialogFooter
+              closeDialog={closeDialog}
+              isLoading={isPending}
+              submitButtonTitle={confirmButtonTitle || 'Confirm'}
+              submitButtonVariant='destructive'
+            />
+          </form>
         ) : null}
       </DialogContent>
     </Dialog>

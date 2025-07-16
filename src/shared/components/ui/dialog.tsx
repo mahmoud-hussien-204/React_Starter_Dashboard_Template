@@ -4,7 +4,7 @@ import * as DialogPrimitive from '@radix-ui/react-dialog';
 
 import { XIcon } from 'lucide-react';
 
-import { cn } from '@/shared/utils/index';
+import { cn } from '@/shared/utils/index.utils';
 
 import { Button, type IButtonVariantProps } from './button';
 
@@ -140,7 +140,7 @@ function DialogFooter({
           variant={cancelButtonVariant}
           onClick={closeDialog}
           className={cn('flex-1', cancelButtonClassName)}
-          disabled={cancelButtonIsDisabled}
+          disabled={cancelButtonIsDisabled || isLoading}
         >
           {cancelButtonTitle}
         </Button>
@@ -152,6 +152,7 @@ function DialogFooter({
           variant={submitButtonVariant}
           className={cn('flex-1', submitButtonClassName)}
           disabled={submitButtonIsDisabled}
+          isLoading={isLoading}
         >
           {submitButtonTitle}
         </Button>
