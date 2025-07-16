@@ -3,10 +3,14 @@ interface IUserData {
   name: string;
   email: string;
   token: string;
-  role: IRole;
+  role: IUserRole;
   avatar: string;
 }
 
-type IRole = 'admin' | 'teacher' | 'student';
+type IUserRole = `${import('../enums/index.enum').EnumUserRoles}`;
 
-type IAppMainLayouts = `${import('../enums').EnumAppMainLayouts}`;
+type IAppMainLayouts = `${import('../enums/index.enum').EnumAppMainLayouts}`;
+
+interface IDialogPropsData {
+  closeDialog: () => void;
+}

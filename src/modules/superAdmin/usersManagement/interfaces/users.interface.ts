@@ -9,3 +9,11 @@ export interface IUser {
   KYC_status: number;
   id: string;
 }
+
+type IUserForm = Omit<IUser, 'id' | 'createdAt' | 'KYC_status'> & {
+  image?: File;
+};
+
+export type ICreateUserForm = IUserForm;
+
+export type IEditUserForm = IUserForm;
