@@ -26,11 +26,11 @@ import type { IUser } from '../interfaces/users.interface';
 
 import type { UseFormReturn } from 'react-hook-form';
 
-import type { ICreateUserFormSchema, IEditUserFormSchema } from '../validation/user.schema';
+import type { IUserFormSchema } from '../validation/user.schema';
 
 interface IProps {
-  user: IUser;
-  form: UseFormReturn<ICreateUserFormSchema | IEditUserFormSchema>;
+  user?: IUser;
+  form: UseFormReturn<IUserFormSchema>;
 }
 
 const UserForm = ({ user, form }: IProps) => {

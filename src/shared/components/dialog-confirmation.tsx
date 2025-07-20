@@ -56,7 +56,6 @@ const DialogConfirmation = ({
                 'if this was the action that you wanted to do, please confirm your choice, or cancel and return to the previous page'}
             </p>
             <DialogFooter
-              closeDialog={closeDialog}
               isLoading={isPending}
               submitButtonTitle={confirmButtonTitle || 'Confirm'}
               submitButtonVariant='destructive'

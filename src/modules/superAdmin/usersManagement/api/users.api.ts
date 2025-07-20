@@ -2,7 +2,7 @@ import { interceptor } from '@/shared/api/interceptor.api';
 
 import { toQueryString } from '@/shared/utils/url.utils';
 
-import type { IEditUserForm, IUser } from '../interfaces/users.interface';
+import type { ICreateUserForm, IEditUserForm, IUser } from '../interfaces/users.interface';
 
 import { safeCall } from '@/shared/api/safe-call.api';
 
@@ -33,6 +33,18 @@ export function apiEditUser(payload: IEditUserForm) {
     requestOptions: {
       method: 'PUT',
       body: JSON.stringify(data),
+    },
+  });
+}
+
+export function apiCreateUser(payload: ICreateUserForm) {
+  const isSafe = safeCall(payload);
+  if (!isSafe) return Promise.reject();
+  return interceptor<IUser>({
+    endpoint: 'users',
+    requestOptions: {
+      method: 'POST',
+      body: JSON.stringify(payload),
     },
   });
 }

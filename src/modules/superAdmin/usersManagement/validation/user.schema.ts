@@ -26,3 +26,5 @@ export const editUserFormSchema = userFormSchema.extend({
 export type ICreateUserFormSchema = z.infer<typeof createUserFormSchema>;
 
 export type IEditUserFormSchema = z.infer<typeof editUserFormSchema>;
+
+export type IUserFormSchema = ICreateUserFormSchema | IEditUserFormSchema;

@@ -122,7 +122,6 @@ const DefaultFilters = ({ closeDialog }: IFiltersComponentProps) => {
         />
 
         <DialogFooter
-          closeDialog={closeDialog}
           isLoading={false}
           submitButtonTitle='Apply Filters'
           submitButtonIsDisabled={!form.formState.isDirty}
