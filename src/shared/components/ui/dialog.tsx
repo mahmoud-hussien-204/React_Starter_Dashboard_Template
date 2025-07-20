@@ -8,8 +8,18 @@ import { cn } from '@/shared/utils/index.utils';
 
 import { Button, type IButtonVariantProps } from './button';
 
+const DialogContext = React.createContext<{ closeDialog: () => void }>({
+  closeDialog: () => {},
+});
+
+export const useDialogContext = () => React.useContext(DialogContext);
+
 function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  return <DialogPrimitive.Root data-slot='dialog' {...props} />;
+  return (
+    <DialogContext.Provider value={{ closeDialog: props.onOpenChange as () => void }}>
+      <DialogPrimitive.Root data-slot='dialog' {...props} />
+    </DialogContext.Provider>
+  );
 }
 
 function DialogTrigger({ ...props }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
@@ -105,7 +115,6 @@ interface IDialogFooterProps extends React.ComponentProps<'div'> {
   cancelButtonVariant?: IButtonVariantProps['variant'];
   cancelButtonClassName?: string;
   cancelButtonIsDisabled?: boolean;
-  closeDialog: () => void;
 }
 
 function DialogFooter({
@@ -121,10 +130,11 @@ function DialogFooter({
   cancelButtonVariant = 'outline',
   cancelButtonClassName,
   cancelButtonIsDisabled,
-  closeDialog,
   children,
   ...props
 }: IDialogFooterProps) {
+  const { closeDialog } = useDialogContext();
+
   return (
     <div
       data-slot='dialog-footer'

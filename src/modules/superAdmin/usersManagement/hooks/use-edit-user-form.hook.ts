@@ -16,7 +16,11 @@ import { apiEditUser } from '../api/users.api';
 
 import { queryKeys } from '@/shared/constants/query-keys.constant';
 
-const useEditUserForm = (user: IUser | undefined, closeDialog: () => void) => {
+import { useDialogContext } from '@/shared/components/ui/dialog';
+
+const useEditUserForm = (user: IUser | undefined) => {
+  const { closeDialog } = useDialogContext();
+
   const form = useForm<IEditUserFormSchema>({
     defaultValues: {
       id: user?.id,

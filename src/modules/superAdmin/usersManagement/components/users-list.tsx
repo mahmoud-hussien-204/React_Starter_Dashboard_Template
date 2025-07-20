@@ -166,9 +166,7 @@ const UsersList = () => {
             title='Edit User'
             description='You can edit any of the available options.'
           />
-          {isEditDelayedOpenedDialog ? (
-            <EditUserForm user={editDialogProps} closeDialog={closeEditDialog} />
-          ) : null}
+          {isEditDelayedOpenedDialog ? <EditUserForm user={editDialogProps} /> : null}
         </DialogContent>
       </Dialog>
 

@@ -10,12 +10,12 @@ import useEditUserForm from '../hooks/use-edit-user-form.hook';
 
 import UserForm from './user-form';
 
-interface IProps extends IDialogPropsData {
+interface IProps {
   user: IUser | undefined;
 }
 
-const EditUserForm = ({ user, closeDialog }: IProps) => {
-  const { form, onSubmit, isPending } = useEditUserForm(user, closeDialog);
+const EditUserForm = ({ user }: IProps) => {
+  const { form, onSubmit, isPending } = useEditUserForm(user);
 
   return !user ? (
     <EmptyState message='User not found' />
@@ -24,7 +24,6 @@ const EditUserForm = ({ user, closeDialog }: IProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)} id='edit-user-form'>
         <UserForm form={form} user={user} />
         <DialogFooter
-          closeDialog={closeDialog}
           isLoading={isPending}
           submitButtonTitle='Save'
           submitButtonIsDisabled={!form.formState.isDirty}
