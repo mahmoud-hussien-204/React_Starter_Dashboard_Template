@@ -11,7 +11,7 @@ const CreateUserForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={onSubmit} id='edit-user-form'>
+      <form onSubmit={onSubmit} id='create-user-form'>
         <UserForm form={form} />
         <DialogFooter
           isLoading={isPending}
