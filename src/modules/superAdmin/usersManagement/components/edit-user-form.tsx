@@ -21,7 +21,7 @@ const EditUserForm = ({ user }: IProps) => {
     <EmptyState message='User not found' />
   ) : (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} id='edit-user-form'>
+      <form onSubmit={onSubmit} id='edit-user-form'>
         {/* @ts-expect-error TODO: fix ts error */}
         <UserForm form={form} user={user} />
         <DialogFooter

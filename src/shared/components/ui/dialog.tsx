@@ -7,6 +7,7 @@ import { XIcon } from 'lucide-react';
 import { cn } from '@/shared/utils/index.utils';
 
 import { Button, type IButtonVariantProps } from './button';
+import { ScrollArea } from './scroll-area';
 
 const DialogContext = React.createContext<{ closeDialog: () => void }>({
   closeDialog: () => {},
@@ -196,6 +197,22 @@ function DialogDescription({
   );
 }
 
+function DialogScrollableContent({
+  className,
+  children,
+}: React.PropsWithChildren & { className?: string }) {
+  return (
+    <ScrollArea
+      className={cn(
+        'h-[calc(100%-(24px+36px))] max-h-[calc(100dvh-(63px+36px+48px+16px+24px+48px))]',
+        className
+      )}
+    >
+      {children}
+    </ScrollArea>
+  );
+}
+
 export {
   Dialog,
   DialogClose,
@@ -207,4 +224,5 @@ export {
   DialogPortal,
   DialogTitle,
   DialogTrigger,
+  DialogScrollableContent,
 };

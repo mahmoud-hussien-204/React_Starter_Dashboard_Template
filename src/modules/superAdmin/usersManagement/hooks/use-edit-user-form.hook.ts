@@ -47,13 +47,13 @@ const useEditUserForm = (user: IUser | undefined) => {
     },
   });
 
-  const onSubmit = (data: IEditUserFormSchema) => {
+  const onSubmit = form.handleSubmit((data) => {
     const payload = getDirtyFields(data, form.formState.dirtyFields);
     mutate({
       id: data.id,
       ...payload,
     });
-  };
+  });
 
   return { onSubmit, form, isPending };
 };

@@ -12,6 +12,8 @@ import usePageData from '@/shared/hooks/use-page-data.hook';
 
 import UsersList from '../components/users-list';
 
+import CreateUserForm from '../components/create-user-form';
+
 const UsersListPage = () => {
   usePageData({ title: 'Users Management' });
 
@@ -28,8 +30,8 @@ const UsersListPage = () => {
           <PageCreateNewButton
             title='Add User'
             dialogCreateTitle='Create new user'
-            dialogCreateDescription=''
-            renderProps={({ closeDialog }) => <div>create new user form</div>}
+            dialogCreateDescription='You can create a new user by filling out the form below.'
+            renderProps={({ closeDialog }) => <CreateUserForm />}
           />
         </div>
       </PageHead>

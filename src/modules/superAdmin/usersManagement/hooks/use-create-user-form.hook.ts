@@ -20,6 +20,12 @@ const useCreateUserForm = () => {
   const form = useForm<ICreateUserFormSchema>({
     defaultValues: {
       role: EnumUserRoles.USER,
+      name: '',
+      email: '',
+      avatar: '',
+      phone: '',
+      status: true,
+      image: undefined,
     },
     resolver: zodResolver(createUserFormSchema),
   });
