@@ -94,8 +94,8 @@ const UsersList = () => {
             <TableRow>
               <TableHead>User</TableHead>
               <TableHead>Email</TableHead>
-              <TableHead>Phone</TableHead>
               <TableHead>Status</TableHead>
+              <TableHead>Phone</TableHead>
               <TableHead>KYC Status</TableHead>
               <TableHead>Actions</TableHead>
             </TableRow>
@@ -110,21 +110,22 @@ const UsersList = () => {
                   </TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    <a href={`tel:${user.phone}`} className='gap-0.5rem flex items-center'>
-                      <PhoneIcon size={15} className='text-primary' />
-                      {user.phone}
-                    </a>
-                  </TableCell>
-                  <TableCell>
                     <span className='gap-0.5rem flex items-center'>
                       {user.status ? (
-                        <CheckCircleIcon className='text-primary' size={15} />
+                        <CheckCircleIcon className='text-success' size={15} />
                       ) : (
                         <CircleXIcon className='text-destructive' size={15} />
                       )}
                       {getUserStatus(user.status)}{' '}
                     </span>
                   </TableCell>
+                  <TableCell>
+                    <a href={`tel:${user.phone}`} className='gap-0.5rem flex items-center'>
+                      <PhoneIcon size={15} />
+                      {user.phone}
+                    </a>
+                  </TableCell>
+
                   <TableCell>
                     <Badge variant={getKycStatusVariant(user.KYC_status)}>
                       {getKycStatusString(user.KYC_status)}
