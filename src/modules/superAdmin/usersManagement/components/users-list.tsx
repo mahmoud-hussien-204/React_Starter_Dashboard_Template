@@ -42,6 +42,7 @@ import { useMemo } from 'react';
 import type { IUser } from '../interfaces/users.interface';
 
 import { queryKeys } from '@/shared/constants/query-keys.constant';
+import ViewUserForm from './view-user-form';
 
 const UsersList = () => {
   const {
@@ -51,6 +52,15 @@ const UsersList = () => {
     isOpenedDialog: isEditOpenedDialog,
     setDialogProps: setEditDialogProps,
     dialogProps: editDialogProps,
+  } = useDialog<IUser>();
+
+  const {
+    showDialog: showViewDialog,
+    closeDialog: closeViewDialog,
+    isDelayedOpenedDialog: isViewDelayedOpenedDialog,
+    isOpenedDialog: isViewOpenedDialog,
+    setDialogProps: setViewDialogProps,
+    dialogProps: viewDialogProps,
   } = useDialog<IUser>();
 
   const {
@@ -132,7 +142,14 @@ const UsersList = () => {
                     </Badge>
                   </TableCell>
                   <TableAction>
-                    <DropdownMenuItem>View</DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => {
+                        showViewDialog();
+                        setViewDialogProps(user);
+                      }}
+                    >
+                      View
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => {
                         showEditDialog();
@@ -168,6 +185,13 @@ const UsersList = () => {
             description='You can edit any of the available options.'
           />
           {isEditDelayedOpenedDialog ? <EditUserForm user={editDialogProps} /> : null}
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={isViewOpenedDialog} onOpenChange={closeViewDialog}>
+        <DialogContent>
+          <DialogHeader title='View User' />
+          {isViewDelayedOpenedDialog ? <ViewUserForm user={viewDialogProps} /> : null}
         </DialogContent>
       </Dialog>
 
