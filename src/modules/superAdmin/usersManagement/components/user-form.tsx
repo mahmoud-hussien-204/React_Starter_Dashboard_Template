@@ -45,7 +45,7 @@ const UserForm = ({ user, form, mode = 'create' }: IProps) => {
           id='user-avatar'
           src={user?.avatar}
           setFieldValue={(fileURL: string) =>
-            form.setValue('avatar', fileURL, { shouldDirty: true })
+            form.setValue('avatar', fileURL, { shouldDirty: true, shouldValidate: true })
           }
         />
         {/* *********** */}

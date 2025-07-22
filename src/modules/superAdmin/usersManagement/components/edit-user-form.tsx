@@ -27,7 +27,7 @@ const EditUserForm = ({ user }: IProps) => {
         <DialogFooter
           isLoading={isPending}
           submitButtonTitle='Save'
-          submitButtonIsDisabled={!form.formState.isDirty}
+          submitButtonIsDisabled={!form.formState.isDirty || !form.formState.isValid}
         />
       </form>
     </Form>
