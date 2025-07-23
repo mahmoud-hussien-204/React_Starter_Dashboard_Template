@@ -14,7 +14,10 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/shared/components/ui/sidebar';
+
 import { Link } from 'react-router';
+
+import useIsPathActive from '@/shared/hooks/use-is-path-active';
 
 interface IProps {
   items: {
@@ -30,6 +33,8 @@ interface IProps {
 }
 
 export function NavMain({ items }: IProps) {
+  const { isPathActive } = useIsPathActive();
+
   return (
     <SidebarGroup>
       <SidebarMenu>
@@ -48,7 +53,7 @@ export function NavMain({ items }: IProps) {
                   <SidebarMenuSub>
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
-                        <SidebarMenuSubButton asChild>
+                        <SidebarMenuSubButton asChild isActive={isPathActive(item.url)}>
                           <Link to={subItem.url}>
                             <span>{subItem.title}</span>
                           </Link>
@@ -61,7 +66,12 @@ export function NavMain({ items }: IProps) {
             </Collapsible>
           ) : (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild tooltip={item.title} isActive={item.isActive} size='lg'>
+              <SidebarMenuButton
+                asChild
+                tooltip={item.title}
+                isActive={isPathActive(item.url)}
+                size='lg'
+              >
                 <Link to={item.url}>
                   {item.icon && <item.icon />}
                   <span>{item.title}</span>

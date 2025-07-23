@@ -15,21 +15,11 @@ import { DropdownMenuItem, DropdownMenuSeparator } from '@/shared/components/ui/
 
 import { DynamicPagination } from '@/shared/components/dynamic-pagination';
 
-import { useReactQuery } from '@/shared/hooks/use-react-query.hook';
+import { apiDeleteUser } from '../api/users.api';
 
-import { apiDeleteUser, apiGetUsersList } from '../api/users.api';
-
-import useURLFilters from '@/shared/hooks/use-url-filters.hook';
-
-import { Badge } from '@/shared/components/ui/badge';
-
-import { getKycStatusString, getKycStatusVariant, getUserStatus } from '../utils/kyc-status.utils';
-
-import { CheckCircleIcon, CircleXIcon, PhoneIcon } from 'lucide-react';
+import { PhoneIcon } from 'lucide-react';
 
 import UserCard from '@/shared/components/user-card';
-
-import useDialog from '@/shared/hooks/use-dialog.hook';
 
 import { Dialog, DialogContent, DialogHeader } from '@/shared/components/ui/dialog';
 
@@ -37,60 +27,39 @@ import EditUserForm from './edit-user-form';
 
 import DialogConfirmation from '@/shared/components/dialog-confirmation';
 
-import { useMemo } from 'react';
-
-import type { IUser } from '../interfaces/users.interface';
-
-import { queryKeys } from '@/shared/constants/query-keys.constant';
 import ViewUserForm from './view-user-form';
+
+import UserKycStatus from './user-kyc-status';
+
+import UserStatus from './user-status';
+
+import useUserList from '../hooks/use-user-list';
 
 const UsersList = () => {
   const {
-    showDialog: showEditDialog,
-    closeDialog: closeEditDialog,
-    isDelayedOpenedDialog: isEditDelayedOpenedDialog,
-    isOpenedDialog: isEditOpenedDialog,
-    setDialogProps: setEditDialogProps,
-    dialogProps: editDialogProps,
-  } = useDialog<IUser>();
-
-  const {
-    showDialog: showViewDialog,
-    closeDialog: closeViewDialog,
-    isDelayedOpenedDialog: isViewDelayedOpenedDialog,
-    isOpenedDialog: isViewOpenedDialog,
-    setDialogProps: setViewDialogProps,
-    dialogProps: viewDialogProps,
-  } = useDialog<IUser>();
-
-  const {
-    showDialog: showDeleteDialog,
-    closeDialog: closeDeleteDialog,
-    isDelayedOpenedDialog: isDeleteDelayedOpenedDialog,
-    isOpenedDialog: isDeleteOpenedDialog,
-    setDialogProps: setDeleteDialogProps,
-    dialogProps: deleteDialogProps,
-  } = useDialog<IUser>();
-
-  const { pageSearchParams, sizeSearchParams, searchSearchParams } = useURLFilters();
-
-  const queryKey = useMemo(
-    () => [
-      queryKeys.users.list,
-      { page: pageSearchParams, limit: sizeSearchParams, search: searchSearchParams },
-    ],
-    [pageSearchParams, sizeSearchParams, searchSearchParams]
-  );
-
-  const { data, isLoading } = useReactQuery({
-    queryFn: () =>
-      apiGetUsersList({
-        limit: sizeSearchParams,
-        page: +pageSearchParams,
-        search: searchSearchParams,
-      }),
-    queryKey: queryKey,
-  });
+    data,
+    isLoading,
+    showEditDialog,
+    closeEditDialog,
+    isEditDelayedOpenedDialog,
+    isEditOpenedDialog,
+    setEditDialogProps,
+    editDialogProps,
+    showViewDialog,
+    closeViewDialog,
+    isViewDelayedOpenedDialog,
+    isViewOpenedDialog,
+    setViewDialogProps,
+    viewDialogProps,
+    showDeleteDialog,
+    closeDeleteDialog,
+    isDeleteDelayedOpenedDialog,
+    isDeleteOpenedDialog,
+    setDeleteDialogProps,
+    deleteDialogProps,
+    sizeSearchParams,
+    queryKey,
+  } = useUserList();
 
   const meta = data?.meta;
 
@@ -120,14 +89,7 @@ const UsersList = () => {
                   </TableCell>
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
-                    <span className='gap-0.5rem flex items-center'>
-                      {user.status ? (
-                        <CheckCircleIcon className='text-success' size={15} />
-                      ) : (
-                        <CircleXIcon className='text-destructive' size={15} />
-                      )}
-                      {getUserStatus(user.status)}{' '}
-                    </span>
+                    <UserStatus status={user.status} />
                   </TableCell>
                   <TableCell>
                     <a href={`tel:${user.phone}`} className='gap-0.5rem flex items-center'>
@@ -135,11 +97,8 @@ const UsersList = () => {
                       {user.phone}
                     </a>
                   </TableCell>
-
                   <TableCell>
-                    <Badge variant={getKycStatusVariant(user.KYC_status)}>
-                      {getKycStatusString(user.KYC_status)}
-                    </Badge>
+                    <UserKycStatus status={user.KYC_status} />
                   </TableCell>
                   <TableAction>
                     <DropdownMenuItem

@@ -21,7 +21,7 @@ import { Layout } from 'lucide-react';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible='offcanvas' {...props}>
+    <Sidebar collapsible='offcanvas' {...props} className='z-50'>
       <SidebarHeader>
         <NavUser user={userData} />
       </SidebarHeader>

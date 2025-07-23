@@ -94,7 +94,7 @@ function DialogHeader({ className, title, description, children, ...props }: IDi
   return (
     <div
       data-slot='dialog-header'
-      className={cn('pb-1rem flex flex-col gap-2 border-b text-center sm:text-left', className)}
+      className={cn('pb-1rem flex flex-col gap-2 border-b text-start', className)}
       {...props}
     >
       {title && <DialogTitle>{title}</DialogTitle>}
@@ -139,10 +139,7 @@ function DialogFooter({
   return (
     <div
       data-slot='dialog-footer'
-      className={cn(
-        'mt-1.5rem gap-1rem flex flex-col-reverse sm:flex-row sm:justify-end',
-        className
-      )}
+      className={cn('mt-1.5rem gap-1rem flex sm:justify-end', className)}
       {...props}
     >
       {isCancelButton && (
