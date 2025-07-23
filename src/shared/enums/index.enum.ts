@@ -9,3 +9,9 @@ export enum EnumUserRoles {
   ADMIN = 'admin',
   USER = 'user',
 }
+
+export enum EnumThemes {
+  LIGHT = 'light',
+  DARK = 'dark',
+  SYSTEM = 'system',
+}

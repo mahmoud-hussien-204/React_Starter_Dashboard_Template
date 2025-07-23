@@ -1,7 +1,7 @@
 export const STORAGE_KEYS = {
-  THEME: 'theme',
-  LANG: 'lang',
-  LAYOUT: 'layout',
-  TOKEN: 'token',
+  theme: 'theme',
+  lang: 'lang',
+  layout: 'layout',
+  token: 'token',
   userData: 'user-data',
 } as const;

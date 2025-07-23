@@ -1,40 +1,36 @@
 import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constant';
 
+import { EnumThemes } from '@/shared/enums/index.enum';
+
 export const defaultAppConfig = {
-  theme: 'light' as ITheme,
+  theme: EnumThemes.LIGHT as ITheme,
   lang: 'en' as ILang,
   layout: 'default' as ILayout,
 };
 
-const cashedAppConfig: {
-  theme?: ITheme;
-  lang?: ILang;
-  layout?: ILayout;
-} = {};
-
 export function getThemeConfig() {
-  if (!cashedAppConfig.theme) {
-    const theme = localStorage.getItem(STORAGE_KEYS.THEME);
-    cashedAppConfig.theme = (theme || defaultAppConfig.theme) as ITheme;
-  }
+  const theme = localStorage.getItem(STORAGE_KEYS.theme);
+  return (theme || defaultAppConfig.theme) as ITheme;
+}
 
-  return cashedAppConfig.theme;
+export function setThemeConfig(theme: ITheme) {
+  localStorage.setItem(STORAGE_KEYS.theme, theme);
 }
 
 export function getLangConfig() {
-  if (!cashedAppConfig.lang) {
-    const lang = localStorage.getItem(STORAGE_KEYS.LANG);
-    cashedAppConfig.lang = (lang || defaultAppConfig.lang) as ILang;
-  }
+  const lang = localStorage.getItem(STORAGE_KEYS.lang);
+  return (lang || defaultAppConfig.lang) as ILang;
+}
 
-  return cashedAppConfig.lang;
+export function setLangConfig(lang: ILang) {
+  localStorage.setItem(STORAGE_KEYS.lang, lang);
 }
 
 export function getLayoutConfig() {
-  if (!cashedAppConfig.layout) {
-    const layout = localStorage.getItem(STORAGE_KEYS.LAYOUT);
-    cashedAppConfig.layout = (layout || defaultAppConfig.layout) as ILayout;
-  }
+  const layout = localStorage.getItem(STORAGE_KEYS.layout);
+  return (layout || defaultAppConfig.layout) as ILayout;
+}
 
-  return cashedAppConfig.layout;
+export function setLayoutConfig(layout: ILayout) {
+  localStorage.setItem(STORAGE_KEYS.layout, layout);
 }

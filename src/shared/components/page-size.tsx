@@ -11,7 +11,7 @@ const PageSize = ({ className }: { className?: string }) => {
         onValueChange={(value) => setSearchParams({ size: value, page: 1 })}
         defaultValue={sizeSearchParams}
       >
-        <SelectTrigger className='!text-foreground max-w-[130px] border-0 bg-transparent px-0'>
+        <SelectTrigger className='!text-foreground max-w-[130px] border-0 !bg-transparent px-0'>
           <SelectValue placeholder='Page size' />
         </SelectTrigger>
         <SelectContent>

@@ -1,4 +1,4 @@
-type ITheme = 'dark' | 'light';
+type ITheme = `${import('../enums/index.enum').EnumThemes}`;
 
 type ILang = 'ar' | 'en';
 

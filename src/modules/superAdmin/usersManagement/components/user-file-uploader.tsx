@@ -40,7 +40,7 @@ const UserFileUploader = ({ src, id, setFieldValue }: IProps) => {
         )}
         <label
           htmlFor={id}
-          className='size-1.5rem hover:bg-primary hover:text-primary-foreground absolute -bottom-2 -end-2 flex cursor-pointer items-center justify-center rounded-full bg-white shadow'
+          className='size-1.5rem hover:bg-primary hover:text-primary-foreground bg-background absolute -bottom-2 -end-2 flex cursor-pointer items-center justify-center rounded-full shadow'
         >
           <PenIcon size={14} />
         </label>
