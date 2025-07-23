@@ -17,7 +17,7 @@ import {
 
 import { Link } from 'react-router';
 
-import useIsPathActive from '@/shared/hooks/use-is-path-active';
+import useIsPathActive from '@/shared/hooks/use-is-path-active.hook';
 
 interface IProps {
   items: {
