@@ -18,7 +18,7 @@ function Table({ className, ...props }: React.ComponentProps<'table'>) {
   return (
     <div
       data-slot='table-container'
-      className='relative h-[max(calc(100dvh-234px),400px)] w-full overflow-x-auto '
+      className='relative h-[max(calc(100dvh-300px),400px)] w-full overflow-x-auto md:h-[max(calc(100dvh-234px),400px)] '
     >
       <table
         data-slot='table'
@@ -93,7 +93,7 @@ function TableCell({ className, ...props }: React.ComponentProps<'td'>) {
     <td
       data-slot='table-cell'
       className={cn(
-        'px-1rem h-3.25rem whitespace-nowrap align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
+        'px-1rem h-3.25rem truncate align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]',
         className
       )}
       {...props}

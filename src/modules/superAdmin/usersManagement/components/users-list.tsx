@@ -33,7 +33,7 @@ import UserKycStatus from './user-kyc-status';
 
 import UserStatus from './user-status';
 
-import useUserList from '../hooks/use-user-list';
+import useUserList from '../hooks/use-user-list.hook';
 
 const UsersList = () => {
   const {
