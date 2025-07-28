@@ -31,7 +31,7 @@ const UsersListPage = () => {
             title='Add User'
             dialogCreateTitle='Create new user'
             dialogCreateDescription='You can create a new user by filling out the form below.'
-            renderProps={({ closeDialog }) => <CreateUserForm />}
+            renderProps={() => <CreateUserForm />}
           />
         </div>
       </PageHead>

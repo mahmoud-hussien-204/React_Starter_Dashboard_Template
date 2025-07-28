@@ -13,6 +13,7 @@ import useURLFilters from '@/shared/hooks/use-url-filters.hook';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { useTransition } from 'react';
 
 interface IFiltersComponentProps {
   closeDialog: () => void;
@@ -24,25 +25,28 @@ interface IProps {
 
 const PageFiltersButton = ({ renderProps }: IProps) => {
   const { showDialog, closeDialog, isDelayedOpenedDialog, isOpenedDialog } = useDialog();
+
   return (
-    <Dialog open={isOpenedDialog} onOpenChange={closeDialog}>
+    <>
       <Button size='lg' variant='secondary' onClick={showDialog}>
         <SlidersHorizontalIcon /> Filters
       </Button>
-      <DialogContent>
-        <DialogHeader
-          title='Filter Options'
-          description='You can filter by any of the available options.'
-        />
-        {isDelayedOpenedDialog ? (
-          renderProps ? (
-            renderProps({ closeDialog })
-          ) : (
-            <DefaultFilters closeDialog={closeDialog} />
-          )
-        ) : null}
-      </DialogContent>
-    </Dialog>
+      <Dialog open={isOpenedDialog} onOpenChange={closeDialog}>
+        <DialogContent>
+          <DialogHeader
+            title='Filter Options'
+            description='You can filter by any of the available options.'
+          />
+          {isDelayedOpenedDialog ? (
+            renderProps ? (
+              renderProps({ closeDialog })
+            ) : (
+              <DefaultFilters closeDialog={closeDialog} />
+            )
+          ) : null}
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
@@ -56,6 +60,8 @@ interface IFilterForm {
 const DefaultFilters = ({ closeDialog }: IFiltersComponentProps) => {
   const { statusSearchParams, roleSearchParams, setSearchParams } = useURLFilters();
 
+  const [, startTransition] = useTransition();
+
   const form = useForm<IFilterForm>({
     defaultValues: {
       status: statusSearchParams || '',
@@ -67,7 +73,9 @@ const DefaultFilters = ({ closeDialog }: IFiltersComponentProps) => {
       status: data.status,
       role: data.role,
     });
-    closeDialog();
+    startTransition(() => {
+      closeDialog();
+    });
   }
 
   return (
