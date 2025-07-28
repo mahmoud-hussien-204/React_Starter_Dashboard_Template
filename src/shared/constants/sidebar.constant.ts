@@ -9,7 +9,7 @@ export const sidebarLinks = [
   },
   {
     title: 'Users Management',
-    url: 'users-management',
+    url: '/super-admin/users-management',
     icon: Users,
   },
   {

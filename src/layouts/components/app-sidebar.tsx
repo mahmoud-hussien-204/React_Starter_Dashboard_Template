@@ -19,7 +19,11 @@ import { Link } from 'react-router';
 
 import { Layout } from 'lucide-react';
 
+import useIsPathActive from '@/shared/hooks/use-is-path-active.hook';
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { isPathActive } = useIsPathActive();
+
   return (
     <Sidebar collapsible='offcanvas' {...props} className='z-50'>
       <SidebarHeader>
@@ -29,8 +33,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={sidebarLinks} />
       </SidebarContent>
       <SidebarFooter>
-        <SidebarMenuButton asChild tooltip='Layout Builder' isActive={false} size='lg'>
-          <Link to='/layout-builder'>
+        <SidebarMenuButton
+          asChild
+          tooltip='Layout Builder'
+          isActive={isPathActive('/common/layout-builder')}
+          size='lg'
+        >
+          <Link to='/common/layout-builder'>
             <Layout className='h-4 w-4' />
             <span>Layout Builder</span>
           </Link>
