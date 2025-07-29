@@ -17,6 +17,8 @@ import {
 
 import { Toaster } from '@ui/sonner';
 
+import { AnimatePresence } from 'framer-motion';
+
 declare module '@tanstack/react-query' {
   interface Register {
     mutationMeta: {
@@ -46,7 +48,9 @@ function App({ router }: IProps) {
     <Suspense fallback={<div>Loading...</div>}>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
-          <RouterProvider router={router} />
+          <AnimatePresence mode='wait'>
+            <RouterProvider router={router} />
+          </AnimatePresence>
         </Provider>
       </QueryClientProvider>
       <Toaster />

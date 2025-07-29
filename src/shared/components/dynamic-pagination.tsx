@@ -8,7 +8,7 @@ import {
   PaginationNext,
 } from '@/shared/components/ui/pagination';
 
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import useURLFilters from '../hooks/use-url-filters.hook';
 
@@ -22,7 +22,7 @@ interface IDynamicPaginationProps {
 export function DynamicPagination({ totalPages, onPageChange }: IDynamicPaginationProps) {
   const { pageSearchParams, setSearchParams } = useURLFilters();
 
-  const currentPage = +pageSearchParams;
+  const currentPage = useMemo(() => +pageSearchParams, [pageSearchParams]);
 
   // Function to generate page numbers and ellipsis
   const getPageNumbers = useCallback(() => {
@@ -106,7 +106,7 @@ export function DynamicPagination({ totalPages, onPageChange }: IDynamicPaginati
                 <PaginationEllipsis />
               </PaginationItem>
             ) : (
-              <PaginationItem key={page}>
+              <PaginationItem key={`page-${page}`}>
                 <PaginationLink
                   href='#'
                   isActive={page === currentPage}

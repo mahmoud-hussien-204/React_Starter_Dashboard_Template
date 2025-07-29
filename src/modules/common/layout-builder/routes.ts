@@ -4,16 +4,8 @@ const usersRoutes: RouteObject[] = [
   {
     path: 'layout-builder',
     lazy: async () => ({
-      Component: (await import('@/layouts/home.layout')).default,
+      Component: (await import('./pages/layout-builder.page')).default,
     }),
-    children: [
-      {
-        index: true,
-        lazy: async () => ({
-          Component: (await import('./pages/layout-builder.page')).default,
-        }),
-      },
-    ],
   },
 ];
 

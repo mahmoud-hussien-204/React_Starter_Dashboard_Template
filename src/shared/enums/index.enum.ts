@@ -15,3 +15,10 @@ export enum EnumThemes {
   DARK = 'dark',
   SYSTEM = 'system',
 }
+
+export enum EnumDashboardLayouts {
+  DEFAULT = 'default',
+  PULSE = 'pulse',
+  NOVA = 'nova',
+  SLATE = 'slate',
+}

@@ -14,11 +14,13 @@ import UsersList from '../components/users-list';
 
 import CreateUserForm from '../components/create-user-form';
 
+import AnimationPage from '@/shared/components/animations/animation-page';
+
 const UsersListPage = () => {
   usePageData({ title: 'Users Management' });
 
   return (
-    <section>
+    <AnimationPage>
       <PageHead>
         <div className='gap-0.75rem flex items-center'>
           <PageSearch />
@@ -37,7 +39,7 @@ const UsersListPage = () => {
       </PageHead>
 
       <UsersList />
-    </section>
+    </AnimationPage>
   );
 };
 

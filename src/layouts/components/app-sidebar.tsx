@@ -30,16 +30,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser user={userData} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={sidebarLinks} />
+        <NavMain items={sidebarLinks['super-admin']} />
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenuButton
           asChild
           tooltip='Layout Builder'
-          isActive={isPathActive('/common/layout-builder')}
+          isActive={isPathActive('layout-builder')}
           size='lg'
         >
-          <Link to='/common/layout-builder'>
+          <Link to='layout-builder'>
             <Layout className='h-4 w-4' />
             <span>Layout Builder</span>
           </Link>

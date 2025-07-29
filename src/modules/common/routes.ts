@@ -4,16 +4,4 @@ import type { RouteObject } from 'react-router';
 
 const modules = import.meta.glob<{ default: RouteObject[] }>('./*/routes.ts');
 
-const routes = await injectRouteModule(modules);
-
-const usersRoutes: RouteObject[] = [
-  {
-    path: 'common',
-    // lazy: async () => ({
-    //   Component: (await import('@/layouts/home.layout')).default,
-    // }),
-    children: routes,
-  },
-];
-
-export default usersRoutes;
+export const commonRoutes = await injectRouteModule(modules);

@@ -1,11 +1,11 @@
 import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constant';
 
-import { EnumThemes } from '@/shared/enums/index.enum';
+import { EnumDashboardLayouts, EnumThemes } from '@/shared/enums/index.enum';
 
 export const defaultAppConfig = {
   theme: EnumThemes.LIGHT as ITheme,
   lang: 'en' as ILang,
-  layout: 'default' as ILayout,
+  layout: EnumDashboardLayouts.DEFAULT as ILayout,
 };
 
 export function getThemeConfig() {
