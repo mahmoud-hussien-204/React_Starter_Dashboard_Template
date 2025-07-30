@@ -17,8 +17,9 @@ export enum EnumThemes {
 }
 
 export enum EnumDashboardLayouts {
-  DEFAULT = 'default',
-  PULSE = 'pulse',
-  NOVA = 'nova',
-  SLATE = 'slate',
+  // the name must be the same as the file name
+  DEFAULT = 'default-layout',
+  PULSE = 'pulse-layout',
+  NOVA = 'nova-layout',
+  SLATE = 'slate-layout',
 }

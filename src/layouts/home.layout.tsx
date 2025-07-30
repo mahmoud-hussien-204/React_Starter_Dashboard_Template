@@ -1,22 +1,29 @@
-import { SidebarInset, SidebarProvider } from '@/shared/components/ui/sidebar';
+import { defaultAppConfig } from '@/core/config/index.config';
 
-import { AppSidebar } from './components/app-sidebar';
+import { useAppSelector } from '@/shared/hooks/use-store.hook';
 
-import { Outlet } from 'react-router';
-
-import AppHeader from './components/app-header';
+import { lazy, Suspense, useMemo } from 'react';
 
 const HomeLayout = () => {
+  const selectedLayout = useAppSelector((state) => state.appConfig.layout);
+
+  const SelectedLayoutComponent = useMemo(() => {
+    // dynamic import wrapped in a promise to avoid crash on wrong file
+    return lazy(() =>
+      import(`./components/dashboard-layouts/${selectedLayout}`).catch((err) => {
+        console.error(
+          `Failed to load layout "${selectedLayout}". Falling back to "${defaultAppConfig.layout}".`,
+          err
+        );
+        return import(`./components/dashboard-layouts/${defaultAppConfig.layout}`);
+      })
+    );
+  }, [selectedLayout]);
+
   return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <AppHeader />
-        <div className='px-1rem py-1.25rem flex-1'>
-          <Outlet />
-        </div>
-      </SidebarInset>
-    </SidebarProvider>
+    <Suspense fallback={<div>Loading layout...</div>}>
+      <SelectedLayoutComponent />
+    </Suspense>
   );
 };
 
