@@ -30,7 +30,7 @@ const LayoutBuilderPage = () => {
             <p className='text-sm'>
               Also, you can configurate the Layout in the code{' '}
               <b>(src/core/config/index.config.ts file)</b>. Don't forget clear your local storage
-              when you are changing index.config.
+              when you are changing <b>index.config</b>.
             </p>
           </div>
         </Box>
