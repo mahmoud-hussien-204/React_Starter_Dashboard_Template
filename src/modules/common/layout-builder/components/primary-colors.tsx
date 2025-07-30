@@ -1,4 +1,5 @@
 import { appConfigActions } from '@/core/store/slices/app-config-slice.store.slice';
+
 import Box from '@/shared/components/box';
 
 import { primaryColors } from '@/shared/constants/themes.constant';
@@ -35,14 +36,6 @@ const PrimaryColors = () => {
             ></div>
           </li>
         ))}
-        <li
-          className={cn(
-            '-ms-1rem bg-background text-muted-foreground p-0.5rem size-3rem cursor-pointer rounded-md border shadow'
-          )}
-          // onClick={() => dispatch(appConfigActions.setPrimaryColor(color))}
-        >
-          <input type='color' />
-        </li>
       </ul>
     </Box>
   );
