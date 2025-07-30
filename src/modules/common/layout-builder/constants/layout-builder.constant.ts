@@ -5,6 +5,7 @@ import IconLayout2 from '@/shared/components/icons/icon-layout-2';
 import IconLayout3 from '@/shared/components/icons/icon-layout-3';
 
 import IconLayout4 from '@/shared/components/icons/icon-layout-4';
+
 import { EnumDashboardLayouts } from '@/shared/enums/index.enum';
 
 export const layouts = [

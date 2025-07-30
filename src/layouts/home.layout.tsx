@@ -6,15 +6,7 @@ import { Outlet } from 'react-router';
 
 import AppHeader from './components/app-header';
 
-import { useEffect } from 'react';
-
 const HomeLayout = () => {
-  console.log('renders');
-
-  useEffect(() => {
-    console.log('mounted');
-  }, []);
-
   return (
     <SidebarProvider>
       <AppSidebar />

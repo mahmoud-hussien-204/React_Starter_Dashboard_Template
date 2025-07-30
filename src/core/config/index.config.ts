@@ -1,11 +1,14 @@
 import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constant';
 
+import { primaryColors } from '@/shared/constants/themes.constant';
+
 import { EnumDashboardLayouts, EnumThemes } from '@/shared/enums/index.enum';
 
 export const defaultAppConfig = {
   theme: EnumThemes.LIGHT as ITheme,
   lang: 'en' as ILang,
   layout: EnumDashboardLayouts.DEFAULT as ILayout,
+  primaryColor: primaryColors[0],
 };
 
 export function getThemeConfig() {
@@ -33,4 +36,13 @@ export function getLayoutConfig() {
 
 export function setLayoutConfig(layout: ILayout) {
   localStorage.setItem(STORAGE_KEYS.layout, layout);
+}
+
+export function getPrimaryColorConfig() {
+  const primaryColor = localStorage.getItem(STORAGE_KEYS.primaryColor);
+  return (primaryColor || defaultAppConfig.primaryColor) as string;
+}
+
+export function setPrimaryColorConfig(primaryColor: string) {
+  localStorage.setItem(STORAGE_KEYS.primaryColor, primaryColor);
 }

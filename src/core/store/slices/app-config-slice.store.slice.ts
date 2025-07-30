@@ -2,8 +2,10 @@ import { createListenerMiddleware, createSlice, type PayloadAction } from '@redu
 
 import {
   getLangConfig,
+  getLayoutConfig,
   setLangConfig,
   setLayoutConfig,
+  setPrimaryColorConfig,
   setThemeConfig,
 } from '@/core/config/index.config';
 
@@ -11,6 +13,7 @@ import { EnumThemes } from '@/shared/enums/index.enum';
 
 interface IAppConfigState {
   theme: ITheme | null;
+  primaryColor: string | null;
   lang: ILang;
   layout: ILayout | null;
   pageData: IPageData;
@@ -18,8 +21,9 @@ interface IAppConfigState {
 
 const initialState: IAppConfigState = {
   theme: null,
+  primaryColor: null,
   lang: getLangConfig(),
-  layout: null,
+  layout: getLayoutConfig(),
   pageData: {
     title: '',
   },
@@ -35,6 +39,10 @@ const appConfigSlice = createSlice({
     setTheme: (state, action: PayloadAction<ITheme>) => {
       state.theme = action.payload;
       setThemeConfig(action.payload);
+    },
+    setPrimaryColor: (state, action: PayloadAction<string>) => {
+      state.primaryColor = action.payload;
+      setPrimaryColorConfig(action.payload);
     },
     setLang: (state, action: PayloadAction<ILang>) => {
       state.lang = action.payload;
@@ -65,5 +73,16 @@ themeListenerMiddleware.startListening({
     } else {
       root.classList.add(theme);
     }
+  },
+});
+
+export const primaryColorListenerMiddleware = createListenerMiddleware();
+
+primaryColorListenerMiddleware.startListening({
+  actionCreator: appConfigActions.setPrimaryColor,
+  effect: async (action: PayloadAction<string>) => {
+    const primaryColor = action.payload;
+    const root = document.documentElement;
+    root.style.setProperty('--dynamic-primary-color', primaryColor);
   },
 });

@@ -4,4 +4,5 @@ export const STORAGE_KEYS = {
   layout: 'layout',
   token: 'token',
   userData: 'user-data',
+  primaryColor: 'primary-color',
 } as const;
