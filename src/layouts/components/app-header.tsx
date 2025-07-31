@@ -10,14 +10,30 @@ import NotificationMenu from './notification-menu';
 
 import { useAppSelector } from '@/shared/hooks/use-store.hook';
 
-const AppHeader = () => {
+import { cn } from '@/shared/utils/index.utils';
+
+interface IProps extends React.PropsWithChildren {
+  showSidebarTrigger?: boolean;
+  className?: string;
+}
+
+const AppHeader = ({ className, showSidebarTrigger = true, children }: IProps) => {
   const pageTitle = useAppSelector((state) => state.appConfig.pageData.title);
 
   return (
-    <header className='bg-sidebar p-1rem sticky top-0 z-40 flex shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear'>
+    <header
+      className={cn(
+        'p-1rem sticky top-0 z-40 flex shrink-0 items-center gap-2 transition-[width,height] ease-linear',
+        className
+      )}
+    >
       <div className='flex items-center gap-2'>
-        <SidebarTrigger />
-        <Separator orientation='vertical' className='!h-1rem' />
+        {showSidebarTrigger && (
+          <>
+            <SidebarTrigger />
+            <Separator orientation='vertical' className='!h-1rem' />
+          </>
+        )}
         <h1 className=' font-semibold'>{pageTitle || 'Dashboard'}</h1>
       </div>
 
@@ -25,6 +41,7 @@ const AppHeader = () => {
         <AppSearch />
         <ThemeToggler />
         <NotificationMenu />
+        {children && children}
       </div>
     </header>
   );

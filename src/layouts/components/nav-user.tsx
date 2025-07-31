@@ -19,15 +19,11 @@ import {
   useSidebar,
 } from '@/shared/components/ui/sidebar';
 
-interface IProps {
-  user: {
-    name: string;
-    email: string;
-    avatar: string;
-  };
-}
+import { userData } from '@/shared/constants/fakeData/user-data.fakeData';
 
-export function NavUser({ user }: IProps) {
+import { cn } from '@/shared/utils/index.utils';
+
+export function NavUser({ variant }: { variant?: 'header' }) {
   const { isMobile } = useSidebar();
 
   return (
@@ -40,11 +36,15 @@ export function NavUser({ user }: IProps) {
               className='data-[state=open]:text-sidebar-accent-foreground hover:text-sidebar-accent-foreground hover:bg-transparent data-[state=open]:bg-transparent'
             >
               <Avatar className='size-9 rounded-full'>
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage src={userData.avatar} alt={userData.name} />
               </Avatar>
-              <div className='grid flex-1 text-left text-sm leading-tight'>
-                <span className='truncate font-semibold'>{user.name}</span>
-                <span className='truncate text-xs'>{user.email}</span>
+              <div
+                className={cn('grid flex-1 text-left text-sm leading-tight', {
+                  'hidden sm:grid': variant === 'header',
+                })}
+              >
+                <span className='truncate font-semibold'>{userData.name}</span>
+                <span className='truncate text-xs'>{userData.email}</span>
               </div>
               <ChevronsUpDown className='ml-auto size-4' />
             </SidebarMenuButton>
@@ -52,17 +52,17 @@ export function NavUser({ user }: IProps) {
           <DropdownMenuContent
             className='w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg'
             side={isMobile ? 'bottom' : 'right'}
-            align='end'
+            align='start'
             sideOffset={4}
           >
             <DropdownMenuLabel className='p-0 font-normal'>
               <div className='flex items-center gap-2 px-1 py-1.5 text-left text-sm'>
                 <Avatar className='size-9 rounded-full'>
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage src={userData.avatar} alt={userData.name} />
                 </Avatar>
                 <div className='grid flex-1 text-left text-sm leading-tight'>
-                  <span className='truncate font-semibold'>{user.name}</span>
-                  <span className='truncate text-xs'>{user.email}</span>
+                  <span className='truncate font-semibold'>{userData.name}</span>
+                  <span className='truncate text-xs'>{userData.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>

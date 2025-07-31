@@ -8,12 +8,12 @@ import AppHeader from '../app-header';
 
 import Container from '@/shared/components/container';
 
-const DefaultLayout = () => {
+const SlateLayout = () => {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar variant='inset' />
       <SidebarInset>
-        <AppHeader className='bg-sidebar border-b' />
+        <AppHeader />
         <Container>
           <Outlet />
         </Container>
@@ -22,4 +22,4 @@ const DefaultLayout = () => {
   );
 };
 
-export default DefaultLayout;
+export default SlateLayout;

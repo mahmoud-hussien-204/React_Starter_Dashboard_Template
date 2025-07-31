@@ -19,21 +19,12 @@ import { Link } from 'react-router';
 
 import useIsPathActive from '@/shared/hooks/use-is-path-active.hook';
 
-interface IProps {
-  items: {
-    title: string;
-    url: string;
-    icon?: LucideIcon;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
-}
+import { sidebarLinks } from '@/shared/constants/sidebar.constant';
 
-export function NavMain({ items }: IProps) {
+export function NavMain() {
   const { isPathActive } = useIsPathActive();
+
+  const items = sidebarLinks['super-admin'];
 
   return (
     <SidebarGroup>

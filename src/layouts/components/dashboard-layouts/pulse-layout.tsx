@@ -11,7 +11,7 @@ import Container from '@/shared/components/container';
 const PulseLayout = () => {
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar variant='floating' />
       <SidebarInset>
         <AppHeader />
         <Container>

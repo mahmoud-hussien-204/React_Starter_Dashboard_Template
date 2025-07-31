@@ -11,10 +11,6 @@ import { NavUser } from './nav-user';
 
 import { NavMain } from './nav-main';
 
-import { sidebarLinks } from '@/shared/constants/sidebar.constant';
-
-import { userData } from '@/shared/constants/fakeData/user-data.fakeData';
-
 import { Link } from 'react-router';
 
 import { Layout } from 'lucide-react';
@@ -27,10 +23,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible='offcanvas' {...props} className='z-50'>
       <SidebarHeader>
-        <NavUser user={userData} />
+        <NavUser />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={sidebarLinks['super-admin']} />
+        <NavMain />
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenuButton
