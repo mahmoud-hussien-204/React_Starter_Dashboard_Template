@@ -13,7 +13,7 @@ import AppSubHeader from '../app-sub-header';
 const NovaLayout = () => {
   return (
     <SidebarProvider>
-      <SidebarInset>
+      <SidebarInset className='overflow-unset'>
         <AppHeader showSidebarTrigger={false}>
           <div className='ms-0.75rem'>
             <NavUser variant='header' />

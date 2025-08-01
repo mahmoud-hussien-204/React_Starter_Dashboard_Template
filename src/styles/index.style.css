@@ -151,6 +151,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .overflow-unset {
+    overflow: unset;
+  }
+}
+
 :root {
   /* the primary color added with js --> core/store/slices/app-config-slice.store.slice */
   --dynamic-primary-color: unset;
