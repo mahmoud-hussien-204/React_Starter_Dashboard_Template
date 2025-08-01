@@ -18,6 +18,7 @@ import {
 import { Toaster } from '@ui/sonner';
 
 import { AnimatePresence } from 'framer-motion';
+import { Loading } from './shared/components/with-loading';
 
 declare module '@tanstack/react-query' {
   interface Register {
@@ -45,7 +46,7 @@ interface IProps {
 
 function App({ router }: IProps) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loading />}>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <AnimatePresence mode='wait'>

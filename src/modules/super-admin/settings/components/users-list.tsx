@@ -36,8 +36,30 @@ import UserStatus from './user-status';
 import useUserList from '../hooks/use-user-list.hook';
 
 const UsersList = () => {
-  const { data, isLoading, editDialog, deleteDialog, viewDialog, sizeSearchParams, queryKey } =
-    useUserList();
+  const {
+    data,
+    isLoading,
+    showEditDialog,
+    closeEditDialog,
+    isEditDelayedOpenedDialog,
+    isEditOpenedDialog,
+    setEditDialogProps,
+    editDialogProps,
+    showViewDialog,
+    closeViewDialog,
+    isViewDelayedOpenedDialog,
+    isViewOpenedDialog,
+    setViewDialogProps,
+    viewDialogProps,
+    showDeleteDialog,
+    closeDeleteDialog,
+    isDeleteDelayedOpenedDialog,
+    isDeleteOpenedDialog,
+    setDeleteDialogProps,
+    deleteDialogProps,
+    sizeSearchParams,
+    queryKey,
+  } = useUserList();
 
   const meta = data?.meta;
 
@@ -81,16 +103,16 @@ const UsersList = () => {
                   <TableAction>
                     <DropdownMenuItem
                       onClick={() => {
-                        viewDialog.showDialog();
-                        viewDialog.setDialogProps(user);
+                        showViewDialog();
+                        setViewDialogProps(user);
                       }}
                     >
                       View
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => {
-                        editDialog.showDialog();
-                        editDialog.setDialogProps(user);
+                        showEditDialog();
+                        setEditDialogProps(user);
                       }}
                     >
                       Edit
@@ -98,8 +120,8 @@ const UsersList = () => {
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       onClick={() => {
-                        deleteDialog.showDialog();
-                        deleteDialog.setDialogProps(user);
+                        showDeleteDialog();
+                        setDeleteDialogProps(user);
                       }}
                     >
                       Delete
@@ -115,28 +137,28 @@ const UsersList = () => {
         <DynamicPagination totalPages={Math.ceil((meta?.pagesCount || 1) / +sizeSearchParams)} />
       </TableContainer>
 
-      <Dialog open={editDialog.isOpenedDialog} onOpenChange={editDialog.closeDialog}>
+      <Dialog open={isEditOpenedDialog} onOpenChange={closeEditDialog}>
         <DialogContent>
           <DialogHeader
             title='Edit User'
             description='You can edit any of the available options.'
           />
-          {editDialog.isDelayedOpenedDialog ? <EditUserForm user={editDialog.dialogProps} /> : null}
+          {isEditDelayedOpenedDialog ? <EditUserForm user={editDialogProps} /> : null}
         </DialogContent>
       </Dialog>
 
-      <Dialog open={viewDialog.isOpenedDialog} onOpenChange={viewDialog.closeDialog}>
+      <Dialog open={isViewOpenedDialog} onOpenChange={closeViewDialog}>
         <DialogContent>
           <DialogHeader title='View User' />
-          {viewDialog.isDelayedOpenedDialog ? <ViewUserForm user={viewDialog.dialogProps} /> : null}
+          {isViewDelayedOpenedDialog ? <ViewUserForm user={viewDialogProps} /> : null}
         </DialogContent>
       </Dialog>
 
       <DialogConfirmation
-        closeDialog={deleteDialog.closeDialog}
-        isDelayedOpenedDialog={deleteDialog.isDelayedOpenedDialog}
-        isOpenedDialog={deleteDialog.isOpenedDialog}
-        onConfirm={async () => apiDeleteUser(deleteDialog.dialogProps?.id)}
+        closeDialog={closeDeleteDialog}
+        isDelayedOpenedDialog={isDeleteDelayedOpenedDialog}
+        isOpenedDialog={isDeleteOpenedDialog}
+        onConfirm={async () => apiDeleteUser(deleteDialogProps?.id)}
         invalidatesQuery={queryKey}
       />
     </section>

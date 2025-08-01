@@ -13,32 +13,11 @@ import { apiGetUsersList } from '../api/users.api';
 import useURLFilters from '@/shared/hooks/use-url-filters.hook';
 
 const useUserList = () => {
-  const {
-    showDialog: showEditDialog,
-    closeDialog: closeEditDialog,
-    isDelayedOpenedDialog: isEditDelayedOpenedDialog,
-    isOpenedDialog: isEditOpenedDialog,
-    setDialogProps: setEditDialogProps,
-    dialogProps: editDialogProps,
-  } = useDialog<IUser>();
+  const editDialog = useDialog<IUser>();
 
-  const {
-    showDialog: showViewDialog,
-    closeDialog: closeViewDialog,
-    isDelayedOpenedDialog: isViewDelayedOpenedDialog,
-    isOpenedDialog: isViewOpenedDialog,
-    setDialogProps: setViewDialogProps,
-    dialogProps: viewDialogProps,
-  } = useDialog<IUser>();
+  const viewDialog = useDialog<IUser>();
 
-  const {
-    showDialog: showDeleteDialog,
-    closeDialog: closeDeleteDialog,
-    isDelayedOpenedDialog: isDeleteDelayedOpenedDialog,
-    isOpenedDialog: isDeleteOpenedDialog,
-    setDialogProps: setDeleteDialogProps,
-    dialogProps: deleteDialogProps,
-  } = useDialog<IUser>();
+  const deleteDialog = useDialog<IUser>();
 
   const { pageSearchParams, sizeSearchParams, searchSearchParams } = useURLFilters();
 
@@ -63,24 +42,9 @@ const useUserList = () => {
   return {
     data,
     isLoading,
-    showEditDialog,
-    closeEditDialog,
-    isEditDelayedOpenedDialog,
-    isEditOpenedDialog,
-    setEditDialogProps,
-    editDialogProps,
-    showViewDialog,
-    closeViewDialog,
-    isViewDelayedOpenedDialog,
-    isViewOpenedDialog,
-    setViewDialogProps,
-    viewDialogProps,
-    showDeleteDialog,
-    closeDeleteDialog,
-    isDeleteDelayedOpenedDialog,
-    isDeleteOpenedDialog,
-    setDeleteDialogProps,
-    deleteDialogProps,
+    editDialog,
+    viewDialog,
+    deleteDialog,
     sizeSearchParams,
     queryKey,
   };

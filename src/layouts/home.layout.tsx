@@ -1,5 +1,7 @@
 import { defaultAppConfig } from '@/core/config/index.config';
 
+import { Loading } from '@/shared/components/with-loading';
+
 import { useAppSelector } from '@/shared/hooks/use-store.hook';
 
 import { lazy, Suspense, useMemo } from 'react';
@@ -21,7 +23,7 @@ const HomeLayout = () => {
   }, [selectedLayout]);
 
   return (
-    <Suspense fallback={<div>Loading layout...</div>}>
+    <Suspense fallback={<Loading />}>
       <SelectedLayoutComponent />
     </Suspense>
   );

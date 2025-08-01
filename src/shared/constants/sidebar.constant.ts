@@ -45,7 +45,7 @@ export const sidebarLinks = {
     },
     {
       title: 'Settings',
-      url: '#',
+      url: 'settings',
       icon: Settings,
     },
   ],

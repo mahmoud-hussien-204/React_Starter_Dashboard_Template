@@ -5,4 +5,7 @@ export const queryKeys = {
     create: 'create-user',
     update: 'update-user',
   },
+  settings: {
+    list: 'settings',
+  },
 };
