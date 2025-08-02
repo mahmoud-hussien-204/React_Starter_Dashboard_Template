@@ -26,13 +26,20 @@ const SettingsLayout = () => {
     queryKey: [queryKeys.settings.list],
   });
 
-  const { isPathActive } = useIsPathActive();
+  const { isPathActive, pathname } = useIsPathActive();
 
   return (
     <AnimationPage>
       <WithLoading isLoading={isLoading}>
         <div className='gap-0.25rem sm:gap-1rem mb-1.25rem flex items-center'>
-          <ButtonLink to='account' variant={isPathActive('settings/account') ? 'default' : 'ghost'}>
+          <ButtonLink
+            to='account'
+            variant={
+              isPathActive('settings/account') || pathname.endsWith('settings')
+                ? 'default'
+                : 'ghost'
+            }
+          >
             <Users2Icon />
             Account
           </ButtonLink>

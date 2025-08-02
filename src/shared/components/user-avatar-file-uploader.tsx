@@ -12,7 +12,7 @@ interface IProps {
 
 const avatarTest = import.meta.env.VITE_APP_AVATAR_TEST;
 
-const UserFileUploader = ({ src, id, setFieldValue }: IProps) => {
+const UserAvatarFileUploader = ({ src, id, setFieldValue }: IProps) => {
   const [fileSrc, setFileSrc] = useState(src);
 
   const { onFileChange, fileURL, reset } = useFileUploader();
@@ -64,4 +64,4 @@ const UserFileUploader = ({ src, id, setFieldValue }: IProps) => {
   );
 };
 
-export default UserFileUploader;
+export default UserAvatarFileUploader;

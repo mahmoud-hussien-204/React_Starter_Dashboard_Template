@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { cn } from '@/shared/utils/index.utils';
 
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
+
 function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   return (
     <input
@@ -18,4 +20,20 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   );
 }
 
-export { Input };
+function InputPassword({ ...props }: Omit<React.ComponentProps<'input'>, 'type'>) {
+  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
+
+  return (
+    <div className='relative'>
+      <Input type={isPasswordVisible ? 'text' : 'password'} {...props} />
+      <div className='end-0.75rem absolute top-1/2 -translate-y-1/2 cursor-pointer'>
+        {isPasswordVisible ? (
+          <EyeIcon onClick={() => setIsPasswordVisible(false)} size={14} />
+        ) : (
+          <EyeOffIcon onClick={() => setIsPasswordVisible(true)} size={14} />
+        )}
+      </div>
+    </div>
+  );
+}
+export { Input, InputPassword };

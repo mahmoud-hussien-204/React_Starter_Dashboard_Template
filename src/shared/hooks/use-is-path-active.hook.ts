@@ -17,7 +17,7 @@ const useIsPathActive = () => {
     return pathAfterRole.startsWith(subPath);
   };
 
-  return { isPathActive };
+  return { isPathActive, pathname };
 };
 
 export default useIsPathActive;

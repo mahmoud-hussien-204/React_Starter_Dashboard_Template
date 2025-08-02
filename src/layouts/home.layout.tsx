@@ -12,12 +12,12 @@ const HomeLayout = () => {
   const SelectedLayoutComponent = useMemo(() => {
     // dynamic import wrapped in a promise to avoid crash on wrong file
     return lazy(() =>
-      import(`./components/dashboard-layouts/${selectedLayout}`).catch((err) => {
+      import(`./components/dashboard-layouts/${selectedLayout}.tsx`).catch((err) => {
         console.error(
           `Failed to load layout "${selectedLayout}". Falling back to "${defaultAppConfig.layout}".`,
           err
         );
-        return import(`./components/dashboard-layouts/${defaultAppConfig.layout}`);
+        return import(`./components/dashboard-layouts/${defaultAppConfig.layout}.tsx`);
       })
     );
   }, [selectedLayout]);

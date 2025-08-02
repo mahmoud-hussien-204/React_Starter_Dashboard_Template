@@ -20,8 +20,6 @@ import {
 
 import { Switch } from '@/shared/components/ui/switch';
 
-import UserFileUploader from './user-file-uploader';
-
 import type { IUser } from '../interfaces/users.interface';
 
 import type { UseFormReturn } from 'react-hook-form';
@@ -29,6 +27,8 @@ import type { UseFormReturn } from 'react-hook-form';
 import type { IUserFormSchema } from '../validation/user.schema';
 
 import { DialogScrollableContent } from '@/shared/components/ui/dialog';
+
+import UserAvatarFileUploader from '@/shared/components/user-avatar-file-uploader';
 
 interface IProps {
   user?: IUser;
@@ -41,7 +41,7 @@ const UserForm = ({ user, form, mode = 'create' }: IProps) => {
     <DialogScrollableContent>
       <div className='gap-1rem flex flex-col'>
         {/* avatar */}
-        <UserFileUploader
+        <UserAvatarFileUploader
           id='user-avatar'
           src={user?.avatar}
           setFieldValue={(fileURL: string) =>
