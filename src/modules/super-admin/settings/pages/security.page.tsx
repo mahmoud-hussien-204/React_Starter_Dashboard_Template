@@ -40,6 +40,7 @@ const SecurityPage = () => {
                       <InputPassword
                         placeholder='Enter current password'
                         id='current_password'
+                        autoComplete='off'
                         {...field}
                       />
                     </FormControl>
@@ -57,6 +58,7 @@ const SecurityPage = () => {
                       <InputPassword
                         placeholder='Enter new password'
                         id='new_password'
+                        autoComplete='off'
                         {...field}
                       />
                     </FormControl>
@@ -74,6 +76,7 @@ const SecurityPage = () => {
                       <InputPassword
                         placeholder='Confirm password'
                         id='confirm_new_password'
+                        autoComplete='off'
                         {...field}
                       />
                     </FormControl>

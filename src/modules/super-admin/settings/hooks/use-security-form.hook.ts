@@ -1,11 +1,11 @@
 import { useForm } from 'react-hook-form';
 
-import { securityFormSchema, type ISecurityormSchema } from '../validation/account.schema';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { securityFormSchema, type ISecurityFormSchema } from '../validation/security.schema';
+
 const useSecurityForm = () => {
-  const form = useForm<ISecurityormSchema>({
+  const form = useForm<ISecurityFormSchema>({
     defaultValues: {
       current_password: '',
       new_password: '',
