@@ -14,11 +14,18 @@ function TableContainer({ children }: Required<React.PropsWithChildren>) {
   return <div className='rounded-md border'>{children}</div>;
 }
 
-function Table({ className, ...props }: React.ComponentProps<'table'>) {
+function Table({
+  className,
+  containerClassName,
+  ...props
+}: React.ComponentProps<'table'> & { containerClassName?: string }) {
   return (
     <div
       data-slot='table-container'
-      className='relative h-[max(calc(100dvh-300px),400px)] w-full overflow-x-auto md:h-[max(calc(100dvh-234px),400px)] '
+      className={cn(
+        'relative h-[max(calc(100dvh-300px),400px)] w-full overflow-x-auto md:h-[max(calc(100dvh-234px),400px)]',
+        containerClassName
+      )}
     >
       <table
         data-slot='table'

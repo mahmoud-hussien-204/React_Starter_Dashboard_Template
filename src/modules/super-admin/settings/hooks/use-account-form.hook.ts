@@ -12,7 +12,7 @@ import { queryKeys } from '@/shared/constants/query-keys.constant';
 
 import { getDirtyFields } from '@/shared/utils/get-dirty-fields.utils';
 
-import { apiSaveAccountForm } from '../api/settings.api';
+import { apiSaveAccountForm } from '../api/account.api';
 
 const useAccountForm = () => {
   const { settings } = useSettings();

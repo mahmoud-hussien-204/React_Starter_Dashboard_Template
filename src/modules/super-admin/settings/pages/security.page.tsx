@@ -26,10 +26,9 @@ const SecurityPage = () => {
 
   return (
     <AnimationPage>
-      <Box>
+      <Box title='Change Password'>
         <Form {...form}>
           <form onSubmit={onSubmit} id='account-settings' className=''>
-            <h1 className='mb-1.25rem text-xl'>Change Password</h1>
             <div className='gap-1rem grid grid-cols-1 items-start md:grid-cols-2 lg:grid-cols-3'>
               <FormField
                 control={form.control}
