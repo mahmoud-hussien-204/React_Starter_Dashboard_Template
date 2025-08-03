@@ -4,7 +4,7 @@ export const sidebarLinks = {
   'super-admin': [
     {
       title: 'Dashboard',
-      url: '#',
+      url: 'dashboard',
       icon: LayoutDashboard,
       isActive: true,
     },
