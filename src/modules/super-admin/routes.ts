@@ -4,13 +4,15 @@ import type { RouteObject } from 'react-router';
 
 import { commonRoutes } from '../common/routes';
 
+import { EnumUserRoles } from '@/shared/enums/index.enum';
+
 const modules = import.meta.glob<{ default: RouteObject[] }>('./*/routes.ts');
 
 const routes = await injectRouteModule(modules);
 
 const usersRoutes: RouteObject[] = [
   {
-    path: 'super-admin',
+    path: EnumUserRoles.SUPER_ADMIN,
     lazy: async () => ({
       Component: (await import('@/layouts/home.layout')).default,
     }),

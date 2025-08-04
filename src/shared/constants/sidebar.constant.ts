@@ -6,7 +6,6 @@ export const sidebarLinks = {
       title: 'Dashboard',
       url: 'dashboard',
       icon: LayoutDashboard,
-      isActive: true,
     },
     {
       title: 'Users Management',

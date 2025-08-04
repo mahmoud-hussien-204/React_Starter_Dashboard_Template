@@ -5,4 +5,5 @@ export const STORAGE_KEYS = {
   token: 'token',
   userData: 'user-data',
   primaryColor: 'primary-color',
+  role: 'role',
 } as const;
