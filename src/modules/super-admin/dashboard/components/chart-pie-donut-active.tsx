@@ -1,25 +1,21 @@
-'use client';
+import { Pie, PieChart, Sector } from 'recharts';
 
-import { TrendingUp } from 'lucide-react';
-import { Label, Pie, PieChart, Sector } from 'recharts';
 import type { PieSectorDataItem } from 'recharts/types/polar/Pie';
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/shared/components/ui/card';
+
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/shared/components/ui/chart';
-
-export const description = 'A donut chart with an active sector';
 
 const chartData = [
   { browser: 'chrome', visitors: 275, fill: 'var(--color-chrome)' },
@@ -80,14 +76,6 @@ export function ChartPieDonutActive() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className='flex-col gap-2 text-sm'>
-        <div className='flex items-center gap-2 font-medium leading-none'>
-          Trending up by 5.2% this month <TrendingUp className='h-4 w-4' />
-        </div>
-        <div className='text-muted-foreground leading-none'>
-          Showing total visitors for the last 6 months
-        </div>
-      </CardFooter>
     </Card>
   );
 }

@@ -1,23 +1,19 @@
-import { TrendingUp } from 'lucide-react';
-
-import { Area, AreaChart, CartesianGrid, XAxis } from 'recharts';
+import { Area, AreaChart } from 'recharts';
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/shared/components/ui/card';
+
 import {
   type ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/shared/components/ui/chart';
-
-export const description = 'An area chart with gradient fill';
 
 const chartData = [
   { month: 'January', desktop: 186, mobile: 80 },
@@ -41,29 +37,21 @@ const chartConfig = {
 
 export function ChartAreaGradient() {
   return (
-    <Card>
+    <Card className='overflow-hidden pb-0'>
       <CardHeader>
         <CardTitle>Area Chart - Gradient</CardTitle>
         <CardDescription>Showing total visitors for the last 6 months</CardDescription>
       </CardHeader>
-      <CardContent>
-        <ChartContainer config={chartConfig}>
+      <CardContent className='mt-auto !px-0'>
+        <ChartContainer config={chartConfig} className='h-[300px] w-full'>
           <AreaChart
             accessibilityLayer
             data={chartData}
             margin={{
-              left: 12,
-              right: 12,
+              left: 0,
+              right: 0,
             }}
           >
-            <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey='month'
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-              tickFormatter={(value) => value.slice(0, 3)}
-            />
             <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
             <defs>
               <linearGradient id='fillDesktop' x1='0' y1='0' x2='0' y2='1'>
@@ -94,18 +82,6 @@ export function ChartAreaGradient() {
           </AreaChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
-        <div className='flex w-full items-start gap-2 text-sm'>
-          <div className='grid gap-2'>
-            <div className='flex items-center gap-2 font-medium leading-none'>
-              Trending up by 5.2% this month <TrendingUp className='h-4 w-4' />
-            </div>
-            <div className='text-muted-foreground flex items-center gap-2 leading-none'>
-              January - June 2024
-            </div>
-          </div>
-        </div>
-      </CardFooter>
     </Card>
   );
 }
