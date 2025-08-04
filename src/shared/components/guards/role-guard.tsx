@@ -7,9 +7,13 @@ const RoleGuard = ({ children }: React.PropsWithChildren) => {
 
   const userRole = useAppSelector((state) => state.userData.role);
 
-  if (!userRole) return <Navigate to='/auth/login' state={{ from: location }} replace />;
+  const inAuthPage = location.pathname.startsWith(`/auth`);
 
-  if (!location.pathname.startsWith(`/${userRole}`)) {
+  if (!userRole && !inAuthPage) {
+    return <Navigate to='/auth/login' state={{ from: location }} replace />;
+  }
+
+  if (userRole && !location.pathname.startsWith(`/${userRole}`)) {
     return <Navigate to={`/${userRole}`} replace />;
   }
 
