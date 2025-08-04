@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 
 import App from './App.tsx';
 
-import { createAppRouter } from './core/router/index.router.ts';
+import { createAppRouter } from './core/router/index.router';
 
 import './styles/index.style.css';
 
