@@ -5,6 +5,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/shared/components/ui/collapsible';
+
 import {
   SidebarGroup,
   SidebarMenu,
@@ -21,16 +22,20 @@ import useIsPathActive from '@/shared/hooks/use-is-path-active.hook';
 
 import { sidebarLinks } from '@/shared/constants/sidebar.constant';
 
+import { useAppSelector } from '@/shared/hooks/use-store.hook';
+
 export function NavMain() {
   const { isPathActive } = useIsPathActive();
 
-  const items = sidebarLinks['super-admin'];
+  const userRole = useAppSelector((state) => state.userData.role);
+
+  const items = userRole ? sidebarLinks[userRole] : [];
 
   return (
     <SidebarGroup>
       <SidebarMenu>
         {items.map((item) =>
-          item.items ? (
+          item?.items ? (
             <Collapsible key={item.title} asChild defaultOpen={true} className='group/collapsible'>
               <SidebarMenuItem>
                 <CollapsibleTrigger asChild>
@@ -60,7 +65,7 @@ export function NavMain() {
               <SidebarMenuButton
                 asChild
                 tooltip={item.title}
-                isActive={isPathActive(item.url)}
+                isActive={isPathActive(item.url, item.index)}
                 size='lg'
               >
                 <Link to={item.url}>

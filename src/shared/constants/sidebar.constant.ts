@@ -1,11 +1,25 @@
 import { Ban, Building2, Car, LayoutDashboard, Settings, Truck, Users } from 'lucide-react';
 
-export const sidebarLinks = {
+type ISideBarLinks = {
+  [key: string]: {
+    title: string;
+    url: string;
+    icon: any;
+    index?: boolean;
+    items?: {
+      title: string;
+      url: string;
+    }[];
+  }[];
+};
+
+export const sidebarLinks: ISideBarLinks = {
   'super-admin': [
     {
       title: 'Dashboard',
       url: 'dashboard',
       icon: LayoutDashboard,
+      index: true,
     },
     {
       title: 'Users Management',
@@ -46,6 +60,37 @@ export const sidebarLinks = {
       title: 'Settings',
       url: 'settings',
       icon: Settings,
+    },
+  ],
+  admin: [
+    {
+      title: 'Dashboard',
+      url: 'dashboard',
+      icon: LayoutDashboard,
+      index: true,
+    },
+    {
+      title: 'Errors',
+      url: '/errors',
+      icon: Ban,
+      items: [
+        {
+          title: 'Error 404',
+          url: '/errors/404',
+        },
+        {
+          title: 'Error 500',
+          url: '/errors/500',
+        },
+      ],
+    },
+  ],
+  user: [
+    {
+      title: 'Dashboard',
+      url: 'dashboard',
+      icon: LayoutDashboard,
+      index: true,
     },
   ],
 };

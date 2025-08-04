@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router';
 
 import { Layout } from 'lucide-react';
+import { useAppSelector } from '@/shared/hooks/use-store.hook';
 
 interface IProps {
   className?: string;
@@ -23,7 +24,10 @@ interface IProps {
 const AppSubHeader = ({ className }: IProps) => {
   const { isPathActive } = useIsPathActive();
 
-  const items = sidebarLinks['super-admin'];
+  const userRole = useAppSelector((state) => state.userData.role);
+
+  const items = userRole ? sidebarLinks[userRole] : [];
+
   return (
     <header
       className={cn(
@@ -34,11 +38,11 @@ const AppSubHeader = ({ className }: IProps) => {
       <NavigationMenu>
         <NavigationMenuList>
           {items.map((item) =>
-            !item.items ? (
+            !item?.items ? (
               <NavigationMenuItem key={item.title}>
                 <NavigationMenuLink
                   asChild
-                  active={isPathActive(item.url)}
+                  active={isPathActive(item.url, item.index)}
                   className={navigationMenuTriggerStyle()}
                 >
                   <Link to={item.url}>
