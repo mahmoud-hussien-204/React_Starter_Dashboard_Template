@@ -19,6 +19,12 @@ const authRoutes: RouteObject[] = [
           Component: (await import('./pages/login.page')).default,
         }),
       },
+      {
+        path: 'forgot-password',
+        lazy: async () => ({
+          Component: (await import('./pages/forgot-password.page')).default,
+        }),
+      },
     ],
   },
 ];

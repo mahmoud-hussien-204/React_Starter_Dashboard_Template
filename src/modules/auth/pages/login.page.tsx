@@ -17,6 +17,10 @@ import useLoginForm from '../hooks/use-login-form.hook';
 
 import { Button } from '@/shared/components/ui/button';
 
+import { Link } from 'react-router';
+
+import SignWithGoogle from '../components/sign-with-google';
+
 const LoginPage = () => {
   const { form, onSubmit, isPending } = useLoginForm();
 
@@ -34,7 +38,7 @@ const LoginPage = () => {
             name='email'
             render={({ field }) => (
               <FormItem>
-                <FormLabel htmlFor='email-address'>Full name</FormLabel>
+                <FormLabel htmlFor='email-address'>Email address</FormLabel>
                 <FormControl>
                   <Input
                     placeholder='Enter your Email address'
@@ -63,7 +67,17 @@ const LoginPage = () => {
                     autoComplete='current-password'
                   />
                 </FormControl>
-                <FormMessage />
+                <div className='flex justify-between'>
+                  <div>
+                    <FormMessage />
+                  </div>
+                  <Link
+                    to='/auth/forgot-password'
+                    className='text-primary -mt-0.25rem text-sm font-medium'
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
               </FormItem>
             )}
           />
@@ -78,6 +92,8 @@ const LoginPage = () => {
           </Button>
         </form>
       </Form>
+
+      <SignWithGoogle />
     </AnimationPage>
   );
 };

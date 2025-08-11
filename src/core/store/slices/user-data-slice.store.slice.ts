@@ -9,7 +9,7 @@ type IUserDataState = {
 
 const initialState: IUserDataState = {
   token: localStorage.getItem(STORAGE_KEYS.token),
-  role: (localStorage.getItem(STORAGE_KEYS.role) as IUserRole) || null,
+  role: null,
 };
 
 const userDataSlice = createSlice({
@@ -22,7 +22,6 @@ const userDataSlice = createSlice({
     },
     setRole: (state, action) => {
       state.role = action.payload;
-      localStorage.setItem(STORAGE_KEYS.role, action.payload);
     },
     clearUserData: (state) => {
       state.token = null;

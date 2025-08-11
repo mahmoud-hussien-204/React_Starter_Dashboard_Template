@@ -18,7 +18,7 @@ const AuthLayout = () => {
           </div>
         </div>
         <div className='p-2rem flex flex-col justify-center'>
-          <div className='mx-auto w-full max-w-[35rem]'>
+          <div className='mx-auto w-full max-w-[30rem]'>
             <Outlet />
           </div>
         </div>

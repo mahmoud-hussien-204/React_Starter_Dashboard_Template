@@ -8,13 +8,20 @@ import { loginFormSchema, type ILoginFormSchema } from '../validation/login.sche
 
 import { apiLogin } from '../api/login.api';
 
+import { userDataActions } from '@/core/store/slices/user-data-slice.store.slice';
+
+import { useAppDispatch } from '@/shared/hooks/use-store.hook';
+
 const useLoginForm = () => {
+  const dispatch = useAppDispatch();
+
   const form = useForm<ILoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       email: '',
       password: '',
     },
+    mode: 'onChange',
   });
 
   const { mutate, isPending } = useReactMutation({
@@ -22,8 +29,8 @@ const useLoginForm = () => {
     options: {
       onSuccess: (res) => {
         console.log(res);
-
-        // save user
+        dispatch(userDataActions.setToken(res.token));
+        dispatch(userDataActions.setRole(res.role));
       },
     },
   });

@@ -18,6 +18,7 @@ import {
 import { Toaster } from '@ui/sonner';
 
 import { AnimatePresence } from 'framer-motion';
+
 import { Loading } from './shared/components/with-loading';
 
 declare module '@tanstack/react-query' {
