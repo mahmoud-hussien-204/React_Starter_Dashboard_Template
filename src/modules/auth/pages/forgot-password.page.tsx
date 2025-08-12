@@ -17,7 +17,9 @@ import useForgotPasswordForm from '../hooks/use-forgot-password-form.hook';
 
 import { Button } from '@/shared/components/ui/button';
 
-const LoginPage = () => {
+import BackBtn from '../components/back-btn';
+
+const ForgotPasswordPage = () => {
   const { form, onSubmit, isPending } = useForgotPasswordForm();
 
   return (
@@ -25,7 +27,7 @@ const LoginPage = () => {
       <FormTitle title='Forgot Password?' description='Enter your email to reset your password' />
 
       <Form {...form}>
-        <form onSubmit={onSubmit} id='login-form' className='gap-1.25rem flex flex-col'>
+        <form onSubmit={onSubmit} id='forgot-password-form' className='gap-1.25rem flex flex-col'>
           <FormField
             control={form.control}
             name='email'
@@ -54,10 +56,12 @@ const LoginPage = () => {
           >
             Submit
           </Button>
+
+          <BackBtn />
         </form>
       </Form>
     </AnimationPage>
   );
 };
 
-export default LoginPage;
+export default ForgotPasswordPage;

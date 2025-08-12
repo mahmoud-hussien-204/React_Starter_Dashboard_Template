@@ -7,4 +7,5 @@ export const STORAGE_KEYS = {
   primaryColor: 'primary-color',
   role: 'role',
   forgotPasswordEmail: 'forgot-password-email',
+  verifyCode: 'verify-code',
 } as const;

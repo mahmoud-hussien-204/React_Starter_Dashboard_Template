@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router';
 
 const useForgotPasswordForm = () => {
   const navigate = useNavigate();
+
   const form = useForm<IForgotPasswordFormSchema>({
     resolver: zodResolver(forgotPasswordFormSchema),
     defaultValues: {
