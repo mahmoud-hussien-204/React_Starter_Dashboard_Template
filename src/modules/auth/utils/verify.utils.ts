@@ -7,3 +7,7 @@ export function setVerifyCode(code: string) {
 export function getVerifyCode(): string {
   return localStorage.getItem(STORAGE_KEYS.verifyCode) || '';
 }
+
+export function removeVerifyCode() {
+  localStorage.removeItem(STORAGE_KEYS.verifyCode);
+}
