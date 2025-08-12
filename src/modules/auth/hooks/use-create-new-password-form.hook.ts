@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router';
 
 import { apiVerify } from '../api/verify.api';
 
-import { getVerifyCode } from '../utils/verify.utils';
+import { getVerifyCode, removeVerifyCode } from '../utils/verify.utils';
 
 import { useState } from 'react';
 
-import { getForgotPasswordEmail } from '../utils/forgot-password.utils';
+import { getForgotPasswordEmail, removeForgotPasswordEmail } from '../utils/forgot-password.utils';
 
 import {
   createNewPasswordFormSchema,
@@ -41,6 +41,8 @@ const useCreateNewPasswordForm = () => {
     mutationFn: apiVerify,
     options: {
       onSuccess: () => {
+        removeForgotPasswordEmail();
+        removeVerifyCode();
         navigate('/auth/login');
       },
     },
