@@ -7,7 +7,7 @@ import Shape from '../components/shape';
 const AuthLayout = () => {
   return (
     <AnimationPage>
-      <div className='gap-2rem grid min-h-dvh grid-cols-2'>
+      <div className='grid min-h-dvh md:grid-cols-2'>
         <div className='bg-sidebar gap-3rem p-2rem flex flex-col items-center justify-center text-center'>
           <Shape />
           <div>

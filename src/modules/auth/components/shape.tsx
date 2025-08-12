@@ -6,6 +6,7 @@ const Shape = () => {
       height='302'
       fill='none'
       viewBox='0 0 286 302'
+      className='max-w-10rem max-h-10rem md:max-h-min md:max-w-min'
     >
       <path
         className='fill-foreground'
