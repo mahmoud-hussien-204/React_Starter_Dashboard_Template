@@ -23,8 +23,14 @@ import { userData } from '@/shared/constants/fakeData/user-data.fakeData';
 
 import { cn } from '@/shared/utils/index.utils';
 
+import { useSetAtom } from 'jotai';
+
+import { userDataClearAtoms } from '@/core/store/atoms/user-data.atoms';
+
 export function NavUser({ variant }: { variant?: 'header' }) {
   const { isMobile } = useSidebar();
+
+  const logout = useSetAtom(userDataClearAtoms);
 
   return (
     <SidebarMenu>
@@ -78,7 +84,7 @@ export function NavUser({ variant }: { variant?: 'header' }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={logout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

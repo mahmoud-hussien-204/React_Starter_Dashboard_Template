@@ -4,6 +4,8 @@ import { injectRouteModule } from './inject-route-module.router';
 
 import ErrorLayout from '@/layouts/error.layout';
 
+import { Loading } from '@/shared/components/with-loading';
+
 export const createAppRouter = async () => {
   const moduleRoutes = await injectRouteModule();
 
@@ -16,12 +18,20 @@ export const createAppRouter = async () => {
     },
 
     {
+      path: '/access-denied',
+      lazy: async () => ({
+        Component: (await import('@/layouts/access-denied.layout')).default,
+      }),
+    },
+
+    {
       path: '/',
       lazy: async () => ({
         Component: (await import('@/layouts/root.layout')).default,
       }),
       errorElement: <ErrorLayout />,
       children: moduleRoutes,
+      HydrateFallback: Loading,
     },
   ]);
 };

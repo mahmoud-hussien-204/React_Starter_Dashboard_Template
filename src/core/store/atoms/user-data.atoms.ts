@@ -26,4 +26,5 @@ export const userDataClearAtoms = atom(null, (_, set) => {
   set(userDataTokenAtom, null);
   set(userDataRoleAtom, null);
   localStorage.clear();
+  window.location.pathname = '/auth/login';
 });

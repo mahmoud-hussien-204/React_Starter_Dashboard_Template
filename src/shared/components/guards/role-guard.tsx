@@ -10,7 +10,7 @@ const RoleGuard = ({ children }: React.PropsWithChildren) => {
   const inAuthPage = location.pathname.startsWith(`/auth`);
 
   if (!userRole && !inAuthPage) {
-    return <Navigate to='/auth/login' state={{ from: location }} replace />;
+    return <Navigate to='/access-denied' state={{ from: location }} replace />;
   }
 
   if (userRole && !location.pathname.startsWith(`/${userRole}`)) {
