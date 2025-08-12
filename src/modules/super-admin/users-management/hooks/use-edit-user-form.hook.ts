@@ -33,6 +33,7 @@ const useEditUserForm = (user: IUser | undefined) => {
       image: undefined,
     },
     resolver: zodResolver(editUserFormSchema),
+    mode: 'onChange',
   });
 
   const { mutate, isPending } = useReactMutation({
