@@ -2,16 +2,16 @@ import { cn } from '@/shared/utils/index.utils';
 
 import Box from '@/shared/components/box';
 
-import { useAppDispatch, useAppSelector } from '@/shared/hooks/use-store.hook';
-
 import { themes } from '@/shared/constants/themes.constant';
 
-import { appConfigActions } from '@/core/store/slices/app-config-slice.store.slice';
+import { useAtomValue, useSetAtom } from 'jotai';
+
+import { appConfigSetThemeAtom, appConfigThemeAtom } from '@/core/store/atoms/app-config.atoms';
 
 const Themes = () => {
-  const selectedTheme = useAppSelector((state) => state.appConfig.theme);
+  const selectedTheme = useAtomValue(appConfigThemeAtom);
 
-  const dispatch = useAppDispatch();
+  const setTheme = useSetAtom(appConfigSetThemeAtom);
 
   return (
     <Box>
@@ -21,7 +21,7 @@ const Themes = () => {
           <li
             key={index}
             className='gap-0.5rem flex cursor-pointer flex-col'
-            onClick={() => dispatch(appConfigActions.setTheme(theme.value))}
+            onClick={() => setTheme(theme.value)}
           >
             <div
               className={cn(

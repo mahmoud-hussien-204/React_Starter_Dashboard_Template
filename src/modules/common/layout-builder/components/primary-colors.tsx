@@ -1,17 +1,20 @@
-import { appConfigActions } from '@/core/store/slices/app-config-slice.store.slice';
+import {
+  appConfigPrimaryColorAtom,
+  appConfigSetPrimaryColorAtom,
+} from '@/core/store/atoms/app-config.atoms';
 
 import Box from '@/shared/components/box';
 
 import { primaryColors } from '@/shared/constants/themes.constant';
 
-import { useAppDispatch, useAppSelector } from '@/shared/hooks/use-store.hook';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { cn } from '@/shared/utils/index.utils';
 
 const PrimaryColors = () => {
-  const selectedColor = useAppSelector((state) => state.appConfig.primaryColor);
+  const selectedColor = useAtomValue(appConfigPrimaryColorAtom);
 
-  const dispatch = useAppDispatch();
+  const setPrimaryColor = useSetAtom(appConfigSetPrimaryColorAtom);
 
   return (
     <Box>
@@ -26,7 +29,7 @@ const PrimaryColors = () => {
                 'border-primary': color === selectedColor,
               }
             )}
-            onClick={() => dispatch(appConfigActions.setPrimaryColor(color))}
+            onClick={() => setPrimaryColor(color)}
           >
             <div
               className='size-full rounded'

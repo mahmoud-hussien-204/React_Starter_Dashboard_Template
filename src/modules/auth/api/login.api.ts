@@ -5,7 +5,7 @@ import type { ILoginFormSchema } from '../validation/login.schema';
 import { EnumUserRoles } from '@/shared/enums/index.enum';
 
 export function apiLogin(payload: ILoginFormSchema) {
-  const isSafe = safeCall(payload);
+  const isSafe = safeCall(undefined, payload);
   if (!isSafe) return Promise.reject();
   // for testing login api
   return new Promise<IUserData>((resolve) => {

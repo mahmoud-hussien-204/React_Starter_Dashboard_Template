@@ -22,12 +22,12 @@ import useIsPathActive from '@/shared/hooks/use-is-path-active.hook';
 
 import { sidebarLinks } from '@/shared/constants/sidebar.constant';
 
-import { useAppSelector } from '@/shared/hooks/use-store.hook';
+import useUserRole from '@/shared/hooks/use-user-role.hook';
 
 export function NavMain() {
   const { isPathActive } = useIsPathActive();
 
-  const userRole = useAppSelector((state) => state.userData.role);
+  const userRole = useUserRole();
 
   const items = userRole ? sidebarLinks[userRole] : [];
 

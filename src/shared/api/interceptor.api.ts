@@ -2,6 +2,10 @@ import { store } from '@/core/store/index.store';
 
 import { notification } from '../utils/notification.utils';
 
+import { userDataTokenAtom } from '@/core/store/atoms/user-data.atoms';
+
+import { appConfigLangAtom } from '@/core/store/atoms/app-config.atoms';
+
 interface IInterceptor {
   endpoint: string;
   requestOptions?: RequestInit;
@@ -45,13 +49,11 @@ export async function interceptor<TData>({
   }
 }
 
-const storeState = store.getState();
+const token = store.get(userDataTokenAtom);
+
+const language = store.get(appConfigLangAtom);
 
 async function interceptRequest(request: RequestInit) {
-  const token = storeState.userData?.token || '';
-
-  const language = storeState.appConfig.lang;
-
   const headers = new Headers({
     ...(request.headers || {}),
     Authorization: `Bearer ${token}`,

@@ -4,14 +4,14 @@ import { cn } from '@/shared/utils/index.utils';
 
 import Box from '@/shared/components/box';
 
-import { useAppDispatch, useAppSelector } from '@/shared/hooks/use-store.hook';
+import { useAtomValue, useSetAtom } from 'jotai';
 
-import { appConfigActions } from '@/core/store/slices/app-config-slice.store.slice';
+import { appConfigLayoutAtom, appConfigSetLayoutAtom } from '@/core/store/atoms/app-config.atoms';
 
 const DashboardLayouts = () => {
-  const selectedLayout = useAppSelector((state) => state.appConfig.layout);
+  const selectedLayout = useAtomValue(appConfigLayoutAtom);
 
-  const dispatch = useAppDispatch();
+  const setLayout = useSetAtom(appConfigSetLayoutAtom);
 
   return (
     <Box>
@@ -21,7 +21,7 @@ const DashboardLayouts = () => {
           <li
             key={index}
             className='gap-0.5rem flex cursor-pointer flex-col'
-            onClick={() => dispatch(appConfigActions.setLayout(layout.value))}
+            onClick={() => setLayout(layout.value)}
           >
             <div
               className={cn('bg-background p-0.5rem rounded-md border', {

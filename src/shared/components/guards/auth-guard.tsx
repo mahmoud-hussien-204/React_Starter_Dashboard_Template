@@ -1,11 +1,13 @@
-import { useAppSelector } from '@/shared/hooks/use-store.hook';
+import { userDataTokenAtom } from '@/core/store/atoms/user-data.atoms';
+
+import { useAtomValue } from 'jotai';
 
 import { Navigate, useLocation } from 'react-router';
 
 const AuthGuard = ({ children }: React.PropsWithChildren) => {
   const location = useLocation();
 
-  const userToken = useAppSelector((state) => state.userData.token);
+  const userToken = useAtomValue(userDataTokenAtom);
 
   const inAuthPage = location.pathname.startsWith(`/auth`);
 

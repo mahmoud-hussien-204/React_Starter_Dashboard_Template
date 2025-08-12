@@ -1,4 +1,4 @@
-import { appConfigActions } from '@/core/store/slices/app-config-slice.store.slice';
+import { appConfigSetThemeAtom, appConfigThemeAtom } from '@/core/store/atoms/app-config.atoms';
 
 import { Button } from '@/shared/components/ui/button';
 
@@ -11,16 +11,16 @@ import {
 
 import { themes } from '@/shared/constants/themes.constant';
 
-import { useAppDispatch, useAppSelector } from '@/shared/hooks/use-store.hook';
-
 import { notification } from '@/shared/utils/notification.utils';
+
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { useState } from 'react';
 
 const ThemeToggler = () => {
-  const theme = useAppSelector((state) => state.appConfig.theme);
+  const theme = useAtomValue(appConfigThemeAtom);
 
-  const dispatch = useAppDispatch();
+  const setTheme = useSetAtom(appConfigSetThemeAtom);
 
   const [currentTheme, setCurrentTheme] = useState(() => themes.find((t) => t.value === theme));
 
@@ -29,7 +29,7 @@ const ThemeToggler = () => {
       notification.error('You must select theme');
       return;
     }
-    dispatch(appConfigActions.setTheme(theme.value));
+    setTheme(theme.value);
     setCurrentTheme(theme);
   };
 

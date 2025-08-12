@@ -1,13 +1,15 @@
 import { defaultAppConfig } from '@/core/config/index.config';
 
+import { appConfigLayoutAtom } from '@/core/store/atoms/app-config.atoms';
+
 import { Loading } from '@/shared/components/with-loading';
 
-import { useAppSelector } from '@/shared/hooks/use-store.hook';
+import { useAtomValue } from 'jotai';
 
 import { lazy, Suspense, useMemo } from 'react';
 
 const HomeLayout = () => {
-  const selectedLayout = useAppSelector((state) => state.appConfig.layout);
+  const selectedLayout = useAtomValue(appConfigLayoutAtom);
 
   const SelectedLayoutComponent = useMemo(() => {
     // dynamic import wrapped in a promise to avoid crash on wrong file

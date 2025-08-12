@@ -1,11 +1,11 @@
-import { useAppSelector } from '@/shared/hooks/use-store.hook';
+import useUserRole from '@/shared/hooks/use-user-role.hook';
 
 import { Navigate, useLocation } from 'react-router';
 
 const RoleGuard = ({ children }: React.PropsWithChildren) => {
   const location = useLocation();
 
-  const userRole = useAppSelector((state) => state.userData.role);
+  const userRole = useUserRole();
 
   const inAuthPage = location.pathname.startsWith(`/auth`);
 

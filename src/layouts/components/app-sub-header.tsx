@@ -15,7 +15,8 @@ import {
 import { Link } from 'react-router';
 
 import { Layout } from 'lucide-react';
-import { useAppSelector } from '@/shared/hooks/use-store.hook';
+
+import useUserRole from '@/shared/hooks/use-user-role.hook';
 
 interface IProps {
   className?: string;
@@ -24,7 +25,7 @@ interface IProps {
 const AppSubHeader = ({ className }: IProps) => {
   const { isPathActive } = useIsPathActive();
 
-  const userRole = useAppSelector((state) => state.userData.role);
+  const userRole = useUserRole();
 
   const items = userRole ? sidebarLinks[userRole] : [];
 

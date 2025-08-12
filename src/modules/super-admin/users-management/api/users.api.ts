@@ -14,7 +14,7 @@ export function apiGetUsersList(searchQueryParams: IApiSearchParams) {
 }
 
 export function apiDeleteUser(userId: string | undefined) {
-  const isSafe = safeCall(userId);
+  const isSafe = safeCall(undefined, userId);
   if (!isSafe) return Promise.reject();
   return interceptor<IUser>({
     endpoint: `users/${userId}`,
@@ -25,7 +25,7 @@ export function apiDeleteUser(userId: string | undefined) {
 }
 
 export function apiEditUser(payload: IEditUserForm) {
-  const isSafe = safeCall(payload);
+  const isSafe = safeCall(undefined, payload);
   if (!isSafe) return Promise.reject();
   const { id, ...data } = payload;
   return interceptor<IUser>({
@@ -38,7 +38,7 @@ export function apiEditUser(payload: IEditUserForm) {
 }
 
 export function apiCreateUser(payload: ICreateUserForm) {
-  const isSafe = safeCall(payload);
+  const isSafe = safeCall(undefined, payload);
   if (!isSafe) return Promise.reject();
   return interceptor<IUser>({
     endpoint: 'users',

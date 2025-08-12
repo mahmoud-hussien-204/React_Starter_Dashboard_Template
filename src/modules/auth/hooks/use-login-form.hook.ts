@@ -8,12 +8,13 @@ import { loginFormSchema, type ILoginFormSchema } from '../validation/login.sche
 
 import { apiLogin } from '../api/login.api';
 
-import { userDataActions } from '@/core/store/slices/user-data-slice.store.slice';
+import { useSetAtom } from 'jotai';
 
-import { useAppDispatch } from '@/shared/hooks/use-store.hook';
+import { userDataSetRoleAtom, userDataSetTokenAtom } from '@/core/store/atoms/user-data.atoms';
 
 const useLoginForm = () => {
-  const dispatch = useAppDispatch();
+  const setToken = useSetAtom(userDataSetTokenAtom);
+  const setRole = useSetAtom(userDataSetRoleAtom);
 
   const form = useForm<ILoginFormSchema>({
     resolver: zodResolver(loginFormSchema),
@@ -28,9 +29,8 @@ const useLoginForm = () => {
     mutationFn: apiLogin,
     options: {
       onSuccess: (res) => {
-        console.log(res);
-        dispatch(userDataActions.setToken(res.token));
-        dispatch(userDataActions.setRole(res.role));
+        setToken(res.token);
+        setRole(res.role);
       },
     },
   });

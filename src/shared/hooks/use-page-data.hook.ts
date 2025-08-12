@@ -1,14 +1,14 @@
-import { appConfigActions } from '@/core/store/slices/app-config-slice.store.slice';
-
-import { useAppDispatch } from './use-store.hook';
-
 import { useEffect } from 'react';
 
+import { useSetAtom } from 'jotai';
+
+import { appConfigSetPageDataAtom } from '@/core/store/atoms/app-config.atoms';
+
 const usePageData = (data: IPageData) => {
-  const dispatch = useAppDispatch();
+  const setPageData = useSetAtom(appConfigSetPageDataAtom);
 
   useEffect(() => {
-    dispatch(appConfigActions.setPageData(data));
+    setPageData(data);
   }, []);
 };
 

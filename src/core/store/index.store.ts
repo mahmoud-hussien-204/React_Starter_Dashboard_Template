@@ -1,45 +1,11 @@
-import { configureStore, combineSlices } from '@reduxjs/toolkit';
+import { createStore } from 'jotai';
 
-import {
-  appConfigActions,
-  appConfigReducer,
-  primaryColorListenerMiddleware,
-  themeListenerMiddleware,
-} from './slices/app-config-slice.store.slice';
+import { appConfigSetPrimaryColorAtom, appConfigSetThemeAtom } from './atoms/app-config.atoms';
 
-import { userDataReducer } from './slices/user-data-slice.store.slice';
+import { getPrimaryColorConfig, getThemeConfig } from '../config/index.config';
 
-import { getPrimaryColorConfig, getThemeConfig } from '@/core/config/index.config';
+export const store = createStore();
 
-// Define an interface for lazy-loaded slices (to be extended via module augmentation)
-export interface LazyLoadedSlices {}
+store.set(appConfigSetThemeAtom, getThemeConfig());
 
-// Create the root reducer with initial slices and support for lazy-loaded slices
-export const rootReducer = combineSlices({
-  appConfig: appConfigReducer,
-  userData: userDataReducer,
-}).withLazyLoadedSlices<LazyLoadedSlices>();
-
-// Configure the store
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().prepend(
-      themeListenerMiddleware.middleware,
-      primaryColorListenerMiddleware.middleware
-    ),
-  devTools: process.env.NODE_ENV !== 'production',
-});
-
-// Define RootState based on the rootReducer
-export type RootState = ReturnType<typeof rootReducer>;
-
-// Export dispatch type
-export type AppDispatch = typeof store.dispatch;
-
-export type AppState = ReturnType<typeof store.getState>;
-
-// ******** Dispatch initial actions
-store.dispatch(appConfigActions.setTheme(getThemeConfig()));
-
-store.dispatch(appConfigActions.setPrimaryColor(getPrimaryColorConfig()));
+store.set(appConfigSetPrimaryColorAtom, getPrimaryColorConfig());

@@ -6,15 +6,15 @@ import App from './App.tsx';
 
 import { createAppRouter } from './core/router/index.router';
 
-import { store } from './core/store/index.store.ts';
-
-import { userDataActions } from './core/store/slices/user-data-slice.store.slice.ts';
-
-import { apiGetLogedInUserData } from './shared/api/index.api.ts';
+import { apiGetLoggedInUserData } from './shared/api/index.api.ts';
 
 import { EnumUserRoles } from './shared/enums/index.enum.ts';
 
 import { STORAGE_KEYS } from './shared/constants/storage-keys.constant.ts';
+
+import { store } from './core/store/index.store.ts';
+
+import { userDataClearAtoms, userDataSetRoleAtom } from './core/store/atoms/user-data.atoms.ts';
 
 import './styles/index.style.css';
 
@@ -23,10 +23,10 @@ async function main() {
   const token = localStorage.getItem(STORAGE_KEYS.token);
   if (token) {
     try {
-      const data = await apiGetLogedInUserData();
-      store.dispatch(userDataActions.setRole(EnumUserRoles.SUPER_ADMIN));
+      const data = await apiGetLoggedInUserData();
+      store.set(userDataSetRoleAtom, EnumUserRoles.SUPER_ADMIN);
     } catch (error) {
-      store.dispatch(userDataActions.clearUserData());
+      store.set(userDataClearAtoms);
     }
   }
 

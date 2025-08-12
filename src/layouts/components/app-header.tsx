@@ -8,9 +8,11 @@ import ThemeToggler from './theme-toggler';
 
 import NotificationMenu from './notification-menu';
 
-import { useAppSelector } from '@/shared/hooks/use-store.hook';
-
 import { cn } from '@/shared/utils/index.utils';
+
+import { appConfigPageDataAtom } from '@/core/store/atoms/app-config.atoms';
+
+import { useAtomValue } from 'jotai';
 
 interface IProps extends React.PropsWithChildren {
   showSidebarTrigger?: boolean;
@@ -18,7 +20,7 @@ interface IProps extends React.PropsWithChildren {
 }
 
 const AppHeader = ({ className, showSidebarTrigger = true, children }: IProps) => {
-  const pageTitle = useAppSelector((state) => state.appConfig.pageData.title);
+  const pageTitle = useAtomValue(appConfigPageDataAtom).title;
 
   return (
     <header

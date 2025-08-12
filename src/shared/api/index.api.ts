@@ -1,6 +1,6 @@
 import { interceptor } from './interceptor.api';
 
-export function apiGetLogedInUserData() {
+export function apiGetLoggedInUserData() {
   return interceptor<IUserData>({
     endpoint: 'me/1',
   });
