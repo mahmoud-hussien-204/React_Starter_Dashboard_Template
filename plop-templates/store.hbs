@@ -1,0 +1,7 @@
+import { atom } from 'jotai';
+
+export const {{camelCase name}}Atom = atom<unknown>(undefined);
+
+export const {{camelCase name}}SetAtom = atom(null, (_, set, update: unknown) => {
+  set({{camelCase name}}Atom, update);
+});

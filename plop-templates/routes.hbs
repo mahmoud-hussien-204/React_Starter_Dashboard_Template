@@ -1,0 +1,12 @@
+import type { RouteObject } from 'react-router';
+
+const {{camelCase name}}Routes: RouteObject[] = [
+  {
+    path: '{{kebabCase name}}',
+    lazy: async () => ({
+      Component: (await import('./pages/{{kebabCase name}}.page')).default,
+    }),
+  },
+];
+
+export default {{camelCase name}}Routes;
