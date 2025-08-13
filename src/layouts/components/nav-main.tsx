@@ -20,7 +20,7 @@ import { Link } from 'react-router';
 
 import useIsPathActive from '@/shared/hooks/use-is-path-active.hook';
 
-import { sidebarLinks } from '@/shared/constants/sidebar.constant';
+import { SIDEBAR_CONSTANT } from '@/shared/constants/sidebar.constant';
 
 import useUserRole from '@/shared/hooks/use-user-role.hook';
 
@@ -29,7 +29,7 @@ export function NavMain() {
 
   const userRole = useUserRole();
 
-  const items = userRole ? sidebarLinks[userRole] : [];
+  const items = userRole ? SIDEBAR_CONSTANT.sidebarLinks[userRole] : [];
 
   return (
     <SidebarGroup>

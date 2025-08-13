@@ -9,9 +9,9 @@ import {
   DropdownMenuTrigger,
 } from '@/shared/components/ui/dropdown-menu';
 
-import { themes } from '@/shared/constants/themes.constant';
+import { THEME_CONSTANT } from '@/shared/constants/themes.constant';
 
-import { notification } from '@/shared/utils/notification.utils';
+import { notificationUtil } from '@/shared/utils/notification.utils';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 
@@ -22,11 +22,13 @@ const ThemeToggler = () => {
 
   const setTheme = useSetAtom(appConfigSetThemeAtom);
 
-  const [currentTheme, setCurrentTheme] = useState(() => themes.find((t) => t.value === theme));
+  const [currentTheme, setCurrentTheme] = useState(() =>
+    THEME_CONSTANT.themes.find((t) => t.value === theme)
+  );
 
-  const toggleTheme = (theme: (typeof themes)[0]) => {
+  const toggleTheme = (theme: (typeof THEME_CONSTANT.themes)[0]) => {
     if (!theme) {
-      notification.error('You must select theme');
+      notificationUtil.error('You must select theme');
       return;
     }
     setTheme(theme.value);
@@ -44,7 +46,7 @@ const ThemeToggler = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        {themes.map((theme) => (
+        {THEME_CONSTANT.themes.map((theme) => (
           <DropdownMenuItem
             key={theme.value}
             onClick={() => toggleTheme(theme)}

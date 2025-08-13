@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import type { IUser } from '../interfaces/users.interface';
 
-import { queryKeys } from '@/shared/constants/query-keys.constant';
+import { QUERY_KEYS_CONSTANT } from '@/shared/constants/query-keys.constant';
 
 import useDialog from '@/shared/hooks/use-dialog.hook';
 
@@ -23,7 +23,7 @@ const useUserList = () => {
 
   const queryKey = useMemo(
     () => [
-      queryKeys.users.list,
+      QUERY_KEYS_CONSTANT.users.list,
       { page: pageSearchParams, limit: sizeSearchParams, search: searchSearchParams },
     ],
     [pageSearchParams, sizeSearchParams, searchSearchParams]

@@ -1,15 +1,17 @@
 import { atom } from 'jotai';
 
-import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constant';
+import { STORAGE_KEYS_CONSTANT } from '@/shared/constants/storage-keys.constant';
 
 // ************ token atom
 type ITokenAtom = string | null | undefined;
 
-export const userDataTokenAtom = atom<ITokenAtom>(localStorage.getItem(STORAGE_KEYS.token));
+export const userDataTokenAtom = atom<ITokenAtom>(
+  localStorage.getItem(STORAGE_KEYS_CONSTANT.token)
+);
 
 export const userDataSetTokenAtom = atom(null, (_, set, newToken: string) => {
   set(userDataTokenAtom, newToken);
-  localStorage.setItem(STORAGE_KEYS.token, newToken);
+  localStorage.setItem(STORAGE_KEYS_CONSTANT.token, newToken);
 });
 
 // ************ role atom

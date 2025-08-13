@@ -1,4 +1,4 @@
-import { sidebarLinks } from '@/shared/constants/sidebar.constant';
+import { SIDEBAR_CONSTANT } from '@/shared/constants/sidebar.constant';
 
 import useIsPathActive from '@/shared/hooks/use-is-path-active.hook';
 
@@ -27,7 +27,7 @@ const AppSubHeader = ({ className }: IProps) => {
 
   const userRole = useUserRole();
 
-  const items = userRole ? sidebarLinks[userRole] : [];
+  const items = userRole ? SIDEBAR_CONSTANT.sidebarLinks[userRole] : [];
 
   return (
     <header

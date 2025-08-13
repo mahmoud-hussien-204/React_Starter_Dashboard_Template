@@ -1,4 +1,4 @@
-export const queryKeys = {
+export const QUERY_KEYS_CONSTANT = {
   users: {
     list: 'users',
     detail: 'user',

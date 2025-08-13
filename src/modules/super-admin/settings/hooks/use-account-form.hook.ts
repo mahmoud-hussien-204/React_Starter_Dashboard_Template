@@ -8,9 +8,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useReactMutation } from '@/shared/hooks/use-react-query.hook';
 
-import { queryKeys } from '@/shared/constants/query-keys.constant';
+import { QUERY_KEYS_CONSTANT } from '@/shared/constants/query-keys.constant';
 
-import { getDirtyFields } from '@/shared/utils/get-dirty-fields.utils';
+import { getDirtyFieldsUtil } from '@/shared/utils/get-dirty-fields.utils';
 
 import { apiSaveAccountForm } from '../api/account.api';
 
@@ -33,13 +33,13 @@ const useAccountForm = () => {
     mutationFn: apiSaveAccountForm,
     options: {
       meta: {
-        invalidatesQuery: [queryKeys.settings.list],
+        invalidatesQuery: [QUERY_KEYS_CONSTANT.settings.list],
       },
     },
   });
 
   const onSubmit = form.handleSubmit((data) => {
-    const payload = getDirtyFields(data, form.formState.dirtyFields);
+    const payload = getDirtyFieldsUtil(data, form.formState.dirtyFields);
     mutate(payload);
   });
 

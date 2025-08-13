@@ -1,4 +1,4 @@
-export function getKycStatusString(status: number) {
+export function getKycStatusStringUtil(status: number) {
   if (status >= 100 && status < 200) {
     return 'Pending';
   }
@@ -22,7 +22,7 @@ export function getKycStatusString(status: number) {
   return 'Unknown Status';
 }
 
-export function getKycStatusVariant(status: number) {
+export function getKycStatusVariantUtil(status: number) {
   if (status >= 100 && status < 200) {
     return 'warning'; // Pending
   }
@@ -46,6 +46,6 @@ export function getKycStatusVariant(status: number) {
   return 'outline'; // Unknown status
 }
 
-export function getUserStatus(status: boolean) {
+export function getUserStatusUtil(status: boolean) {
   return status ? 'Active' : 'Inactive';
 }

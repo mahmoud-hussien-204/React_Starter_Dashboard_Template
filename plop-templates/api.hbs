@@ -1,9 +1,9 @@
 import { interceptor } from '@/shared/api/interceptor.api';
 
-import { toQueryString } from '@/shared/utils/url.utils';
+import { toQueryStringUtil } from '@/shared/utils/url.utils';
 
 export function apiGet{{pascalCase name}}List(searchQueryParams: IApiSearchParams) {
-  const params = toQueryString(searchQueryParams);
+  const params = toQueryStringUtil(searchQueryParams);
   return interceptor<I{{pascalCase name}}[]>({
     endpoint: `{{kebabCase name}}?${params}`,
   });

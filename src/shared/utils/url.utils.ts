@@ -1,4 +1,4 @@
-export function toQueryString(params: Record<string, string | boolean | number>) {
+export function toQueryStringUtil(params: Record<string, string | boolean | number>) {
   const searchParams = new URLSearchParams();
 
   for (const key in params) {
@@ -10,7 +10,7 @@ export function toQueryString(params: Record<string, string | boolean | number>)
   return searchParams.toString();
 }
 
-export function getFilterValue(filter: string | null) {
+export function getFilterValueUtil(filter: string | null) {
   if (!filter) return '';
   if (filter === 'none') return '';
   return filter;

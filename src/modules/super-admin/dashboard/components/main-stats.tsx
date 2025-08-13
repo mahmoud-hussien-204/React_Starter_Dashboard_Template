@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/shared/components/ui
 
 import { dashboardMainData } from '@/shared/constants/fakeData/dashboard.fakeData';
 
-import { formatNumber } from '@/shared/utils/numbers.utils';
+import { formatNumberUtil } from '@/shared/utils/numbers.utils';
 
 import { TrendingDownIcon, TrendingUpIcon } from 'lucide-react';
 
@@ -32,11 +32,11 @@ const StatsCard = ({ data }: { data: (typeof dashboardMainData)[0] }) => {
           ) : (
             <TrendingDownIcon className='text-destructive' />
           )}{' '}
-          {formatNumber(parseInt(data.change))}%
+          {formatNumberUtil(parseInt(data.change))}%
         </Badge>
       </CardHeader>
       <CardContent>
-        <h2 className='text-2xl font-medium'>$ {formatNumber(data.value)}</h2>
+        <h2 className='text-2xl font-medium'>$ {formatNumberUtil(data.value)}</h2>
       </CardContent>
     </Card>
   );

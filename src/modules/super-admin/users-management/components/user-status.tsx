@@ -1,6 +1,6 @@
 import { CheckCircleIcon, CircleXIcon } from 'lucide-react';
 
-import { getUserStatus } from '../utils/kyc-status.utils';
+import { getUserStatusUtil } from '../utils/kyc-status.utils';
 
 interface IProps {
   status: boolean;
@@ -14,7 +14,7 @@ const UserStatus = ({ status }: IProps) => {
       ) : (
         <CircleXIcon className='text-destructive' size={15} />
       )}
-      {getUserStatus(status)}
+      {getUserStatusUtil(status)}
     </span>
   );
 };

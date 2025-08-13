@@ -1,4 +1,4 @@
-export function formatNumber(num: number): string {
+export function formatNumberUtil(num: number): string {
   if (!isFinite(num)) return '0';
 
   const formatter = new Intl.NumberFormat('en-US', {

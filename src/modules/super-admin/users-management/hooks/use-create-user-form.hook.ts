@@ -8,7 +8,7 @@ import { EnumUserRoles } from '@/shared/enums/index.enum';
 
 import { useReactMutation } from '@/shared/hooks/use-react-query.hook';
 
-import { queryKeys } from '@/shared/constants/query-keys.constant';
+import { QUERY_KEYS_CONSTANT } from '@/shared/constants/query-keys.constant';
 
 import { useDialogContext } from '@/shared/components/ui/dialog';
 
@@ -34,7 +34,7 @@ const useCreateUserForm = () => {
     mutationFn: apiCreateUser,
     options: {
       meta: {
-        invalidatesQuery: [queryKeys.users.list],
+        invalidatesQuery: [QUERY_KEYS_CONSTANT.users.list],
       },
       onSuccess: () => {
         closeDialog();

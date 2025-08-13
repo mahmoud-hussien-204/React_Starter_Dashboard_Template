@@ -20,7 +20,7 @@ import {
   TableRow,
 } from '@/shared/components/ui/table';
 
-import { notificationSettings } from '../constants/settings.constant';
+import { SETTINGS_CONSTANT } from '../constants/settings.constant';
 
 import { Checkbox } from '@/shared/components/ui/checkbox';
 
@@ -45,7 +45,7 @@ const NotificationsPage = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {notificationSettings.map((notification) => (
+                  {SETTINGS_CONSTANT.notificationSettings.map((notification) => (
                     <TableRow key={notification.id}>
                       <TableCell>{notification.type}</TableCell>
                       <TableCell>

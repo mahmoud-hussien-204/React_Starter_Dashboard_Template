@@ -2,7 +2,7 @@ import { cn } from '@/shared/utils/index.utils';
 
 import Box from '@/shared/components/box';
 
-import { themes } from '@/shared/constants/themes.constant';
+import { THEME_CONSTANT } from '@/shared/constants/themes.constant';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 
@@ -17,7 +17,7 @@ const Themes = () => {
     <Box>
       <h4 className='capitalize'>Choose and customize your theme</h4>
       <ul className='mt-1.25rem gap-1.25rem flex flex-wrap'>
-        {themes.map((theme, index) => (
+        {THEME_CONSTANT.themes.map((theme, index) => (
           <li
             key={index}
             className='gap-0.5rem flex cursor-pointer flex-col'

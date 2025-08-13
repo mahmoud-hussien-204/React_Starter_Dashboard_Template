@@ -1,13 +1,13 @@
 import { interceptor } from '@/shared/api/interceptor.api';
 
-import { toQueryString } from '@/shared/utils/url.utils';
+import { toQueryStringUtil } from '@/shared/utils/url.utils';
 
 import type { ICreateUserForm, IEditUserForm, IUser } from '../interfaces/users.interface';
 
 import { safeCall } from '@/shared/api/safe-call.api';
 
 export function apiGetUsersList(searchQueryParams: IApiSearchParams) {
-  const ss = toQueryString(searchQueryParams);
+  const ss = toQueryStringUtil(searchQueryParams);
   return interceptor<IUser[]>({
     endpoint: `users?${ss}`,
   });

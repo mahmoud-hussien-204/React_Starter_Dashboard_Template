@@ -6,7 +6,7 @@ import { Outlet } from 'react-router';
 
 import { apiGetSettings } from '../api/settings.api';
 
-import { queryKeys } from '@/shared/constants/query-keys.constant';
+import { QUERY_KEYS_CONSTANT } from '@/shared/constants/query-keys.constant';
 
 import WithLoading from '@/shared/components/with-loading';
 
@@ -23,7 +23,7 @@ const SettingsLayout = () => {
 
   const { data, isLoading } = useReactQuery({
     queryFn: () => apiGetSettings(),
-    queryKey: [queryKeys.settings.list],
+    queryKey: [QUERY_KEYS_CONSTANT.settings.list],
   });
 
   const { isPathActive, pathname } = useIsPathActive();

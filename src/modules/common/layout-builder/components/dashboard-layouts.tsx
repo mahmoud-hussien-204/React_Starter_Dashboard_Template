@@ -1,4 +1,4 @@
-import { layouts } from '../constants/layout-builder.constant';
+import { LAYOUT_BUILDER_CONSTANT } from '../constants/layout-builder.constant';
 
 import { cn } from '@/shared/utils/index.utils';
 
@@ -17,7 +17,7 @@ const DashboardLayouts = () => {
     <Box>
       <h4 className='capitalize'>Choose your preferred dashboard layout</h4>
       <ul className='mt-1.25rem gap-1.25rem flex flex-wrap'>
-        {layouts.map((layout, index) => (
+        {LAYOUT_BUILDER_CONSTANT.layouts.map((layout, index) => (
           <li
             key={index}
             className='gap-0.5rem flex cursor-pointer flex-col'

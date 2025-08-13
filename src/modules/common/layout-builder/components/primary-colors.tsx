@@ -5,7 +5,7 @@ import {
 
 import Box from '@/shared/components/box';
 
-import { primaryColors } from '@/shared/constants/themes.constant';
+import { THEME_CONSTANT } from '@/shared/constants/themes.constant';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 
@@ -20,7 +20,7 @@ const PrimaryColors = () => {
     <Box>
       <h4 className='capitalize'>Choose primary color</h4>
       <ul className='mt-1.25rem flex'>
-        {primaryColors.map((color, index) => (
+        {THEME_CONSTANT.primaryColors.map((color, index) => (
           <li
             key={index}
             className={cn(

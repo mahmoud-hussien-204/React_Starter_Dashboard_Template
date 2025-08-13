@@ -11,7 +11,7 @@ import {
 
 import { apiForgotPassword } from '../api/forgot-password.api';
 
-import { setForgotPasswordEmail } from '../utils/forgot-password.utils';
+import { setForgotPasswordEmailUtil } from '../utils/forgot-password.utils';
 
 import { useNavigate } from 'react-router';
 
@@ -30,7 +30,7 @@ const useForgotPasswordForm = () => {
     mutationFn: apiForgotPassword,
     options: {
       onSuccess: (res) => {
-        setForgotPasswordEmail(res.email);
+        setForgotPasswordEmailUtil(res.email);
         navigate('/auth/forgot-password/verify');
       },
     },

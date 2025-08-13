@@ -1,4 +1,4 @@
-export const STORAGE_KEYS = {
+export const STORAGE_KEYS_CONSTANT = {
   theme: 'theme',
   lang: 'lang',
   layout: 'layout',

@@ -1,6 +1,6 @@
 import { store } from '@/core/store/index.store';
 
-import { notification } from '../utils/notification.utils';
+import { notificationUtil } from '../utils/notification.utils';
 
 import { userDataTokenAtom } from '@/core/store/atoms/user-data.atoms';
 
@@ -30,7 +30,7 @@ export async function interceptor<TData>({
 
     // show success toast
     if (requestOptions.method !== 'GET' && showToast) {
-      notification.success(data.message);
+      notificationUtil.success(data.message);
     }
 
     return data;
@@ -42,7 +42,7 @@ export async function interceptor<TData>({
 
     // show error toast
     if (showToast) {
-      notification.error(apiError.message);
+      notificationUtil.error(apiError.message);
     }
 
     return Promise.reject(apiError);

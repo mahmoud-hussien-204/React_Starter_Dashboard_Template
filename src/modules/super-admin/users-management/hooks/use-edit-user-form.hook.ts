@@ -8,13 +8,13 @@ import type { IUser } from '../interfaces/users.interface';
 
 import { EnumUserRoles } from '@/shared/enums/index.enum';
 
-import { getDirtyFields } from '@/shared/utils/get-dirty-fields.utils';
+import { getDirtyFieldsUtil } from '@/shared/utils/get-dirty-fields.utils';
 
 import { useReactMutation } from '@/shared/hooks/use-react-query.hook';
 
 import { apiEditUser } from '../api/users.api';
 
-import { queryKeys } from '@/shared/constants/query-keys.constant';
+import { QUERY_KEYS_CONSTANT } from '@/shared/constants/query-keys.constant';
 
 import { useDialogContext } from '@/shared/components/ui/dialog';
 
@@ -40,7 +40,7 @@ const useEditUserForm = (user: IUser | undefined) => {
     mutationFn: apiEditUser,
     options: {
       meta: {
-        invalidatesQuery: [queryKeys.users.list],
+        invalidatesQuery: [QUERY_KEYS_CONSTANT.users.list],
       },
       onSuccess: () => {
         closeDialog();
@@ -49,7 +49,7 @@ const useEditUserForm = (user: IUser | undefined) => {
   });
 
   const onSubmit = form.handleSubmit((data) => {
-    const payload = getDirtyFields(data, form.formState.dirtyFields);
+    const payload = getDirtyFieldsUtil(data, form.formState.dirtyFields);
     mutate({
       id: data.id,
       ...payload,

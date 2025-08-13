@@ -16,7 +16,7 @@ const info = (message: string) => {
   toast.info(message);
 };
 
-export const notification = {
+export const notificationUtil = {
   success,
   error,
   warning,

@@ -1,4 +1,4 @@
-export function getDirtyFields<T extends object>(
+export function getDirtyFieldsUtil<T extends object>(
   values: T,
   dirtyFields: Partial<Readonly<{ [key in keyof T]: boolean | undefined }>>
 ) {

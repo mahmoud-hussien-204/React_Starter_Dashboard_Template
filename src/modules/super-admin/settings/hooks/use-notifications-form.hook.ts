@@ -1,4 +1,4 @@
-import { notificationSettings } from './../constants/settings.constant';
+import { SETTINGS_CONSTANT } from './../constants/settings.constant';
 
 import { useForm } from 'react-hook-form';
 
@@ -13,7 +13,7 @@ import { useMemo } from 'react';
 
 const useNotificationsForm = () => {
   const notificationsDefaultValues = useMemo(() => {
-    return notificationSettings.reduce(
+    return SETTINGS_CONSTANT.notificationSettings.reduce(
       (acc, item) => {
         acc[item.id] = {
           email: item.email,

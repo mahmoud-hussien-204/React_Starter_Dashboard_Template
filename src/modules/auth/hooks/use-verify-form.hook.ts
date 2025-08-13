@@ -10,16 +10,16 @@ import { verifyFormSchema, type IVerifyFormSchema } from '../validation/verify.s
 
 import { apiVerify } from '../api/verify.api';
 
-import { setVerifyCode } from '../utils/verify.utils';
+import { setVerifyCodeUtil } from '../utils/verify.utils';
 
 import { useState } from 'react';
 
-import { getForgotPasswordEmail } from '../utils/forgot-password.utils';
+import { getForgotPasswordEmailUtil } from '../utils/forgot-password.utils';
 
 const useVerifyForm = () => {
   const navigate = useNavigate();
 
-  const [email] = useState(() => getForgotPasswordEmail());
+  const [email] = useState(() => getForgotPasswordEmailUtil());
 
   const form = useForm<IVerifyFormSchema>({
     resolver: zodResolver(verifyFormSchema),
@@ -33,7 +33,7 @@ const useVerifyForm = () => {
     mutationFn: apiVerify,
     options: {
       onSuccess: (res) => {
-        setVerifyCode(res.code);
+        setVerifyCodeUtil(res.code);
         navigate('/auth/forgot-password/create-new-password');
       },
     },

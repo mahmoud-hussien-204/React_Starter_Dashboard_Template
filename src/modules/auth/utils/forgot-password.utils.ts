@@ -1,13 +1,13 @@
-import { STORAGE_KEYS } from '@/shared/constants/storage-keys.constant';
+import { STORAGE_KEYS_CONSTANT } from '@/shared/constants/storage-keys.constant';
 
-export function setForgotPasswordEmail(email: string) {
-  localStorage.setItem(STORAGE_KEYS.forgotPasswordEmail, email);
+export function setForgotPasswordEmailUtil(email: string) {
+  localStorage.setItem(STORAGE_KEYS_CONSTANT.forgotPasswordEmail, email);
 }
 
-export function getForgotPasswordEmail(): string {
-  return localStorage.getItem(STORAGE_KEYS.forgotPasswordEmail) || '';
+export function getForgotPasswordEmailUtil(): string {
+  return localStorage.getItem(STORAGE_KEYS_CONSTANT.forgotPasswordEmail) || '';
 }
 
-export function removeForgotPasswordEmail() {
-  localStorage.removeItem(STORAGE_KEYS.forgotPasswordEmail);
+export function removeForgotPasswordEmailUtil() {
+  localStorage.removeItem(STORAGE_KEYS_CONSTANT.forgotPasswordEmail);
 }

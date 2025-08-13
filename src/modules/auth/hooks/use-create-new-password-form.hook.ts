@@ -8,11 +8,14 @@ import { useNavigate } from 'react-router';
 
 import { apiVerify } from '../api/verify.api';
 
-import { getVerifyCode, removeVerifyCode } from '../utils/verify.utils';
+import { getVerifyCodeUtil, removeVerifyCodeUtil } from '../utils/verify.utils';
 
 import { useState } from 'react';
 
-import { getForgotPasswordEmail, removeForgotPasswordEmail } from '../utils/forgot-password.utils';
+import {
+  getForgotPasswordEmailUtil,
+  removeForgotPasswordEmailUtil,
+} from '../utils/forgot-password.utils';
 
 import {
   createNewPasswordFormSchema,
@@ -22,9 +25,9 @@ import {
 const useCreateNewPasswordForm = () => {
   const navigate = useNavigate();
 
-  const [email] = useState(() => getForgotPasswordEmail());
+  const [email] = useState(() => getForgotPasswordEmailUtil());
 
-  const [code] = useState(() => getVerifyCode());
+  const [code] = useState(() => getVerifyCodeUtil());
 
   const form = useForm<ICreateNewPasswordFormSchema>({
     resolver: zodResolver(createNewPasswordFormSchema),
@@ -41,8 +44,8 @@ const useCreateNewPasswordForm = () => {
     mutationFn: apiVerify,
     options: {
       onSuccess: () => {
-        removeForgotPasswordEmail();
-        removeVerifyCode();
+        removeForgotPasswordEmailUtil();
+        removeVerifyCodeUtil();
         navigate('/auth/login');
       },
     },

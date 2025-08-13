@@ -1,21 +1,21 @@
 import { useSearchParams } from 'react-router';
 
-import { getFilterValue } from '../utils/url.utils';
+import { getFilterValueUtil } from '../utils/url.utils';
 
 const useURLFilters = () => {
   const [searchParams, setSearchParamsMethod] = useSearchParams();
 
-  const statusSearchParams = getFilterValue(searchParams.get('status'));
+  const statusSearchParams = getFilterValueUtil(searchParams.get('status'));
 
-  const roleSearchParams = getFilterValue(searchParams.get('role'));
+  const roleSearchParams = getFilterValueUtil(searchParams.get('role'));
 
-  const pageSearchParams = getFilterValue(searchParams.get('page')) || '1';
+  const pageSearchParams = getFilterValueUtil(searchParams.get('page')) || '1';
 
-  const sizeSearchParams = getFilterValue(searchParams.get('size')) || '15';
+  const sizeSearchParams = getFilterValueUtil(searchParams.get('size')) || '15';
 
-  const orderBySearchParams = getFilterValue(searchParams.get('orderBy'));
+  const orderBySearchParams = getFilterValueUtil(searchParams.get('orderBy'));
 
-  const searchSearchParams = getFilterValue(searchParams.get('search'));
+  const searchSearchParams = getFilterValueUtil(searchParams.get('search'));
 
   const setSearchParams = (params: Record<string, string | boolean | number>) => {
     const newSearchParams = new URLSearchParams(searchParams);
