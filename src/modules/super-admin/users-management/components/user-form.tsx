@@ -105,7 +105,13 @@ const UserForm = ({ user, form, mode = 'create' }: IProps) => {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Role</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={(e) => {
+                  field.onChange(e);
+                  form.trigger('role');
+                }}
+                defaultValue={field.value}
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder='User role' />
@@ -133,7 +139,10 @@ const UserForm = ({ user, form, mode = 'create' }: IProps) => {
                 <Switch
                   id='user-status'
                   defaultChecked={field.value}
-                  onCheckedChange={field.onChange}
+                  onCheckedChange={(e) => {
+                    field.onChange(e);
+                    form.trigger('status');
+                  }}
                 />
               </FormControl>
               <FormLabel htmlFor='user-status'>User status</FormLabel>
